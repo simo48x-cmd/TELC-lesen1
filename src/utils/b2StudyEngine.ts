@@ -75,7 +75,12 @@ function persistTranslationCache() {
 
 export function sanitizeUtf8Text(input: string): string {
   if (!input) return '';
-  return input.replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]|\uFFFD/g, '');
+  return input
+    .replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]|\uFFFD/g, '')
+    .replace(/🔲+/g, '')
+    .replace(/\bInsell\b/g, 'Inseln')
+    .replace(/Kellner\s*\(\s*Jugend\s+Forscherr\s*\)/gi, 'Kellner (Jugend forscht)')
+    .replace(/\bJugend\s+Forscherr\b/gi, 'Jugend forscht');
 }
 
 export function safeSliceText(input: string, maxChars: number): string {
@@ -814,46 +819,167 @@ export function lookupGermanWord(rawWord: string, contextText: string): WordLook
 }
 
 // ============================================================================
-// 3. GERMAN TEXT-TO-SPEECH (Web Speech API - 100% Free Native Audio)
+// 3. BULLETPROOF DUAL-ENGINE GERMAN AUDIO PLAYER (Cloud MP3 + Web Speech API)
 // ============================================================================
 
-export function speakGermanText(text: string, rate = 1.0, onEnd?: () => void): void {
-  if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
-    onEnd?.();
-    return;
+let activeAudioElement: HTMLAudioElement | null = null;
+let isAudioPlaying = false;
+let stopRequested = false;
+
+export function getIsGermanAudioPlaying(): boolean {
+  return isAudioPlaying;
+}
+
+export function stopGermanAudio() {
+  stopRequested = true;
+  isAudioPlaying = false;
+  if (activeAudioElement) {
+    try {
+      activeAudioElement.pause();
+      activeAudioElement.currentTime = 0;
+    } catch (e) {}
+    activeAudioElement = null;
   }
-  try {
-    window.speechSynthesis.cancel();
-    const cleaned = sanitizeUtf8Text(text)
-      .replace(/_{2,4}\s*(\d+)\s*_{2,4}/g, ' Lücke $1 ')
-      .replace(/\s+/g, ' ')
-      .trim();
-    const utterance = new SpeechSynthesisUtterance(cleaned);
-    utterance.lang = 'de-DE';
-    utterance.rate = rate;
-
-    const voices = window.speechSynthesis.getVoices();
-    const deVoice =
-      voices.find((v) => v.lang.toLowerCase().startsWith('de-de')) ||
-      voices.find((v) => v.lang.toLowerCase().startsWith('de'));
-    if (deVoice) {
-      utterance.voice = deVoice;
-    }
-
-    if (onEnd) {
-      utterance.onend = () => onEnd();
-      utterance.onerror = () => onEnd();
-    }
-    window.speechSynthesis.speak(utterance);
-  } catch {
-    onEnd?.();
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    try {
+      window.speechSynthesis.cancel();
+    } catch (e) {}
   }
 }
 
-export function stopGermanSpeech(): void {
-  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
+export async function playGermanAudio(
+  rawText: string,
+  rate: number = 1.0,
+  onEnd?: () => void
+) {
+  stopGermanAudio();
+  stopRequested = false;
+
+  // Clean underscores and gap markers before reading aloud
+  const cleanText = sanitizeUtf8Text(rawText)
+    .replace(/_{2,5}\s*\d+\s*_{2,5}/g, ' Lücke ')
+    .replace(/\[\s*\d+\s*:?[^\]]*\]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!cleanText) {
+    onEnd?.();
+    return;
   }
+
+  // Split long paragraphs into <= 160 char chunks on sentence/comma boundaries
+  const rawSentences = cleanText.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [cleanText];
+  const chunks: string[] = [];
+  for (const s of rawSentences) {
+    const trimmed = s.trim();
+    if (!trimmed) continue;
+    if (trimmed.length <= 160) {
+      chunks.push(trimmed);
+    } else {
+      const parts = trimmed.split(/(?<=[,;:])\s+/);
+      let cur = '';
+      for (const p of parts) {
+        if ((cur + ' ' + p).trim().length <= 160) {
+          cur = (cur + ' ' + p).trim();
+        } else {
+          if (cur) chunks.push(cur);
+          cur = p.slice(0, 160);
+        }
+      }
+      if (cur) chunks.push(cur);
+    }
+  }
+
+  isAudioPlaying = true;
+
+  // Helper: Try playing a single chunk via Google Translate Cloud TTS MP3 (with no-referrer so it never 403s!)
+  const playChunkCloudMp3 = (chunk: string): Promise<boolean> => {
+    return new Promise((resolve) => {
+      try {
+        const audio = new Audio();
+        audio.setAttribute('referrerpolicy', 'no-referrer');
+        (audio as HTMLAudioElement & { referrerPolicy?: string }).referrerPolicy = 'no-referrer';
+        audio.crossOrigin = 'anonymous';
+        const ttsUrl = `https://translate.googleapis.com/translate_tts?ie=UTF-8&tl=de&client=gtx&q=${encodeURIComponent(chunk)}`;
+        audio.src = ttsUrl;
+        audio.playbackRate = rate;
+        activeAudioElement = audio;
+
+        let settled = false;
+        const finish = (ok: boolean) => {
+          if (!settled) {
+            settled = true;
+            resolve(ok);
+          }
+        };
+
+        audio.onended = () => finish(true);
+        audio.onerror = () => finish(false);
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => finish(false));
+        }
+      } catch (e) {
+        resolve(false);
+      }
+    });
+  };
+
+  // Helper: Fallback to chunked Web Speech API with Chrome unfreeze fix
+  const playChunkWebSpeech = (chunk: string): Promise<boolean> => {
+    return new Promise((resolve) => {
+      if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+        resolve(false);
+        return;
+      }
+      try {
+        window.speechSynthesis.cancel();
+        setTimeout(() => {
+          if (stopRequested) {
+            resolve(false);
+            return;
+          }
+          window.speechSynthesis.resume();
+          const utter = new SpeechSynthesisUtterance(chunk);
+          utter.lang = 'de-DE';
+          utter.rate = rate;
+          const voices = window.speechSynthesis.getVoices();
+          const deVoice = voices.find(
+            (v) =>
+              v.lang.toLowerCase().startsWith('de') ||
+              v.name.toLowerCase().includes('german') ||
+              v.name.toLowerCase().includes('deutsch')
+          );
+          if (deVoice) utter.voice = deVoice;
+          utter.onend = () => resolve(true);
+          utter.onerror = () => resolve(false);
+          window.speechSynthesis.speak(utter);
+        }, 60);
+      } catch (e) {
+        resolve(false);
+      }
+    });
+  };
+
+  for (const chunk of chunks) {
+    if (stopRequested) break;
+    // Try Cloud MP3 first (works even when Windows has no German voice installed!), fallback to WebSpeech
+    const cloudOk = await playChunkCloudMp3(chunk);
+    if (!cloudOk && !stopRequested) {
+      await playChunkWebSpeech(chunk);
+    }
+  }
+
+  isAudioPlaying = false;
+  onEnd?.();
+}
+
+export function speakGermanText(text: string, rate = 1.0, onEnd?: () => void): void {
+  void playGermanAudio(text, rate, onEnd);
+}
+
+export function stopGermanSpeech(): void {
+  stopGermanAudio();
 }
 
 // ============================================================================

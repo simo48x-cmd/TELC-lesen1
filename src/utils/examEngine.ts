@@ -677,7 +677,7 @@ export function searchRadarModules(query: string): RadarRow[] {
       ]
         .filter(Boolean)
         .join(' | ') || '—',
-      keywordsSample: `${p.badge} • SB1: ${sb1?.title || p.sb1} • SB2: ${sb2?.title || p.sb2}`,
+      keywordsSample: `SB1: ${sb1?.title || p.sb1} • SB2: ${sb2?.title || p.sb2}`,
       linkedInfo: `T1: ${t1?.sahlaTitle || p.t1} | T2: ${t2?.title || p.t2} | T3: ${t3?.title || p.t3}`,
     });
   }

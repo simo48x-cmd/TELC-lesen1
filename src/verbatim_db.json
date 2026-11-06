@@ -17,7 +17,7 @@
     },
     {
       "id": "p_kellner",
-      "title": "Kellner(Jugend Forscherr)",
+      "title": "Kellner (Jugend forscht)",
       "arTitle": "باحث شاب / النادل",
       "modCount": 1,
       "t1": "kellner",
@@ -53,7 +53,7 @@
     },
     {
       "id": "p_inseln",
-      "title": "Insell",
+      "title": "Inseln",
       "arTitle": "الجزر",
       "modCount": 2,
       "t1": "inseln",
@@ -654,7 +654,7 @@
     },
     {
       "id": "inseln",
-      "sahlaTitle": "Insell",
+      "sahlaTitle": "Inseln",
       "arTitle": "الجزر البحرية (Inseln)",
       "pdfTitle": "INSELN",
       "ansBase": [
@@ -1177,7 +1177,7 @@
     },
     {
       "id": "kellner",
-      "sahlaTitle": "Kellner(Jugend Forscherr)",
+      "sahlaTitle": "Kellner (Jugend forscht)",
       "arTitle": "باحث شاب والنادل (Jugend forscht / Kellner)",
       "pdfTitle": "JUGEND",
       "ansBase": [
@@ -10220,57 +10220,57 @@
           "B": "von",
           "C": "zu"
         },
-        "24": {
-          "A": "bieten",
-          "B": "fordern",
-          "C": "nehmen"
-        },
-        "27": {
-          "A": "die Ansicht",
-          "B": "der Besuch",
-          "C": "das Betrachten"
-        },
-        "30": {
-          "A": "haben",
-          "B": "hatten",
-          "C": "hätten"
-        },
         "22": {
           "A": "ankommenden",
           "B": "gekommenen",
           "C": "kommenden"
-        },
-        "25": {
-          "A": "sodass",
-          "B": "weil",
-          "C": "wenn"
-        },
-        "28": {
-          "A": "hat geplant",
-          "B": "ist geplant",
-          "C": "wird geplant haben"
         },
         "23": {
           "A": "aus",
           "B": "mit",
           "C": "nach"
         },
+        "24": {
+          "A": "bieten",
+          "B": "fordern",
+          "C": "nehmen"
+        },
+        "25": {
+          "A": "sodass",
+          "B": "weil",
+          "C": "wenn"
+        },
         "26": {
           "A": "Gemeinsam mit",
           "B": "Verbunden von",
           "C": "Zusammen neben"
         },
+        "27": {
+          "A": "die Ansicht",
+          "B": "der Besuch",
+          "C": "das Betrachten"
+        },
+        "28": {
+          "A": "hat geplant",
+          "B": "ist geplant",
+          "C": "wird geplant haben"
+        },
         "29": {
           "A": "besprochen",
           "B": "gesprochen",
           "C": "versprochen"
+        },
+        "30": {
+          "A": "haben",
+          "B": "hatten",
+          "C": "hätten"
         }
       }
     },
     {
       "id": "maria_timur",
       "title": "Maria + Timur (Hochzeitsfest)",
-      "text": "Liebe Maria, lieber Timur,\nherzlichen Dank für die Einladung zu eurem Hochzeitsfest! Nachdem wir gestern aus dem Urlaub\nzurückgekommen ___21___, haben wir euren Brief und die Einladungskarte im Briefkasten\nentdeckt.\n___22___ gibt es nicht viel zu überlegen: Natürlich kommen wir sehr gerne! Wir freuen uns sehr\n___23___ euch, dass ihr nun endlich diesen Schritt wagt. Es ist eine geniale Idee, ___24___ in der\nTürkei ___24___ in Österreich zu feiern. Dann können alle Freunde und ___25___ dabei sein.\nWir hoffen, dass wir so einige ___26___ alten Freunde wiedersehen werden. Ihr habt\ngeschrieben, dass Timurs Eltern und seine Schwester auch in Österreich sein werden. Endlich\nlernen wir auch Timurs Familie kennen! Und wie schön, dass ihr in Marias Heimatdorf im\nMühlviertel feiert! Wir erinnern uns noch oft an die langen Partynächte, die wir dort ___27___\nJugendliche gemeinsam verbracht haben.\nNun überlegen wir, ___28___ wir nicht gleich ein Hotelzimmer für einige Tage buchen sollten. Ihr\nhabt ja sicher mit den Vorbereitungen alle Hände voll zu ___29___. Dann können wir am Freitag\nwandern gehen. Am Samstag ist dann euer Fest und am Sonntag ___30___ wird die Gelegenheit,\nvor der Abreise noch gemütlich zusammen zu frühstücken.\nIn welchem Hotel habt ihr eure Verwandten untergebracht? Seid ihr auch in einem Hotel oder\nübernachtet ihr bei deinen Eltern, Maria?\nNun, das können wir alles noch später besprechen. Vorerst freuen wir uns einfach nur auf euch\nund euer Fest.\nNoch einmal vielen Dank für die Einladung und bis bald!\nYasmin & Peter",
+      "text": "Liebe Maria, lieber Timur,\nherzlichen Dank für die Einladung zu eurem Hochzeitsfest! Nachdem wir gestern aus dem Urlaub\nzurückgekommen ___21___, haben wir euren Brief und die Einladungskarte im Briefkasten\nentdeckt.\n___22___ gibt es nicht viel zu überlegen: Natürlich kommen wir sehr gerne! Wir freuen uns sehr\n___23___ euch, dass ihr nun endlich diesen Schritt wagt. Es ist eine geniale Idee, ___24___ in der\nTürkei ... in Österreich zu feiern. Dann können alle Freunde und ___25___ dabei sein.\nWir hoffen, dass wir so einige ___26___ alten Freunde wiedersehen werden. Ihr habt\ngeschrieben, dass Timurs Eltern und seine Schwester auch in Österreich sein werden. Endlich\nlernen wir auch Timurs Familie kennen! Und wie schön, dass ihr in Marias Heimatdorf im\nMühlviertel feiert! Wir erinnern uns noch oft an die langen Partynächte, die wir dort ___27___\nJugendliche gemeinsam verbracht haben.\nNun überlegen wir, ___28___ wir nicht gleich ein Hotelzimmer für einige Tage buchen sollten. Ihr\nhabt ja sicher mit den Vorbereitungen alle Hände voll zu ___29___. Dann können wir am Freitag\nwandern gehen. Am Samstag ist dann euer Fest und am Sonntag ___30___ wird die Gelegenheit,\nvor der Abreise noch gemütlich zusammen zu frühstücken.\nIn welchem Hotel habt ihr eure Verwandten untergebracht? Seid ihr auch in einem Hotel oder\nübernachtet ihr bei deinen Eltern, Maria?\nNun, das können wir alles noch später besprechen. Vorerst freuen wir uns einfach nur auf euch\nund euer Fest.\nNoch einmal vielen Dank für die Einladung und bis bald!\nYasmin & Peter",
       "optionsRaw": "21 A seien 24 A je...desto 27 A als 30 A hätten\nB sind B sowohl...als auch B für B könnten\nC waren C weder...noch C wie C sollten\n22 A Da 25 A Verwandte 28 A dass\nB Das B Verwandten B falls\nC Dass C Verwandter C ob\n23 A an 26 A unsere 29 A bereiten\nB auf B unseren B machen\nC für C unserer C tun",
       "ansBase": [
         "B",
@@ -10290,50 +10290,50 @@
           "B": "sind",
           "C": "waren"
         },
-        "24": {
-          "A": "je...desto",
-          "B": "sowohl...als auch",
-          "C": "weder...noch"
-        },
-        "27": {
-          "A": "als",
-          "B": "für",
-          "C": "wie"
-        },
-        "30": {
-          "A": "hätten",
-          "B": "könnten",
-          "C": "sollten"
-        },
         "22": {
           "A": "Da",
           "B": "Das",
           "C": "Dass"
-        },
-        "25": {
-          "A": "Verwandte",
-          "B": "Verwandten",
-          "C": "Verwandter"
-        },
-        "28": {
-          "A": "dass",
-          "B": "falls",
-          "C": "ob"
         },
         "23": {
           "A": "an",
           "B": "auf",
           "C": "für"
         },
+        "24": {
+          "A": "je...desto",
+          "B": "sowohl...als auch",
+          "C": "weder...noch"
+        },
+        "25": {
+          "A": "Verwandte",
+          "B": "Verwandten",
+          "C": "Verwandter"
+        },
         "26": {
           "A": "unsere",
           "B": "unseren",
           "C": "unserer"
         },
+        "27": {
+          "A": "als",
+          "B": "für",
+          "C": "wie"
+        },
+        "28": {
+          "A": "dass",
+          "B": "falls",
+          "C": "ob"
+        },
         "29": {
           "A": "bereiten",
           "B": "machen",
           "C": "tun"
+        },
+        "30": {
+          "A": "hätten",
+          "B": "könnten",
+          "C": "sollten"
         }
       }
     },
@@ -10360,50 +10360,50 @@
           "B": "Was",
           "C": "Wann"
         },
-        "24": {
-          "A": "zu",
-          "B": "ein",
-          "C": "ab"
-        },
-        "27": {
-          "A": "deswegn",
-          "B": "darum",
-          "C": "dafür"
-        },
-        "30": {
-          "A": "sowie",
-          "B": "als ob",
-          "C": "als"
-        },
         "22": {
           "A": "vorliegen",
           "B": "unterliegen",
           "C": "liegen lassen"
-        },
-        "25": {
-          "A": "mit",
-          "B": "für",
-          "C": "bei"
-        },
-        "28": {
-          "A": "besprechen",
-          "B": "aussprechen",
-          "C": "ansprechen"
         },
         "23": {
           "A": "von",
           "B": "ohne",
           "C": "im"
         },
+        "24": {
+          "A": "zu",
+          "B": "ein",
+          "C": "ab"
+        },
+        "25": {
+          "A": "mit",
+          "B": "für",
+          "C": "bei"
+        },
         "26": {
           "A": "unerschütterlich",
           "B": "stark",
           "C": "fest"
         },
+        "27": {
+          "A": "deswegn",
+          "B": "darum",
+          "C": "dafür"
+        },
+        "28": {
+          "A": "besprechen",
+          "B": "aussprechen",
+          "C": "ansprechen"
+        },
         "29": {
           "A": "ob",
           "B": "dass",
           "C": "damit"
+        },
+        "30": {
+          "A": "sowie",
+          "B": "als ob",
+          "C": "als"
         }
       }
     },
@@ -10430,50 +10430,50 @@
           "B": "für",
           "C": "um"
         },
-        "24": {
-          "A": "bestimmt",
-          "B": "unbedingt",
-          "C": "völlig"
-        },
-        "27": {
-          "A": "jetzigen",
-          "B": "kommenden",
-          "C": "letzten"
-        },
-        "30": {
-          "A": "einen",
-          "B": "einfach",
-          "C": "einzig"
-        },
         "22": {
           "A": "wann",
           "B": "wie",
           "C": "wo"
-        },
-        "25": {
-          "A": "dich",
-          "B": "mich",
-          "C": "sich"
-        },
-        "28": {
-          "A": "danach",
-          "B": "darüber",
-          "C": "dazu"
         },
         "23": {
           "A": "damit",
           "B": "denn",
           "C": "doch"
         },
+        "24": {
+          "A": "bestimmt",
+          "B": "unbedingt",
+          "C": "völlig"
+        },
+        "25": {
+          "A": "dich",
+          "B": "mich",
+          "C": "sich"
+        },
         "26": {
           "A": "als",
           "B": "da",
           "C": "wenn"
         },
+        "27": {
+          "A": "jetzigen",
+          "B": "kommenden",
+          "C": "letzten"
+        },
+        "28": {
+          "A": "danach",
+          "B": "darüber",
+          "C": "dazu"
+        },
         "29": {
           "A": "als",
           "B": "sondern",
           "C": "oder"
+        },
+        "30": {
+          "A": "einen",
+          "B": "einfach",
+          "C": "einzig"
         }
       }
     },
@@ -10500,57 +10500,57 @@
           "B": "ohne",
           "C": "um"
         },
-        "24": {
-          "A": "bestimmt",
-          "B": "unbedingt",
-          "C": "völlig"
-        },
-        "27": {
-          "A": "baldigen",
-          "B": "kommenden",
-          "C": "vergangenen"
-        },
-        "30": {
-          "A": "für",
-          "B": "einfach",
-          "C": "einzig"
-        },
         "22": {
           "A": "dass",
           "B": "ob",
           "C": "während"
-        },
-        "25": {
-          "A": "dich",
-          "B": "mich",
-          "C": "sich"
-        },
-        "28": {
-          "A": "danach",
-          "B": "darüber",
-          "C": "dazu"
         },
         "23": {
           "A": "aber",
           "B": "denn",
           "C": "und"
         },
+        "24": {
+          "A": "bestimmt",
+          "B": "unbedingt",
+          "C": "völlig"
+        },
+        "25": {
+          "A": "dich",
+          "B": "mich",
+          "C": "sich"
+        },
         "26": {
           "A": "als",
           "B": "wenn",
           "C": "wie"
         },
+        "27": {
+          "A": "baldigen",
+          "B": "kommenden",
+          "C": "vergangenen"
+        },
+        "28": {
+          "A": "danach",
+          "B": "darüber",
+          "C": "dazu"
+        },
         "29": {
           "A": "aber",
           "B": "oder",
           "C": "sondern"
+        },
+        "30": {
+          "A": "für",
+          "B": "einfach",
+          "C": "einzig"
         }
       }
     },
     {
       "id": "thomas",
       "title": "Lieber Thomas (Erstes Mal Ski gefahren)",
-      "text": "Lieber Thomas,\nich muss dir unbedingt etwas erzählen: Ich bin heute das erste Mal in meinem Leben Ski\ngefahren, ___21___ ich mir das bisher nie zugetraut hatte. Meine Freundin Lisa hat mich\neingeladen, einige Tage mit ihr und ihren Eltern in den Bergen zu verbringen. Und bevor ich\nankam, ___22___ sie schon eine individuellen Skikurs für mich gebucht! Du kannst dir vorstellen,\nwie mich das überrascht hat.\nIch ___23___ es mir schon anders überlegen, aber Lisa wollte nichts ___24___ hören.\nHeute morgen ging es dann los, ___25___ war ich ziemlich aufgeregt, ___25___ habe ich mich\nauch unheimlich gefreut. Mit der Skilehrerin habe ich mich gleich gut verstanden. Sie hat mich\nabgeholt und mir ___26___ geholfen, im Sportgeschäft Schuhe, Skier, Stöcke und einen Helm für\nmich ___27___.\nDann hat mir die Skilehrerin einige ___28___ Dinge erklärt. Ich war anfangs sehr unsicher, mit der\nZeit liess das aber nach. Die Kinder im Zwergerlkurs scheinen ___29___ Gegensatz zu mir\nüberhaupt keine Angst zu haben.\nDas Schlimmste am ersten Tag war der Schlepplift. Erst habe ich den Lift einige Male verpasst,\ndann bin ich hingefallen. Irgendwie habe ich es dann doch noch geschafft. Und zum Schluss bin\nich mit der Lehrerin sogar eine leichte Piste runtergefahren.\nMorgen habe ich wieder zwei Stunden. Ich habe jetzt schon Muskelkater und mir tut alles weh!\nIch weiß gar nicht, ___30___ ich das schaffen soll. Ich werde dich über meine Fortschritte auf\ndem Laufenden halten.\nBis bald und liebe Grüße\nSamira",
+      "text": "Lieber Thomas,\nich muss dir unbedingt etwas erzählen: Ich bin heute das erste Mal in meinem Leben Ski\ngefahren, ___21___ ich mir das bisher nie zugetraut hatte. Meine Freundin Lisa hat mich\neingeladen, einige Tage mit ihr und ihren Eltern in den Bergen zu verbringen. Und bevor ich\nankam, ___22___ sie schon eine individuellen Skikurs für mich gebucht! Du kannst dir vorstellen,\nwie mich das überrascht hat.\nIch ___23___ es mir schon anders überlegen, aber Lisa wollte nichts ___24___ hören.\nHeute morgen ging es dann los, ___25___ war ich ziemlich aufgeregt, ... habe ich mich\nauch unheimlich gefreut. Mit der Skilehrerin habe ich mich gleich gut verstanden. Sie hat mich\nabgeholt und mir ___26___ geholfen, im Sportgeschäft Schuhe, Skier, Stöcke und einen Helm für\nmich ___27___.\nDann hat mir die Skilehrerin einige ___28___ Dinge erklärt. Ich war anfangs sehr unsicher, mit der\nZeit liess das aber nach. Die Kinder im Zwergerlkurs scheinen ___29___ Gegensatz zu mir\nüberhaupt keine Angst zu haben.\nDas Schlimmste am ersten Tag war der Schlepplift. Erst habe ich den Lift einige Male verpasst,\ndann bin ich hingefallen. Irgendwie habe ich es dann doch noch geschafft. Und zum Schluss bin\nich mit der Lehrerin sogar eine leichte Piste runtergefahren.\nMorgen habe ich wieder zwei Stunden. Ich habe jetzt schon Muskelkater und mir tut alles weh!\nIch weiß gar nicht, ___30___ ich das schaffen soll. Ich werde dich über meine Fortschritte auf\ndem Laufenden halten.\nBis bald und liebe Grüße\nSamira",
       "optionsRaw": "21 A obwohl 24 A dafür 27 A aussuchen 30 A dass\nB trotzdem B damit B ausgesucht B ob\nC während C davon C auszusuchen C wie\n22 A hat 25 A Einerseits...andererseits 28 A grundlegende\nB hatte B Weder...noch B grundlegenden\nC hätte C Zwar...aber C grundlegender\n23 A konnte 26 A dabei 29 A am\nB sollte B davon B im\nC wollte C dazu C zum",
       "ansBase": [
         "A",
@@ -10570,50 +10570,50 @@
           "B": "trotzdem",
           "C": "während"
         },
-        "24": {
-          "A": "dafür",
-          "B": "damit",
-          "C": "davon"
-        },
-        "27": {
-          "A": "aussuchen",
-          "B": "ausgesucht",
-          "C": "auszusuchen"
-        },
-        "30": {
-          "A": "dass",
-          "B": "ob",
-          "C": "wie"
-        },
         "22": {
           "A": "hat",
           "B": "hatte",
           "C": "hätte"
-        },
-        "25": {
-          "A": "Einerseits...andererseits",
-          "B": "Weder...noch",
-          "C": "Zwar...aber"
-        },
-        "28": {
-          "A": "grundlegende",
-          "B": "grundlegenden",
-          "C": "grundlegender"
         },
         "23": {
           "A": "konnte",
           "B": "sollte",
           "C": "wollte"
         },
+        "24": {
+          "A": "dafür",
+          "B": "damit",
+          "C": "davon"
+        },
+        "25": {
+          "A": "Einerseits...andererseits",
+          "B": "Weder...noch",
+          "C": "Zwar...aber"
+        },
         "26": {
           "A": "dabei",
           "B": "davon",
           "C": "dazu"
         },
+        "27": {
+          "A": "aussuchen",
+          "B": "ausgesucht",
+          "C": "auszusuchen"
+        },
+        "28": {
+          "A": "grundlegende",
+          "B": "grundlegenden",
+          "C": "grundlegender"
+        },
         "29": {
           "A": "am",
           "B": "im",
           "C": "zum"
+        },
+        "30": {
+          "A": "dass",
+          "B": "ob",
+          "C": "wie"
         }
       }
     },
@@ -10640,50 +10640,50 @@
           "B": "Möglichst",
           "C": "Hoffentlich"
         },
-        "24": {
-          "A": "damit",
-          "B": "dafür",
-          "C": "dadurch"
-        },
-        "27": {
-          "A": "vor Kurzem",
-          "B": "kürzlich",
-          "C": "kurz"
-        },
-        "30": {
-          "A": "passenden",
-          "B": "bequemen",
-          "C": "angenehmen"
-        },
         "22": {
           "A": "vermutlich",
           "B": "nämlich",
           "C": "bestimmt"
-        },
-        "25": {
-          "A": "Wenn",
-          "B": "Wann",
-          "C": "Als"
-        },
-        "28": {
-          "A": "weshalb",
-          "B": "insofern",
-          "C": "deshalb"
         },
         "23": {
           "A": "schon",
           "B": "fast",
           "C": "beinahe"
         },
+        "24": {
+          "A": "damit",
+          "B": "dafür",
+          "C": "dadurch"
+        },
+        "25": {
+          "A": "Wenn",
+          "B": "Wann",
+          "C": "Als"
+        },
         "26": {
           "A": "zueinander",
           "B": "voneinander",
           "C": "miteinander"
         },
+        "27": {
+          "A": "vor Kurzem",
+          "B": "kürzlich",
+          "C": "kurz"
+        },
+        "28": {
+          "A": "weshalb",
+          "B": "insofern",
+          "C": "deshalb"
+        },
         "29": {
           "A": "vollkommen",
           "B": "sämtlich",
           "C": "erschöpfend"
+        },
+        "30": {
+          "A": "passenden",
+          "B": "bequemen",
+          "C": "angenehmen"
         }
       }
     },
@@ -10710,50 +10710,50 @@
           "B": "ob",
           "C": "weil"
         },
-        "24": {
-          "A": "außerdem",
-          "B": "insbesondere",
-          "C": "jedoch"
-        },
-        "27": {
-          "A": "gering",
-          "B": "knapp",
-          "C": "wenig"
-        },
-        "30": {
-          "A": "kürzlich",
-          "B": "üblich",
-          "C": "möglich"
-        },
         "22": {
           "A": "bedienen",
           "B": "beeilen",
           "C": "beschäftigen"
-        },
-        "25": {
-          "A": "übermächtig",
-          "B": "übermäßig",
-          "C": "überwiegend"
-        },
-        "28": {
-          "A": "kommt",
-          "B": "läuft",
-          "C": "steht"
         },
         "23": {
           "A": "bloß",
           "B": "doch",
           "C": "nur"
         },
+        "24": {
+          "A": "außerdem",
+          "B": "insbesondere",
+          "C": "jedoch"
+        },
+        "25": {
+          "A": "übermächtig",
+          "B": "übermäßig",
+          "C": "überwiegend"
+        },
         "26": {
           "A": "darf",
           "B": "muss",
           "C": "soll"
         },
+        "27": {
+          "A": "gering",
+          "B": "knapp",
+          "C": "wenig"
+        },
+        "28": {
+          "A": "kommt",
+          "B": "läuft",
+          "C": "steht"
+        },
         "29": {
           "A": "brauchst",
           "B": "hast",
           "C": "lässt"
+        },
+        "30": {
+          "A": "kürzlich",
+          "B": "üblich",
+          "C": "möglich"
         }
       }
     },
@@ -10780,50 +10780,50 @@
           "B": "was",
           "C": "welches"
         },
-        "24": {
-          "A": "abnehmen",
-          "B": "annehmen",
-          "C": "nehmen"
-        },
-        "27": {
-          "A": "wenn",
-          "B": "auch wenn",
-          "C": "wenn auch"
-        },
-        "30": {
-          "A": "müssen",
-          "B": "sollen",
-          "C": "wollen"
-        },
         "22": {
           "A": "denn",
           "B": "doch",
           "C": "mal"
-        },
-        "25": {
-          "A": "für",
-          "B": "über",
-          "C": "um"
-        },
-        "28": {
-          "A": "an",
-          "B": "für",
-          "C": "über"
         },
         "23": {
           "A": "dazu",
           "B": "noch",
           "C": "sogar"
         },
+        "24": {
+          "A": "abnehmen",
+          "B": "annehmen",
+          "C": "nehmen"
+        },
+        "25": {
+          "A": "für",
+          "B": "über",
+          "C": "um"
+        },
         "26": {
           "A": "bevor",
           "B": "bis",
           "C": "sobald"
         },
+        "27": {
+          "A": "wenn",
+          "B": "auch wenn",
+          "C": "wenn auch"
+        },
+        "28": {
+          "A": "an",
+          "B": "für",
+          "C": "über"
+        },
         "29": {
           "A": "demnächst",
           "B": "neulich",
           "C": "noch nicht"
+        },
+        "30": {
+          "A": "müssen",
+          "B": "sollen",
+          "C": "wollen"
         }
       }
     },
@@ -10850,50 +10850,50 @@
           "B": "aus",
           "C": "von"
         },
-        "24": {
-          "A": "ist",
-          "B": "wird",
-          "C": "würde"
-        },
-        "27": {
-          "A": "aber",
-          "B": "denn",
-          "C": "sondern"
-        },
-        "30": {
-          "A": "auf",
-          "B": "für",
-          "C": "über"
-        },
         "22": {
           "A": "wann",
           "B": "was",
           "C": "wie"
-        },
-        "25": {
-          "A": "bin",
-          "B": "war",
-          "C": "wäre"
-        },
-        "28": {
-          "A": "Beide",
-          "B": "Beiden",
-          "C": "Beides"
         },
         "23": {
           "A": "da",
           "B": "indem",
           "C": "obwohl"
         },
+        "24": {
+          "A": "ist",
+          "B": "wird",
+          "C": "würde"
+        },
+        "25": {
+          "A": "bin",
+          "B": "war",
+          "C": "wäre"
+        },
         "26": {
           "A": "konnte",
           "B": "musste",
           "C": "sollte"
         },
+        "27": {
+          "A": "aber",
+          "B": "denn",
+          "C": "sondern"
+        },
+        "28": {
+          "A": "Beide",
+          "B": "Beiden",
+          "C": "Beides"
+        },
         "29": {
           "A": "erst",
           "B": "noch",
           "C": "schon"
+        },
+        "30": {
+          "A": "auf",
+          "B": "für",
+          "C": "über"
         }
       }
     },
@@ -10920,57 +10920,57 @@
           "B": "von",
           "C": "auf"
         },
-        "24": {
-          "A": "unterrichten",
-          "B": "machen",
-          "C": "lernen"
-        },
-        "27": {
-          "A": "falls",
-          "B": "dass",
-          "C": "dafür"
-        },
-        "30": {
-          "A": "weniger",
-          "B": "viel",
-          "C": "mehr"
-        },
         "22": {
           "A": "zu",
           "B": "aus",
           "C": "ab"
-        },
-        "25": {
-          "A": "über",
-          "B": "für",
-          "C": "an"
-        },
-        "28": {
-          "A": "schon",
-          "B": "noch",
-          "C": "bevor"
         },
         "23": {
           "A": "kaum",
           "B": "fast",
           "C": "ein bisschen"
         },
+        "24": {
+          "A": "unterrichten",
+          "B": "machen",
+          "C": "lernen"
+        },
+        "25": {
+          "A": "über",
+          "B": "für",
+          "C": "an"
+        },
         "26": {
           "A": "irgendwo",
           "B": "irgendjemandem",
           "C": "irgendetwas"
         },
+        "27": {
+          "A": "falls",
+          "B": "dass",
+          "C": "dafür"
+        },
+        "28": {
+          "A": "schon",
+          "B": "noch",
+          "C": "bevor"
+        },
         "29": {
           "A": "zu",
           "B": "für",
           "C": "vor"
+        },
+        "30": {
+          "A": "weniger",
+          "B": "viel",
+          "C": "mehr"
         }
       }
     },
     {
       "id": "dobromil",
       "title": "Herr Dr. Dobromil (Antiquitätengeschäft)",
-      "text": "Sehr geehrter Herr Dr. Dobromil,\nmit ___21___ Interesse habe ich Ihr Stellenangebot in der Essener Zeitung gelesen, ___22___\nSie eine Teilzeit-Mitarbeiterin in Ihrem Antiquitätengeschäft suchen. Es reizt mich eine verant-\nwortungsvolle Aufgabe in einem so renommierten Geschäft wie dem ___23___ übernehmen\n___24___.\nNach dem Abitur am Kreisgymnasium in Velbert begann ich eine dreijährige Schreinerlehre\n___25___ der Firma Eichelbohrer & Co und besuchte die Kreisberufsschule in Velbert. Nach\nerfolgreichem Abschluss meiner Berufsausbildung arbeitete ich ___26___ bei Stutz & Partner -\nMöbeldesign in Düsseldorf. Danach schrieb ich mich an der Fachhochschule Köln im Fachbereich\nMöbeldesign ein und ___27___ meine Liebe zu antiquarischen Möbelstücken.\nMeine Spezialität ist das stilgenaue Restaurieren und Aufarbeiten antiquarischer Möbel insbe-\nsondere aus der Biedermeier Zeit und dem Jugendstil. Aufgrund meiner Berufserfahrung und\nmeines Studiums konnte ich umfangreiche Kenntnisse erwerben, ___28___ Möbelstile und die\nHerstellungskunst in den verschiedensten Epochen ___29___ in Nord-___29___ in Südeuropa\nangeht.\nMein Studium lässt mir genügend Zeit, eine Teilzeitstelle zu übernehmen, die darüber hinaus\nmeinen beruflichen Fähigkeiten und Neigungen entspricht. Aus diesem Grund habe ich mich\nentschlossen, ___30___, und bewerbe mich um die von Ihnen angebotene Teilzeitstelle.\nIch freue mich auf ein persönliches Gespräch.\nMit freundlichen Grüßen\nSabine Holzinger",
+      "text": "Sehr geehrter Herr Dr. Dobromil,\nmit ___21___ Interesse habe ich Ihr Stellenangebot in der Essener Zeitung gelesen, ___22___\nSie eine Teilzeit-Mitarbeiterin in Ihrem Antiquitätengeschäft suchen. Es reizt mich eine verant-\nwortungsvolle Aufgabe in einem so renommierten Geschäft wie dem ___23___ übernehmen\n___24___.\nNach dem Abitur am Kreisgymnasium in Velbert begann ich eine dreijährige Schreinerlehre\n___25___ der Firma Eichelbohrer & Co und besuchte die Kreisberufsschule in Velbert. Nach\nerfolgreichem Abschluss meiner Berufsausbildung arbeitete ich ___26___ bei Stutz & Partner -\nMöbeldesign in Düsseldorf. Danach schrieb ich mich an der Fachhochschule Köln im Fachbereich\nMöbeldesign ein und ___27___ meine Liebe zu antiquarischen Möbelstücken.\nMeine Spezialität ist das stilgenaue Restaurieren und Aufarbeiten antiquarischer Möbel insbe-\nsondere aus der Biedermeier Zeit und dem Jugendstil. Aufgrund meiner Berufserfahrung und\nmeines Studiums konnte ich umfangreiche Kenntnisse erwerben, ___28___ Möbelstile und die\nHerstellungskunst in den verschiedensten Epochen ___29___ in Nord-... in Südeuropa\nangeht.\nMein Studium lässt mir genügend Zeit, eine Teilzeitstelle zu übernehmen, die darüber hinaus\nmeinen beruflichen Fähigkeiten und Neigungen entspricht. Aus diesem Grund habe ich mich\nentschlossen, ___30___, und bewerbe mich um die von Ihnen angebotene Teilzeitstelle.\nIch freue mich auf ein persönliches Gespräch.\nMit freundlichen Grüßen\nSabine Holzinger",
       "optionsRaw": "21 A allergrößte 24 A können 27 A entdeckte 30 A auf Ihre Anzeige\nantwortenB allergrößtem B könnte B erfand\nC allergrößten C zu können C merkte B auf Ihre Anzeige\nzu antworten\n22 A an dem 25 A an 28 A das\nB auf dem B bei B was C um auf Ihre\nAnzeige zu\nantwortenC in dem C mit C welches\n23 A Ihrem 26 A ein Jahr lang 29 A sowohl ... als auch\nB Ihren B durch ein Jahr B teils ... teils\nC Ihres C seit einem Jahr C weder ... noch",
       "ansBase": [
         "B",
@@ -10990,34 +10990,9 @@
           "C": "allergrößten",
           "B": "Option B"
         },
-        "24": {
-          "A": "können",
-          "C": "zu können",
-          "B": "Option B"
-        },
-        "27": {
-          "A": "entdeckte",
-          "C": "merkte B auf Ihre Anzeige",
-          "B": "Option B"
-        },
-        "30": {
-          "A": "auf Ihre Anzeige",
-          "B": "Option B",
-          "C": "Option C"
-        },
         "22": {
           "A": "an dem",
           "B": "auf dem",
-          "C": "Option C"
-        },
-        "25": {
-          "A": "an",
-          "B": "bei",
-          "C": "Option C"
-        },
-        "28": {
-          "A": "das",
-          "B": "was C um auf Ihre",
           "C": "Option C"
         },
         "23": {
@@ -11025,22 +11000,47 @@
           "B": "Ihren",
           "C": "Ihres"
         },
+        "24": {
+          "A": "können",
+          "C": "zu können",
+          "B": "Option B"
+        },
+        "25": {
+          "A": "an",
+          "B": "bei",
+          "C": "Option C"
+        },
         "26": {
           "A": "ein Jahr lang",
           "B": "durch ein Jahr",
           "C": "seit einem Jahr"
         },
+        "27": {
+          "A": "entdeckte",
+          "C": "merkte B auf Ihre Anzeige",
+          "B": "Option B"
+        },
+        "28": {
+          "A": "das",
+          "B": "was C um auf Ihre",
+          "C": "Option C"
+        },
         "29": {
           "A": "sowohl ... als auch",
           "B": "teils ... teils",
           "C": "weder ... noch"
+        },
+        "30": {
+          "A": "auf Ihre Anzeige",
+          "B": "Option B",
+          "C": "Option C"
         }
       }
     },
     {
       "id": "moosberger",
       "title": "Herr Dr. Moosberger (Antiquitätengeschäft)",
-      "text": "Sehr geehrter Herr Dr. Moosberger,\nmit ___21___ Interesse habe ich Ihr Stellenangebot in der Essener Zeitung gelesen, ___22___\ndem Sie eine Teilzeit-Mitarbeiterin in Ihrem Antiquitätengeschäft suchen. Es reizt mich eine\nverantwortungsvolle Aufgabe in einem ___23___ renommierten Geschäft wie dem Ihrigen  über-\nnehmen ___24___.\nNach dem Abitur am Kreisgymnasium in Velbert ___25___ ich eine dreijährige Schreinerlehre bei\nder Firma Eichelbohrer & Co und besuchte die Kreisberufsschule in Velbert. Nach erfolgreichem\nAbschluss meiner Berufsausbildung arbeitete ich ___26___ bei Stutz & Partner -\nMöbeldesign in Düsseldorf. Danach schrieb ich mich an der Fachhochschule Köln im Fachbereich\nMöbeldesign ein und ___27___ meine Liebe zu antiquarischen Möbelstücken.\nMeine Spezialität ist das stilgenaue Restaurieren und Aufarbeiten antiquarischer Möbel insbe-\nsondere aus der Biedermeier Zeit und dem Jugendstil. ___28___ meiner Berufstätigkeit und\nmeines Studiums konnte ich umfangreiche Kenntnisse erwerben, was Möbelstile und die\nHerstellungskunst in den verschiedensten Epochen ___29___ in Nord-___29___ in Südeuropa\nangeht.\nMein Studium lässt mir genügend Zeit, eine Teilzeitstelle zu übernehmen, die darüber hinaus\nmeinen beruflichen Fähigkeiten und Neigungen entspricht. Aus diesem Grund habe ich mich\nentschlossen, ___30___, und bewerbe mich um die von Ihnen angebotene Teilzeitstelle.\nIch freue mich auf ein persönliches Gespräch.\nMit freundlichen Grüßen\nSabine Holzinger",
+      "text": "Sehr geehrter Herr Dr. Moosberger,\nmit ___21___ Interesse habe ich Ihr Stellenangebot in der Essener Zeitung gelesen, ___22___\ndem Sie eine Teilzeit-Mitarbeiterin in Ihrem Antiquitätengeschäft suchen. Es reizt mich eine\nverantwortungsvolle Aufgabe in einem ___23___ renommierten Geschäft wie dem Ihrigen  über-\nnehmen ___24___.\nNach dem Abitur am Kreisgymnasium in Velbert ___25___ ich eine dreijährige Schreinerlehre bei\nder Firma Eichelbohrer & Co und besuchte die Kreisberufsschule in Velbert. Nach erfolgreichem\nAbschluss meiner Berufsausbildung arbeitete ich ___26___ bei Stutz & Partner -\nMöbeldesign in Düsseldorf. Danach schrieb ich mich an der Fachhochschule Köln im Fachbereich\nMöbeldesign ein und ___27___ meine Liebe zu antiquarischen Möbelstücken.\nMeine Spezialität ist das stilgenaue Restaurieren und Aufarbeiten antiquarischer Möbel insbe-\nsondere aus der Biedermeier Zeit und dem Jugendstil. ___28___ meiner Berufstätigkeit und\nmeines Studiums konnte ich umfangreiche Kenntnisse erwerben, was Möbelstile und die\nHerstellungskunst in den verschiedensten Epochen ___29___ in Nord-... in Südeuropa\nangeht.\nMein Studium lässt mir genügend Zeit, eine Teilzeitstelle zu übernehmen, die darüber hinaus\nmeinen beruflichen Fähigkeiten und Neigungen entspricht. Aus diesem Grund habe ich mich\nentschlossen, ___30___, und bewerbe mich um die von Ihnen angebotene Teilzeitstelle.\nIch freue mich auf ein persönliches Gespräch.\nMit freundlichen Grüßen\nSabine Holzinger",
       "optionsRaw": "21 A allergrößte 24 A können 27 A entdeckte 30 A auf Ihre Anzeige\nantwortenB allergrößtem B könnte B erfand\nC allergrößten C zu können C merkte B auf Ihre Anzeige\nzu antworten\n22 A an 25 A begann 28 A Dabei\nB auf B beging B Inzwischen C um auf Ihre\nAnzeige zu\nantwortenC in C belief C Während\n23 A als 26 A durch ein Jahr 29 A sowohl ... als auch\nB  so B ein Jahr lang B teils ... teils\nC  wie C seit einem Jahr C weder ... noch",
       "ansBase": [
         "B",
@@ -11060,34 +11060,9 @@
           "C": "allergrößten",
           "B": "Option B"
         },
-        "24": {
-          "A": "können",
-          "C": "zu können",
-          "B": "Option B"
-        },
-        "27": {
-          "A": "entdeckte",
-          "C": "merkte B auf Ihre Anzeige",
-          "B": "Option B"
-        },
-        "30": {
-          "A": "auf Ihre Anzeige",
-          "B": "Option B",
-          "C": "Option C"
-        },
         "22": {
           "A": "an",
           "B": "auf",
-          "C": "Option C"
-        },
-        "25": {
-          "A": "begann",
-          "B": "beging",
-          "C": "Option C"
-        },
-        "28": {
-          "A": "Dabei",
-          "B": "Inzwischen C um auf Ihre",
           "C": "Option C"
         },
         "23": {
@@ -11095,15 +11070,40 @@
           "B": "so",
           "C": "wie"
         },
+        "24": {
+          "A": "können",
+          "C": "zu können",
+          "B": "Option B"
+        },
+        "25": {
+          "A": "begann",
+          "B": "beging",
+          "C": "Option C"
+        },
         "26": {
           "A": "durch ein Jahr",
           "B": "ein Jahr lang",
           "C": "seit einem Jahr"
         },
+        "27": {
+          "A": "entdeckte",
+          "C": "merkte B auf Ihre Anzeige",
+          "B": "Option B"
+        },
+        "28": {
+          "A": "Dabei",
+          "B": "Inzwischen C um auf Ihre",
+          "C": "Option C"
+        },
         "29": {
           "A": "sowohl ... als auch",
           "B": "teils ... teils",
           "C": "weder ... noch"
+        },
+        "30": {
+          "A": "auf Ihre Anzeige",
+          "B": "Option B",
+          "C": "Option C"
         }
       }
     },
@@ -11130,50 +11130,50 @@
           "B": "noch",
           "C": "zwar"
         },
-        "24": {
-          "A": "konnten",
-          "B": "sollten",
-          "C": "wollten"
-        },
-        "27": {
-          "A": "neulich",
-          "B": "seitdem",
-          "C": "vormals"
-        },
-        "30": {
-          "A": "fast",
-          "B": "kaum",
-          "C": "wohl"
-        },
         "22": {
           "A": "jedoch",
           "B": "obwohl",
           "C": "trotzdem"
-        },
-        "25": {
-          "A": "ankommen wirst",
-          "B": "anzukommen wirst",
-          "C": "wirst ankommen"
-        },
-        "28": {
-          "A": "auffrischen",
-          "B": "aufholen",
-          "C": "aufsparen"
         },
         "23": {
           "A": "anschauen",
           "B": "überschauen",
           "C": "vorschauen"
         },
+        "24": {
+          "A": "konnten",
+          "B": "sollten",
+          "C": "wollten"
+        },
+        "25": {
+          "A": "ankommen wirst",
+          "B": "anzukommen wirst",
+          "C": "wirst ankommen"
+        },
         "26": {
           "A": "falls",
           "B": "für den Fall",
           "C": "im Fall"
         },
+        "27": {
+          "A": "neulich",
+          "B": "seitdem",
+          "C": "vormals"
+        },
+        "28": {
+          "A": "auffrischen",
+          "B": "aufholen",
+          "C": "aufsparen"
+        },
         "29": {
           "A": "als",
           "B": "wann",
           "C": "wo"
+        },
+        "30": {
+          "A": "fast",
+          "B": "kaum",
+          "C": "wohl"
         }
       }
     },
@@ -11200,50 +11200,50 @@
           "B": "noch",
           "C": "zwar"
         },
-        "24": {
-          "A": "konnten",
-          "B": "sollten",
-          "C": "wollten"
-        },
-        "27": {
-          "A": "neulich",
-          "B": "seitdem",
-          "C": "vormals"
-        },
-        "30": {
-          "A": "geh",
-          "B": "komm",
-          "C": "lass"
-        },
         "22": {
           "A": "jedoch",
           "B": "obwohl",
           "C": "trotzdem"
-        },
-        "25": {
-          "A": "ankommen wirst",
-          "B": "anzukommen wirst",
-          "C": "wirst ankommen"
-        },
-        "28": {
-          "A": "auffrischen",
-          "B": "aufholen",
-          "C": "aufsparen"
         },
         "23": {
           "A": "anschauen",
           "B": "überschauen",
           "C": "vorschauen"
         },
+        "24": {
+          "A": "konnten",
+          "B": "sollten",
+          "C": "wollten"
+        },
+        "25": {
+          "A": "ankommen wirst",
+          "B": "anzukommen wirst",
+          "C": "wirst ankommen"
+        },
         "26": {
           "A": "falls",
           "B": "für den Fall",
           "C": "im Fall"
         },
+        "27": {
+          "A": "neulich",
+          "B": "seitdem",
+          "C": "vormals"
+        },
+        "28": {
+          "A": "auffrischen",
+          "B": "aufholen",
+          "C": "aufsparen"
+        },
         "29": {
           "A": "als",
           "B": "wann",
           "C": "wo"
+        },
+        "30": {
+          "A": "geh",
+          "B": "komm",
+          "C": "lass"
         }
       }
     },
@@ -11270,50 +11270,50 @@
           "B": "deine",
           "C": "deinen"
         },
-        "24": {
-          "A": "Für",
-          "B": "Vor",
-          "C": "Zu"
-        },
-        "27": {
-          "A": "Damit",
-          "B": "Darauf",
-          "C": "Darüber"
-        },
-        "30": {
-          "A": "können",
-          "B": "könnten",
-          "C": "konnten"
-        },
         "22": {
           "A": "denn",
           "B": "obwohl",
           "C": "weil"
-        },
-        "25": {
-          "A": "neu",
-          "B": "neuen",
-          "C": "neuer"
-        },
-        "28": {
-          "A": "ist",
-          "B": "wäre",
-          "C": "würde"
         },
         "23": {
           "A": "noch",
           "B": "schon",
           "C": "weiterhin"
         },
+        "24": {
+          "A": "Für",
+          "B": "Vor",
+          "C": "Zu"
+        },
+        "25": {
+          "A": "neu",
+          "B": "neuen",
+          "C": "neuer"
+        },
         "26": {
           "A": "bloß",
           "B": "ja",
           "C": "mal"
         },
+        "27": {
+          "A": "Damit",
+          "B": "Darauf",
+          "C": "Darüber"
+        },
+        "28": {
+          "A": "ist",
+          "B": "wäre",
+          "C": "würde"
+        },
         "29": {
           "A": "aufgrund",
           "B": "trotz",
           "C": "wegen"
+        },
+        "30": {
+          "A": "können",
+          "B": "könnten",
+          "C": "konnten"
         }
       }
     },
@@ -11340,50 +11340,50 @@
           "B": "könnt",
           "C": "sollt"
         },
-        "24": {
-          "A": "einige",
-          "B": "einigen",
-          "C": "einiges"
-        },
-        "27": {
-          "A": "wann",
-          "B": "wie",
-          "C": "wo"
-        },
-        "30": {
-          "A": "man",
-          "B": "sich",
-          "C": "Sie"
-        },
         "22": {
           "A": "an",
           "B": "für",
           "C": "in"
-        },
-        "25": {
-          "A": "dem",
-          "B": "den",
-          "C": "der"
-        },
-        "28": {
-          "A": "dabei",
-          "B": "daneben",
-          "C": "darin"
         },
         "23": {
           "A": "bei",
           "B": "unter",
           "C": "zu"
         },
+        "24": {
+          "A": "einige",
+          "B": "einigen",
+          "C": "einiges"
+        },
+        "25": {
+          "A": "dem",
+          "B": "den",
+          "C": "der"
+        },
         "26": {
           "A": "ist",
           "B": "sind",
           "C": "waren"
         },
+        "27": {
+          "A": "wann",
+          "B": "wie",
+          "C": "wo"
+        },
+        "28": {
+          "A": "dabei",
+          "B": "daneben",
+          "C": "darin"
+        },
         "29": {
           "A": "dies",
           "B": "diesem",
           "C": "dieses"
+        },
+        "30": {
+          "A": "man",
+          "B": "sich",
+          "C": "Sie"
         }
       }
     },
@@ -11410,50 +11410,50 @@
           "B": "bist",
           "C": "konntest"
         },
-        "24": {
-          "A": "langen",
-          "B": "vielen",
-          "C": "unzähligen"
-        },
-        "27": {
-          "A": "falls",
-          "B": "wenn",
-          "C": "ob"
-        },
-        "30": {
-          "A": "dank",
-          "B": "deshalb",
-          "C": "weil"
-        },
         "22": {
           "A": "würde",
           "B": "wäre",
           "C": "wurde"
-        },
-        "25": {
-          "A": "gefallen",
-          "B": "gefiel",
-          "C": "hat gefallen"
-        },
-        "28": {
-          "A": "danach",
-          "B": "dann",
-          "C": "denn"
         },
         "23": {
           "A": "für",
           "B": "in",
           "C": "zu"
         },
+        "24": {
+          "A": "langen",
+          "B": "vielen",
+          "C": "unzähligen"
+        },
+        "25": {
+          "A": "gefallen",
+          "B": "gefiel",
+          "C": "hat gefallen"
+        },
         "26": {
           "A": "weil",
           "B": "denn",
           "C": "wegen"
         },
+        "27": {
+          "A": "falls",
+          "B": "wenn",
+          "C": "ob"
+        },
+        "28": {
+          "A": "danach",
+          "B": "dann",
+          "C": "denn"
+        },
         "29": {
           "A": "ausgeräumt",
           "B": "ausgeräumten",
           "C": "ausgeräumter"
+        },
+        "30": {
+          "A": "dank",
+          "B": "deshalb",
+          "C": "weil"
         }
       }
     },
@@ -11480,50 +11480,50 @@
           "B": "bei",
           "C": "in"
         },
-        "24": {
-          "A": "angeschlossen",
-          "B": "anschließen",
-          "C": "anschließen an"
-        },
-        "27": {
-          "A": "ein",
-          "B": "einem",
-          "C": "einer"
-        },
-        "30": {
-          "A": "Bei",
-          "B": "Für",
-          "C": "Zu"
-        },
         "22": {
           "A": "in Betrag",
           "B": "in Höhe",
           "C": "in Summe"
-        },
-        "25": {
-          "A": "anlässlich",
-          "B": "bezüglich",
-          "C": "mittels"
-        },
-        "28": {
-          "A": "Sobald",
-          "B": "Sofort",
-          "C": "So oft"
         },
         "23": {
           "A": "Für",
           "B": "Zu",
           "C": "Zwecks"
         },
+        "24": {
+          "A": "angeschlossen",
+          "B": "anschließen",
+          "C": "anschließen an"
+        },
+        "25": {
+          "A": "anlässlich",
+          "B": "bezüglich",
+          "C": "mittels"
+        },
         "26": {
           "A": "als",
           "B": "wenn",
           "C": "wie"
         },
+        "27": {
+          "A": "ein",
+          "B": "einem",
+          "C": "einer"
+        },
+        "28": {
+          "A": "Sobald",
+          "B": "Sofort",
+          "C": "So oft"
+        },
         "29": {
           "A": "dafür",
           "B": "damit",
           "C": "dazu"
+        },
+        "30": {
+          "A": "Bei",
+          "B": "Für",
+          "C": "Zu"
         }
       }
     },
@@ -11550,57 +11550,57 @@
           "B": "Dabei",
           "C": "Vorbei"
         },
-        "24": {
-          "A": "durchführen",
-          "B": "stattfinden",
-          "C": "veranstalten"
-        },
-        "27": {
-          "A": "ein",
-          "B": "einem",
-          "C": "einer"
-        },
-        "30": {
-          "A": "Bei",
-          "B": "Für",
-          "C": "Zu"
-        },
         "22": {
           "A": "in Betrag",
           "B": "in Höhe",
           "C": "in Summe"
-        },
-        "25": {
-          "A": "anlässlich",
-          "B": "bezüglich",
-          "C": "mittels"
-        },
-        "28": {
-          "A": "Sobald",
-          "B": "Sofort",
-          "C": "So oft"
         },
         "23": {
           "A": "Für",
           "B": "Zur",
           "C": "Zwecks"
         },
+        "24": {
+          "A": "durchführen",
+          "B": "stattfinden",
+          "C": "veranstalten"
+        },
+        "25": {
+          "A": "anlässlich",
+          "B": "bezüglich",
+          "C": "mittels"
+        },
         "26": {
           "A": "möglich",
           "B": "möglicherweise",
           "C": "möglichst"
         },
+        "27": {
+          "A": "ein",
+          "B": "einem",
+          "C": "einer"
+        },
+        "28": {
+          "A": "Sobald",
+          "B": "Sofort",
+          "C": "So oft"
+        },
         "29": {
           "A": "dafür",
           "B": "damit",
           "C": "dazu"
+        },
+        "30": {
+          "A": "Bei",
+          "B": "Für",
+          "C": "Zu"
         }
       }
     },
     {
       "id": "agnieszka",
       "title": "Liebe Agnieszka (Abschlussprüfung)",
-      "text": "Liebe Agnieszka,\njetzt ist es schon bald ein halbes Jahr ___21___‚ dass ich dir das letzte Mal geschrieben habe. Bitte denke\njetzt nicht, dass ich dich vergessen habe. Aber, wie du ja schon weißt, stehe ich vor der Abschlussprüfung\nin Deutsch und das bedeutet jede Menge Arbeit und Stress.\nStell dir vor, ausgerechnet jetzt, nur zwei Wochen vor der Prüfung, ist unsere Lehrerin, Frau Reuter\n___22___. Sie liegt sogar im Krankenhaus und kommt erst wieder zurück, ___23___  unsere Prüfung schon\nlängst vorbei ist. Ihre Vertretung, Frau Eichhorn ist ___24___ sehr nett, ___24___ sie hat gerade erst mit\ndem Unterrichten angefangen und noch keine Erfahrung. Das macht uns alle ein bisschen unsicher. Aber in\nzwei Wochen ist hoffentlich alles geschafft. Und dann ___25___ ich alle Bücher und Hefte in die Ecke legen\nund erst einmal ein paar Tage gar nichts tun.\n___26___ freue ich mich schon riesig. Wenn du Zeit und Lust hast, kannst du mich doch besuchen kom-\nmen und wir können zusammen etwas unternehmen. Wir wollten doch schon lange Bad Homburg besu-\nchen und im Taunus wandern. Was hältst du ___27___?\n.\nWas macht deine Au-pair-Familie? Musst du immer noch so viel Hausarbeit machen? Hören \"deine\" Kinder\nauf dich oder tanzen sie ___28___ noch immer auf der Nase herum, wie du in deinem letzten Brief ge-\nschrieben hast? Es ist bestimmt nicht so leicht, einen zweijährigen Jungen und ein vierjähriges Mädchen\nden ganzen Tag ___29___. Aber ich kenne dich: Du hast gute Ideen und bestimmt hast du schon einen\nWeg gefunden, ___30___ du mit den Kindern zurechtkommst.\n.\nSo, jetzt muss ich mich wieder an meine Prüfungsvorbereitung machen, sonst wird mir die Zeit zu knapp.\nIch grüße dich ganz herzlich und wünsche dir alles Gute.\nBis bald\nDeine Louise",
+      "text": "Liebe Agnieszka,\njetzt ist es schon bald ein halbes Jahr ___21___‚ dass ich dir das letzte Mal geschrieben habe. Bitte denke\njetzt nicht, dass ich dich vergessen habe. Aber, wie du ja schon weißt, stehe ich vor der Abschlussprüfung\nin Deutsch und das bedeutet jede Menge Arbeit und Stress.\nStell dir vor, ausgerechnet jetzt, nur zwei Wochen vor der Prüfung, ist unsere Lehrerin, Frau Reuter\n___22___. Sie liegt sogar im Krankenhaus und kommt erst wieder zurück, ___23___  unsere Prüfung schon\nlängst vorbei ist. Ihre Vertretung, Frau Eichhorn ist ___24___ sehr nett, ... sie hat gerade erst mit\ndem Unterrichten angefangen und noch keine Erfahrung. Das macht uns alle ein bisschen unsicher. Aber in\nzwei Wochen ist hoffentlich alles geschafft. Und dann ___25___ ich alle Bücher und Hefte in die Ecke legen\nund erst einmal ein paar Tage gar nichts tun.\n___26___ freue ich mich schon riesig. Wenn du Zeit und Lust hast, kannst du mich doch besuchen kom-\nmen und wir können zusammen etwas unternehmen. Wir wollten doch schon lange Bad Homburg besu-\nchen und im Taunus wandern. Was hältst du ___27___?\n.\nWas macht deine Au-pair-Familie? Musst du immer noch so viel Hausarbeit machen? Hören \"deine\" Kinder\nauf dich oder tanzen sie ___28___ noch immer auf der Nase herum, wie du in deinem letzten Brief ge-\nschrieben hast? Es ist bestimmt nicht so leicht, einen zweijährigen Jungen und ein vierjähriges Mädchen\nden ganzen Tag ___29___. Aber ich kenne dich: Du hast gute Ideen und bestimmt hast du schon einen\nWeg gefunden, ___30___ du mit den Kindern zurechtkommst.\n.\nSo, jetzt muss ich mich wieder an meine Prüfungsvorbereitung machen, sonst wird mir die Zeit zu knapp.\nIch grüße dich ganz herzlich und wünsche dir alles Gute.\nBis bald\nDeine Louise",
       "optionsRaw": "21 A her 24 A nicht nur...sondern auch 27 A darüber 30 A weshalb\nB hin B teils...teils B davon B wie\nC vorbei C zwar...aber C dazu C wo\n22 A erkrankt 25 A werde 28 A dich\nB gekränkt B wollte B dir\nC kränklich C würde C sich\n23 A als 26 A Dafür 29 A beschäftigen lassen\nB da B Danach B beschäftigt zu sein\nC wenn C Darauf C zu beschäftigen",
       "ansBase": [
         "A",
@@ -11620,50 +11620,50 @@
           "B": "hin",
           "C": "vorbei"
         },
-        "24": {
-          "A": "nicht nur...sondern auch",
-          "B": "teils...teils",
-          "C": "zwar...aber"
-        },
-        "27": {
-          "A": "darüber",
-          "B": "davon",
-          "C": "dazu"
-        },
-        "30": {
-          "A": "weshalb",
-          "B": "wie",
-          "C": "wo"
-        },
         "22": {
           "A": "erkrankt",
           "B": "gekränkt",
           "C": "kränklich"
-        },
-        "25": {
-          "A": "werde",
-          "B": "wollte",
-          "C": "würde"
-        },
-        "28": {
-          "A": "dich",
-          "B": "dir",
-          "C": "sich"
         },
         "23": {
           "A": "als",
           "B": "da",
           "C": "wenn"
         },
+        "24": {
+          "A": "nicht nur...sondern auch",
+          "B": "teils...teils",
+          "C": "zwar...aber"
+        },
+        "25": {
+          "A": "werde",
+          "B": "wollte",
+          "C": "würde"
+        },
         "26": {
           "A": "Dafür",
           "B": "Danach",
           "C": "Darauf"
         },
+        "27": {
+          "A": "darüber",
+          "B": "davon",
+          "C": "dazu"
+        },
+        "28": {
+          "A": "dich",
+          "B": "dir",
+          "C": "sich"
+        },
         "29": {
           "A": "beschäftigen lassen",
           "B": "beschäftigt zu sein",
           "C": "zu beschäftigen"
+        },
+        "30": {
+          "A": "weshalb",
+          "B": "wie",
+          "C": "wo"
         }
       }
     },
@@ -11690,34 +11690,9 @@
           "C": "davon",
           "B": "Option B"
         },
-        "24": {
-          "A": "Jeder Mittwoch",
-          "C": "Zum Mittwoch",
-          "B": "Option B"
-        },
-        "27": {
-          "A": "obwohl",
-          "C": "wobei B müssen eine",
-          "B": "Option B"
-        },
-        "30": {
-          "A": "eine Diät",
-          "B": "Option B",
-          "C": "Option C"
-        },
         "22": {
           "A": "denen",
           "B": "die",
-          "C": "Option C"
-        },
-        "25": {
-          "A": "jedem Kurs",
-          "B": "jeden Kurs",
-          "C": "Option C"
-        },
-        "28": {
-          "A": "Ihnen",
-          "B": "Sie C müssen halten",
           "C": "Option C"
         },
         "23": {
@@ -11725,15 +11700,40 @@
           "B": "durch",
           "C": "in"
         },
+        "24": {
+          "A": "Jeder Mittwoch",
+          "C": "Zum Mittwoch",
+          "B": "Option B"
+        },
+        "25": {
+          "A": "jedem Kurs",
+          "B": "jeden Kurs",
+          "C": "Option C"
+        },
         "26": {
           "A": "der",
           "B": "deren",
           "C": "dessen"
         },
+        "27": {
+          "A": "obwohl",
+          "C": "wobei B müssen eine",
+          "B": "Option B"
+        },
+        "28": {
+          "A": "Ihnen",
+          "B": "Sie C müssen halten",
+          "C": "Option C"
+        },
         "29": {
           "A": "hat",
           "B": "ist",
           "C": "wird"
+        },
+        "30": {
+          "A": "eine Diät",
+          "B": "Option B",
+          "C": "Option C"
         }
       }
     },
@@ -11760,50 +11760,50 @@
           "B": "gleich",
           "C": "zuerst"
         },
-        "24": {
-          "A": "aber",
-          "B": "denn",
-          "C": "oder"
-        },
-        "27": {
-          "A": "anwerben",
-          "B": "bewerben",
-          "C": "umwerben"
-        },
-        "30": {
-          "A": "ausgemacht",
-          "B": "beschlossen",
-          "C": "entschieden"
-        },
         "22": {
           "A": "am besten",
           "B": "bestenfalls",
           "C": "bestens"
-        },
-        "25": {
-          "A": "besondere",
-          "B": "geringe",
-          "C": "gute"
-        },
-        "28": {
-          "A": "Bedauerlich",
-          "B": "Leider",
-          "C": "Schade"
         },
         "23": {
           "A": "bei",
           "B": "mit",
           "C": "zu"
         },
+        "24": {
+          "A": "aber",
+          "B": "denn",
+          "C": "oder"
+        },
+        "25": {
+          "A": "besondere",
+          "B": "geringe",
+          "C": "gute"
+        },
         "26": {
           "A": "künftige",
           "B": "nächste",
           "C": "weitere"
         },
+        "27": {
+          "A": "anwerben",
+          "B": "bewerben",
+          "C": "umwerben"
+        },
+        "28": {
+          "A": "Bedauerlich",
+          "B": "Leider",
+          "C": "Schade"
+        },
         "29": {
           "A": "deshalb",
           "B": "trotzdem",
           "C": "übrigens"
+        },
+        "30": {
+          "A": "ausgemacht",
+          "B": "beschlossen",
+          "C": "entschieden"
         }
       }
     },
@@ -11830,50 +11830,50 @@
           "B": "gleich",
           "C": "zuerst"
         },
-        "24": {
-          "A": "fast",
-          "B": "ungefähr",
-          "C": "ziemlich"
-        },
-        "27": {
-          "A": "anwerben",
-          "B": "bewerben",
-          "C": "umwerben"
-        },
-        "30": {
-          "A": "ausgemacht",
-          "B": "beschlossen",
-          "C": "entschieden"
-        },
         "22": {
           "A": "am besten",
           "B": "bestenfalls",
           "C": "bestens"
-        },
-        "25": {
-          "A": "besondere",
-          "B": "geringe",
-          "C": "gute"
-        },
-        "28": {
-          "A": "außerdem",
-          "B": "damals",
-          "C": "sonst"
         },
         "23": {
           "A": "bei",
           "B": "mit",
           "C": "zu"
         },
+        "24": {
+          "A": "fast",
+          "B": "ungefähr",
+          "C": "ziemlich"
+        },
+        "25": {
+          "A": "besondere",
+          "B": "geringe",
+          "C": "gute"
+        },
         "26": {
           "A": "künftige",
           "B": "nächste",
           "C": "weitere"
         },
+        "27": {
+          "A": "anwerben",
+          "B": "bewerben",
+          "C": "umwerben"
+        },
+        "28": {
+          "A": "außerdem",
+          "B": "damals",
+          "C": "sonst"
+        },
         "29": {
           "A": "deshalb",
           "B": "trotzdem",
           "C": "übrigens"
+        },
+        "30": {
+          "A": "ausgemacht",
+          "B": "beschlossen",
+          "C": "entschieden"
         }
       }
     },
@@ -11900,50 +11900,50 @@
           "B": "für",
           "C": "wegen"
         },
-        "24": {
-          "A": "vorbereitende",
-          "B": "vorbereitend",
-          "C": "vorbereiteten"
-        },
-        "27": {
-          "A": "auf",
-          "B": "hinter",
-          "C": "neben"
-        },
-        "30": {
-          "A": "erhältlich",
-          "B": "erreichbar",
-          "C": "wirksam"
-        },
         "22": {
           "A": "jeden",
           "B": "jedoch",
           "C": "jeweils"
-        },
-        "25": {
-          "A": "am meisten",
-          "B": "meisten",
-          "C": "meistens"
-        },
-        "28": {
-          "A": "der",
-          "B": "deren",
-          "C": "dessen"
         },
         "23": {
           "A": "gedacht",
           "B": "geeignet",
           "C": "gewidmet"
         },
+        "24": {
+          "A": "vorbereitende",
+          "B": "vorbereitend",
+          "C": "vorbereiteten"
+        },
+        "25": {
+          "A": "am meisten",
+          "B": "meisten",
+          "C": "meistens"
+        },
         "26": {
           "A": "entlang",
           "B": "gegenüber",
           "C": "während"
         },
+        "27": {
+          "A": "auf",
+          "B": "hinter",
+          "C": "neben"
+        },
+        "28": {
+          "A": "der",
+          "B": "deren",
+          "C": "dessen"
+        },
         "29": {
           "A": "sofern",
           "B": "sogar",
           "C": "sogleich"
+        },
+        "30": {
+          "A": "erhältlich",
+          "B": "erreichbar",
+          "C": "wirksam"
         }
       }
     },
@@ -11970,57 +11970,57 @@
           "B": "noch",
           "C": "weiterhin"
         },
-        "24": {
-          "A": "haben",
-          "B": "hatten",
-          "C": "hätten"
-        },
-        "27": {
-          "A": "absolut",
-          "B": "ganz",
-          "C": "vollkommen"
-        },
-        "30": {
-          "A": "inzwischen",
-          "B": "während",
-          "C": "zwischen"
-        },
         "22": {
           "A": "deswegen",
           "B": "wegen",
           "C": "weil"
-        },
-        "25": {
-          "A": "als",
-          "B": "für",
-          "C": "zur"
-        },
-        "28": {
-          "A": "obwohl",
-          "B": "trotzdem",
-          "C": "ungeachtet"
         },
         "23": {
           "A": "abgesehen",
           "B": "außer",
           "C": "bis"
         },
+        "24": {
+          "A": "haben",
+          "B": "hatten",
+          "C": "hätten"
+        },
+        "25": {
+          "A": "als",
+          "B": "für",
+          "C": "zur"
+        },
         "26": {
           "A": "auf",
           "B": "in",
           "C": "zu"
         },
+        "27": {
+          "A": "absolut",
+          "B": "ganz",
+          "C": "vollkommen"
+        },
+        "28": {
+          "A": "obwohl",
+          "B": "trotzdem",
+          "C": "ungeachtet"
+        },
         "29": {
           "A": "durften",
           "B": "konnten",
           "C": "sollten"
+        },
+        "30": {
+          "A": "inzwischen",
+          "B": "während",
+          "C": "zwischen"
         }
       }
     },
     {
       "id": "vanessa",
       "title": "Liebe Vanessa (Urlaub mit Gastfamilie)",
-      "text": "Liebe Vanessa,\ndanke für deinen Brief, ___21___ ich mich total gefreut habe. Du fragst dich bestimmt, warum du schon\ndrei Wochen ___22___ von mir gehört hast, oder? Ich war mit meiner Gastfamilie in Urlaub. Vierzehn Tage\nim Allgäu - mit den Kindern Stefan, Anja und Karina. Du weißt ___21___ selbst, wie anstrengend es ist,\nwenn man ständig drei kleine Kinder um sich hat, die pausenlos unterhalten werden möchten. ___24___\nist es übrigens in deiner Au-pair-Familie mit der kleinen Dorothea?\n.\nDas Allgäu liegt in Süddeutschland am Fuße ___25___ Alpen. Wir sind fast jeden Tag gewandert, immer\nbergauf und bergab. Den Kindern und mir haben ständig die Füße weh ___26___‚doch meine Gasteltern,\nHerr und Frau Zimmer, sind einfach immer weitergelaufen. Die Deutschen lieben es nämlich, in der Natur\nspazieren zu gehen, bis sie vor Erschöpfung ___27___.\n.\nUnterwegs haben wir manchmal an einer sogenannten \"Wassertretstelle\" Rast gemacht. Das sind kleine\nWasserbecken, die oft mitten im Wald liegen. Durch das Becken fließt ein Bach mit eiskaltem Wasser, das\ndirekt von den Bergen kommt. Stell ___28___ vor, alle Wanderer ziehen ihre Schuhe und Strümpfe aus und\nlaufen durch dieses Becken. Als ich meinen Fuß in dieses kalte Wasser getaucht hatte, dachte ich, dass ich\ngleich sterben muss.\n.\nAm Wochenende haben wir alle Minigolf gespielt. Dabei muss ein Golfball mit einem Schläger in ein etwa\nzehn Meter entferntes Loch geschlagen werden. Aber vor dem Loch gibt es ___29___ Menge Hindernisse:\nGräben, kleine Hügel, Tunnel. Der Spieler, dessen Ball mit den wenigsten Schlägen im Loch ankommt, hat\ngewonnen. Die Kinder wollten gar nicht mehr ___30___ aufhören.\nJetzt muss ich aber Schluss machen, die Kinder warten auf ihr Abendessen, denn die Zimmers sind heute\nnicht da: Sie wandern mal wieder .\nViele Grüße\ndeine Mercedes",
+      "text": "Liebe Vanessa,\ndanke für deinen Brief, ___21___ ich mich total gefreut habe. Du fragst dich bestimmt, warum du schon\ndrei Wochen ___22___ von mir gehört hast, oder? Ich war mit meiner Gastfamilie in Urlaub. Vierzehn Tage\nim Allgäu - mit den Kindern Stefan, Anja und Karina. Du weißt ___23___ selbst, wie anstrengend es ist,\nwenn man ständig drei kleine Kinder um sich hat, die pausenlos unterhalten werden möchten. ___24___\nist es übrigens in deiner Au-pair-Familie mit der kleinen Dorothea?\n.\nDas Allgäu liegt in Süddeutschland am Fuße ___25___ Alpen. Wir sind fast jeden Tag gewandert, immer\nbergauf und bergab. Den Kindern und mir haben ständig die Füße weh ___26___‚doch meine Gasteltern,\nHerr und Frau Zimmer, sind einfach immer weitergelaufen. Die Deutschen lieben es nämlich, in der Natur\nspazieren zu gehen, bis sie vor Erschöpfung ___27___.\n.\nUnterwegs haben wir manchmal an einer sogenannten \"Wassertretstelle\" Rast gemacht. Das sind kleine\nWasserbecken, die oft mitten im Wald liegen. Durch das Becken fließt ein Bach mit eiskaltem Wasser, das\ndirekt von den Bergen kommt. Stell ___28___ vor, alle Wanderer ziehen ihre Schuhe und Strümpfe aus und\nlaufen durch dieses Becken. Als ich meinen Fuß in dieses kalte Wasser getaucht hatte, dachte ich, dass ich\ngleich sterben muss.\n.\nAm Wochenende haben wir alle Minigolf gespielt. Dabei muss ein Golfball mit einem Schläger in ein etwa\nzehn Meter entferntes Loch geschlagen werden. Aber vor dem Loch gibt es ___29___ Menge Hindernisse:\nGräben, kleine Hügel, Tunnel. Der Spieler, dessen Ball mit den wenigsten Schlägen im Loch ankommt, hat\ngewonnen. Die Kinder wollten gar nicht mehr ___30___ aufhören.\nJetzt muss ich aber Schluss machen, die Kinder warten auf ihr Abendessen, denn die Zimmers sind heute\nnicht da: Sie wandern mal wieder .\nViele Grüße\ndeine Mercedes",
       "optionsRaw": "21 A an den 24 A Wann 27 A durchfallen 30 A dabei\nB auf dem B Was B umfallen B damit\nC über den C Wie C wegfallen C davon\n22 A nichts mehr 25 A der 28 A dich\nB noch nicht B die B dir\nC keines C von C mal\n23 A doch 26 A gelaufen 29 A alle\nB eben B getan B ganze\nC überhaupt C geworden C jede",
       "ansBase": [
         "C",
@@ -12040,57 +12040,57 @@
           "B": "auf dem",
           "C": "über den"
         },
-        "24": {
-          "A": "Wann",
-          "B": "Was",
-          "C": "Wie"
-        },
-        "27": {
-          "A": "durchfallen",
-          "B": "umfallen",
-          "C": "wegfallen"
-        },
-        "30": {
-          "A": "dabei",
-          "B": "damit",
-          "C": "davon"
-        },
         "22": {
           "A": "nichts mehr",
           "B": "noch nicht",
           "C": "keines"
-        },
-        "25": {
-          "A": "der",
-          "B": "die",
-          "C": "von"
-        },
-        "28": {
-          "A": "dich",
-          "B": "dir",
-          "C": "mal"
         },
         "23": {
           "A": "doch",
           "B": "eben",
           "C": "überhaupt"
         },
+        "24": {
+          "A": "Wann",
+          "B": "Was",
+          "C": "Wie"
+        },
+        "25": {
+          "A": "der",
+          "B": "die",
+          "C": "von"
+        },
         "26": {
           "A": "gelaufen",
           "B": "getan",
           "C": "geworden"
         },
+        "27": {
+          "A": "durchfallen",
+          "B": "umfallen",
+          "C": "wegfallen"
+        },
+        "28": {
+          "A": "dich",
+          "B": "dir",
+          "C": "mal"
+        },
         "29": {
           "A": "alle",
           "B": "ganze",
           "C": "jede"
+        },
+        "30": {
+          "A": "dabei",
+          "B": "damit",
+          "C": "davon"
         }
       }
     },
     {
       "id": "igor",
       "title": "Lieber Igor (Sommerreise)",
-      "text": "Lieber Igor,\nvielen Dank für deine Nachricht, ___21___ die ich mich sehr gefreut habe. Es ist echt eine tolle Idee im\nSommer gemeinsam zu verreisen!\nAber möchtest du wirklich mit dem Auto fahren? Ich würde lieber die Bahn nehmen, denn das ist\numweltfreundlicher und ___22___ noch billiger. Momentan bin ich nämlich mal wieder etwas knapp bei\nKasse. Wir könnten doch eine Interrail-Tour machen.\nMit einem Global Pass können wir in 30 Europäischen Ländern Zug  ___23___ und zwar wann und wohin\nauch immer - allerdings nicht bei uns in Deutschland. Hier müssen wir extra zahlen. Aber wir haben es ja\nvon mir aus nicht allzu weit bis zur Grenze. ___ 24___wir noch keine 26 Jahre alt sind, können wir den Pass\nausgesprochen günstig bekommen. Der Preis hängt ___25___ ab, wie lange wir unterwegs sein wollen.\nWenn du lieber nur ein einziges Land bereisen möchtest, schlage ich vor, nach Frankreich zu fahren, Dann\nnämlich würden wir für ein Interrail-Ticket sogar noch weniger zahlen. Ich habe auch schon mit meiner\nTante in Marseilles ___26___ und sie hat gleich vorgeschlagen, ___27___ wir einige Tage bei ihr verbrin-\ngen. Meine Cousins Jerome und Matthieu, die in Paris studieren, haben Semesterferien und werden auch\ndort sein. Die beiden würden ___28___ freuen, mit uns um die Häuser zu ziehen und könnten uns\nsicherlich die angesagtesten Clubs der Stadt zeigen.\n.\nWegen ___29___ Sprachkenntnisse brauchst du dir nicht den Kopf zu zerbrechen, denn die beiden\nsprechen ziemlich gut Deutsch. Was hältst du davon? Hast du noch andere Vorschläge?\nIch freue mich ___30___schon sehr auf unsere gemeinsame Reise.\nBis bald\nThomas",
+      "text": "Lieber Igor,\nvielen Dank für deine Nachricht, ___21___ die ich mich sehr gefreut habe. Es ist echt eine tolle Idee im\nSommer gemeinsam zu verreisen!\nAber möchtest du wirklich mit dem Auto fahren? Ich würde lieber die Bahn nehmen, denn das ist\numweltfreundlicher und ___22___ noch billiger. Momentan bin ich nämlich mal wieder etwas knapp bei\nKasse. Wir könnten doch eine Interrail-Tour machen.\nMit einem Global Pass können wir in 30 Europäischen Ländern Zug  ___23___ und zwar wann und wohin\nauch immer - allerdings nicht bei uns in Deutschland. Hier müssen wir extra zahlen. Aber wir haben es ja\nvon mir aus nicht allzu weit bis zur Grenze. ___24___wir noch keine 26 Jahre alt sind, können wir den Pass\nausgesprochen günstig bekommen. Der Preis hängt ___25___ ab, wie lange wir unterwegs sein wollen.\nWenn du lieber nur ein einziges Land bereisen möchtest, schlage ich vor, nach Frankreich zu fahren, Dann\nnämlich würden wir für ein Interrail-Ticket sogar noch weniger zahlen. Ich habe auch schon mit meiner\nTante in Marseilles ___26___ und sie hat gleich vorgeschlagen, ___27___ wir einige Tage bei ihr verbrin-\ngen. Meine Cousins Jerome und Matthieu, die in Paris studieren, haben Semesterferien und werden auch\ndort sein. Die beiden würden ___28___ freuen, mit uns um die Häuser zu ziehen und könnten uns\nsicherlich die angesagtesten Clubs der Stadt zeigen.\n.\nWegen ___29___ Sprachkenntnisse brauchst du dir nicht den Kopf zu zerbrechen, denn die beiden\nsprechen ziemlich gut Deutsch. Was hältst du davon? Hast du noch andere Vorschläge?\nIch freue mich ___30___schon sehr auf unsere gemeinsame Reise.\nBis bald\nThomas",
       "optionsRaw": "21 A mit 24 A da 27 A als 30 A bestenfalls\nB über B darum B dass B jedenfalls\nC wegen C deshalb C wenn C keinesfalls\n22 A außerdem 25 A dadurch 28 A euch\nB sonst B damit B sich\nC weiterhin C davon C uns\n23 A fahren 26 A besprochen 29 A das\nB kommen B gesprochen B der\nC nehmen C versprochen C die",
       "ansBase": [
         "B",
@@ -12110,57 +12110,57 @@
           "B": "über",
           "C": "wegen"
         },
-        "24": {
-          "A": "da",
-          "B": "darum",
-          "C": "deshalb"
-        },
-        "27": {
-          "A": "als",
-          "B": "dass",
-          "C": "wenn"
-        },
-        "30": {
-          "A": "bestenfalls",
-          "B": "jedenfalls",
-          "C": "keinesfalls"
-        },
         "22": {
           "A": "außerdem",
           "B": "sonst",
           "C": "weiterhin"
-        },
-        "25": {
-          "A": "dadurch",
-          "B": "damit",
-          "C": "davon"
-        },
-        "28": {
-          "A": "euch",
-          "B": "sich",
-          "C": "uns"
         },
         "23": {
           "A": "fahren",
           "B": "kommen",
           "C": "nehmen"
         },
+        "24": {
+          "A": "da",
+          "B": "darum",
+          "C": "deshalb"
+        },
+        "25": {
+          "A": "dadurch",
+          "B": "damit",
+          "C": "davon"
+        },
         "26": {
           "A": "besprochen",
           "B": "gesprochen",
           "C": "versprochen"
         },
+        "27": {
+          "A": "als",
+          "B": "dass",
+          "C": "wenn"
+        },
+        "28": {
+          "A": "euch",
+          "B": "sich",
+          "C": "uns"
+        },
         "29": {
           "A": "das",
           "B": "der",
           "C": "die"
+        },
+        "30": {
+          "A": "bestenfalls",
+          "B": "jedenfalls",
+          "C": "keinesfalls"
         }
       }
     },
     {
       "id": "ida",
       "title": "Liebe Ida (Umzug nach Frankfurt)",
-      "text": "Liebe Ida,\nnun ist es schon drei Monate her, dass ich nach Frankfurt gezogen bin. Es hat ziemlich lange gedauert, bis\nich mich hier eingelebt habe.\nAm Anfang hatte ich mich auch gar nicht ___21___ die neue Stelle und das Leben in der Stadt gefreut. Dass\nich für meine neue Arbeitsstelle umgezogen war, hatte mich eine zeitlang sogar ein bisschen geärgert. Ich\n___22___ ja auch täglich mit dem Zug fahren können, statt mir eine Wohnung in der Nähe der Firma zu\nsuchen. Zuerst habe ich ___ 23___in meiner neuen Wohnung auch gar nicht richtig wohlgefühlt. Aber\nnachdem ich meine Umzugskartons ___24___, konnte ich endlich die Stadt richtig erkunden.\nSeit einiger Zeit gefällt es mir in Frankfurt nun richtig gut. Das liegt vor allem ___25___, dass ich eine neue\nFreundin gefunden habe. Annabelle wohnt in derselben Straße wie ich und wir haben uns auf einem Floh-\nmarkt in unserem Stadtviertel kennengelernt. Sie hat dort ihre alten Bücher verkauft. Als wir ___ 26___ins\nGespräch kamen, haben wir festgestellt, dass wir ähnliche Interessen und Hobbys teilen: Sie mag ebenfalls\nausgefallene Mode und moderne Kunst und wir gehen nun regelmäßig zusammen ins Schwimmbad.\nMein Leben sieht nun also ganz anders aus ___27___ noch vor drei Monaten. Mit meiner neuen Stelle bin\nich auch zufrieden, ___28___ ich oft Überstunden machen muss. Dafür herrscht jedoch ein angenehmes\nBetriebsklima ___29___ uns in der Abteilung.\nJetzt habe ich viel von mir erzählt, aber Dich noch gar nicht gefragt, wie es Dir ___30___ geht. Gibt es\netwas Neues bei Dir?\nIch freue mich auf Deine nächste Mail!\nHerzliche Grüße\nDeine Emilia",
+      "text": "Liebe Ida,\nnun ist es schon drei Monate her, dass ich nach Frankfurt gezogen bin. Es hat ziemlich lange gedauert, bis\nich mich hier eingelebt habe.\nAm Anfang hatte ich mich auch gar nicht ___21___ die neue Stelle und das Leben in der Stadt gefreut. Dass\nich für meine neue Arbeitsstelle umgezogen war, hatte mich eine zeitlang sogar ein bisschen geärgert. Ich\n___22___ ja auch täglich mit dem Zug fahren können, statt mir eine Wohnung in der Nähe der Firma zu\nsuchen. Zuerst habe ich ___23___in meiner neuen Wohnung auch gar nicht richtig wohlgefühlt. Aber\nnachdem ich meine Umzugskartons ___24___, konnte ich endlich die Stadt richtig erkunden.\nSeit einiger Zeit gefällt es mir in Frankfurt nun richtig gut. Das liegt vor allem ___25___, dass ich eine neue\nFreundin gefunden habe. Annabelle wohnt in derselben Straße wie ich und wir haben uns auf einem Floh-\nmarkt in unserem Stadtviertel kennengelernt. Sie hat dort ihre alten Bücher verkauft. Als wir ___26___ins\nGespräch kamen, haben wir festgestellt, dass wir ähnliche Interessen und Hobbys teilen: Sie mag ebenfalls\nausgefallene Mode und moderne Kunst und wir gehen nun regelmäßig zusammen ins Schwimmbad.\nMein Leben sieht nun also ganz anders aus ___27___ noch vor drei Monaten. Mit meiner neuen Stelle bin\nich auch zufrieden, ___28___ ich oft Überstunden machen muss. Dafür herrscht jedoch ein angenehmes\nBetriebsklima ___29___ uns in der Abteilung.\nJetzt habe ich viel von mir erzählt, aber Dich noch gar nicht gefragt, wie es Dir ___30___ geht. Gibt es\netwas Neues bei Dir?\nIch freue mich auf Deine nächste Mail!\nHerzliche Grüße\nDeine Emilia",
       "optionsRaw": "21 A an 24 A ausgepackt habe 27 A als 30 A eigentlich\nB auf B ausgepackt hatte B denn B hoffentlich\nC wegen C auspackte C wenn C sicherlich\n22 A habe 25 A daran 28 A obwohl\nB hätte B darauf B trotzdem\nC würde C darin C während\n23 A dich 26 A einander 29 A bei\nB uns B gegeneinander B mit\nC mich C miteinander C zu",
       "ansBase": [
         "B",
@@ -12180,50 +12180,50 @@
           "B": "auf",
           "C": "wegen"
         },
-        "24": {
-          "A": "ausgepackt habe",
-          "B": "ausgepackt hatte",
-          "C": "auspackte"
-        },
-        "27": {
-          "A": "als",
-          "B": "denn",
-          "C": "wenn"
-        },
-        "30": {
-          "A": "eigentlich",
-          "B": "hoffentlich",
-          "C": "sicherlich"
-        },
         "22": {
           "A": "habe",
           "B": "hätte",
           "C": "würde"
-        },
-        "25": {
-          "A": "daran",
-          "B": "darauf",
-          "C": "darin"
-        },
-        "28": {
-          "A": "obwohl",
-          "B": "trotzdem",
-          "C": "während"
         },
         "23": {
           "A": "dich",
           "B": "uns",
           "C": "mich"
         },
+        "24": {
+          "A": "ausgepackt habe",
+          "B": "ausgepackt hatte",
+          "C": "auspackte"
+        },
+        "25": {
+          "A": "daran",
+          "B": "darauf",
+          "C": "darin"
+        },
         "26": {
           "A": "einander",
           "B": "gegeneinander",
           "C": "miteinander"
         },
+        "27": {
+          "A": "als",
+          "B": "denn",
+          "C": "wenn"
+        },
+        "28": {
+          "A": "obwohl",
+          "B": "trotzdem",
+          "C": "während"
+        },
         "29": {
           "A": "bei",
           "B": "mit",
           "C": "zu"
+        },
+        "30": {
+          "A": "eigentlich",
+          "B": "hoffentlich",
+          "C": "sicherlich"
         }
       }
     },
@@ -12250,50 +12250,50 @@
           "B": "für",
           "C": "über"
         },
-        "24": {
-          "A": "allerdings",
-          "B": "außerdem",
-          "C": "schließlich"
-        },
-        "27": {
-          "A": "gesagt",
-          "B": "sagend",
-          "C": "zu sagen"
-        },
-        "30": {
-          "A": "ist",
-          "B": "war",
-          "C": "wäre"
-        },
         "22": {
           "A": "daher",
           "B": "gar",
           "C": "sicher"
-        },
-        "25": {
-          "A": "---",
-          "B": "abgerückt",
-          "C": "entfernt"
-        },
-        "28": {
-          "A": "kommende",
-          "B": "kommendem",
-          "C": "kommenden"
         },
         "23": {
           "A": "besonders",
           "B": "einfach",
           "C": "kaum"
         },
+        "24": {
+          "A": "allerdings",
+          "B": "außerdem",
+          "C": "schließlich"
+        },
+        "25": {
+          "A": "---",
+          "B": "abgerückt",
+          "C": "entfernt"
+        },
         "26": {
           "A": "wechseln",
           "B": "verwechseln",
           "C": "wechselten"
         },
+        "27": {
+          "A": "gesagt",
+          "B": "sagend",
+          "C": "zu sagen"
+        },
+        "28": {
+          "A": "kommende",
+          "B": "kommendem",
+          "C": "kommenden"
+        },
         "29": {
           "A": "als",
           "B": "je",
           "C": "weil"
+        },
+        "30": {
+          "A": "ist",
+          "B": "war",
+          "C": "wäre"
         }
       }
     },
@@ -12320,57 +12320,57 @@
           "B": "Sie",
           "C": "sie"
         },
-        "24": {
-          "A": "auf",
-          "B": "im",
-          "C": "in"
-        },
-        "27": {
-          "A": "verstellen",
-          "B": "vorstellen",
-          "C": "zustellen"
-        },
-        "30": {
-          "A": "hätte",
-          "B": "sei",
-          "C": "wäre"
-        },
         "22": {
           "A": "deshalb",
           "B": "obwohl",
           "C": "trotzdem"
-        },
-        "25": {
-          "A": "seit",
-          "B": "vom",
-          "C": "zum"
-        },
-        "28": {
-          "A": "dafür",
-          "B": "damit",
-          "C": "davon"
         },
         "23": {
           "A": "bis",
           "B": "dann",
           "C": "wann"
         },
+        "24": {
+          "A": "auf",
+          "B": "im",
+          "C": "in"
+        },
+        "25": {
+          "A": "seit",
+          "B": "vom",
+          "C": "zum"
+        },
         "26": {
           "A": "ob",
           "B": "obwohl",
           "C": "ohnehin"
         },
+        "27": {
+          "A": "verstellen",
+          "B": "vorstellen",
+          "C": "zustellen"
+        },
+        "28": {
+          "A": "dafür",
+          "B": "damit",
+          "C": "davon"
+        },
         "29": {
           "A": "als",
           "B": "wie",
           "C": "zu"
+        },
+        "30": {
+          "A": "hätte",
+          "B": "sei",
+          "C": "wäre"
         }
       }
     },
     {
       "id": "meike",
       "title": "Liebe Meike (Arbeit in Bremen)",
-      "text": "Liebe Meike,\nvielen Dank für deine Mail! Es freut mich, dass du dich in Bremen wohlfühlst und mit deiner ___21___\nArbeit zufrieden bist.\nAuch ich habe eine Menge zu erzählen. Du weißt ja, wie unzufrieden ich in letzter Zeit oft war. ___22___\nich einen neuen Chef habe, hat sich in der Firma viel verändert: Die Arbeitsatmosphäre ist schlechter ge-\nworden und ich muss viele Überstunden machen. Daher habe ich oft ___23___ nachgedacht, ob ein\nberuflicher Neuanfang das Richtige für mich wäre.\nNun, inzwischen habe ich einen ersten Schritt unternommen: Ich habe ___24___ an einer Fernuniversität\nfür ein Psychologie-Studium eingeschrieben. ___25___ ich zuerst einige Bedenken hatte, bin ich nun sehr\nfroh über meine Entscheidung. Anfangs war ich mir nicht sicher, ob ich nebenberuflich ein Studium\nschaffen ___26___. Schließlich muss ich ja auch noch meinen Lebensunterhalt verdienen. Außerdem hatte\nich Angst, dass mir das Lernen nicht mehr so leichtfallen würde ___27___ früher.\nDas Studium macht mir wirklich Spaß. Allerdings habe ich es unterschätzt, wie viel Zeit die Vorbereitungen\nin Anspruch ___28___. Manchmal fehlt mir bei dem Fernstudium auch der direkte Austausch mit Kommili-\ntonen, denn den Lehrstoff arbeite ich alleine zuhause durch. Für ___29___ ist es aber eine große Hilfe,\ndass die Fernuniversität Chatgruppen anbietet, in ___30____ man rund um die Uhr Fragen stellen kann.\nIch bin jedenfalls gespannt, wie es mit meinem Studium weitergeht.\nWie wäre es, wenn wir demnächst mal wieder telefonieren? Ich würde mich freuen, bald von dir zu hören.\nHerzliche Grüße\nElise",
+      "text": "Liebe Meike,\nvielen Dank für deine Mail! Es freut mich, dass du dich in Bremen wohlfühlst und mit deiner ___21___\nArbeit zufrieden bist.\nAuch ich habe eine Menge zu erzählen. Du weißt ja, wie unzufrieden ich in letzter Zeit oft war. ___22___\nich einen neuen Chef habe, hat sich in der Firma viel verändert: Die Arbeitsatmosphäre ist schlechter ge-\nworden und ich muss viele Überstunden machen. Daher habe ich oft ___23___ nachgedacht, ob ein\nberuflicher Neuanfang das Richtige für mich wäre.\nNun, inzwischen habe ich einen ersten Schritt unternommen: Ich habe ___24___ an einer Fernuniversität\nfür ein Psychologie-Studium eingeschrieben. ___25___ ich zuerst einige Bedenken hatte, bin ich nun sehr\nfroh über meine Entscheidung. Anfangs war ich mir nicht sicher, ob ich nebenberuflich ein Studium\nschaffen ___26___. Schließlich muss ich ja auch noch meinen Lebensunterhalt verdienen. Außerdem hatte\nich Angst, dass mir das Lernen nicht mehr so leichtfallen würde ___27___ früher.\nDas Studium macht mir wirklich Spaß. Allerdings habe ich es unterschätzt, wie viel Zeit die Vorbereitungen\nin Anspruch ___28___. Manchmal fehlt mir bei dem Fernstudium auch der direkte Austausch mit Kommili-\ntonen, denn den Lehrstoff arbeite ich alleine zuhause durch. Für ___29___ ist es aber eine große Hilfe,\ndass die Fernuniversität Chatgruppen anbietet, in ___30___ man rund um die Uhr Fragen stellen kann.\nIch bin jedenfalls gespannt, wie es mit meinem Studium weitergeht.\nWie wäre es, wenn wir demnächst mal wieder telefonieren? Ich würde mich freuen, bald von dir zu hören.\nHerzliche Grüße\nElise",
       "optionsRaw": "21 A neue 24 A es 27 A als 30 A denen\nB neuen B mich B nach B der\nC neuer C mir C wie C die\n22 A Seit 25 A Damit 28 A nahmen\nB Sobald B Obwohl B nehmen\nC Solange C Wenn C nimmt\n23 A daran 26 A dürfte 29 A mein\nB darauf B könnte B mich\nC darüber C müsste C mir",
       "ansBase": [
         "B",
@@ -12390,50 +12390,50 @@
           "B": "neuen",
           "C": "neuer"
         },
-        "24": {
-          "A": "es",
-          "B": "mich",
-          "C": "mir"
-        },
-        "27": {
-          "A": "als",
-          "B": "nach",
-          "C": "wie"
-        },
-        "30": {
-          "A": "denen",
-          "B": "der",
-          "C": "die"
-        },
         "22": {
           "A": "Seit",
           "B": "Sobald",
           "C": "Solange"
-        },
-        "25": {
-          "A": "Damit",
-          "B": "Obwohl",
-          "C": "Wenn"
-        },
-        "28": {
-          "A": "nahmen",
-          "B": "nehmen",
-          "C": "nimmt"
         },
         "23": {
           "A": "daran",
           "B": "darauf",
           "C": "darüber"
         },
+        "24": {
+          "A": "es",
+          "B": "mich",
+          "C": "mir"
+        },
+        "25": {
+          "A": "Damit",
+          "B": "Obwohl",
+          "C": "Wenn"
+        },
         "26": {
           "A": "dürfte",
           "B": "könnte",
           "C": "müsste"
         },
+        "27": {
+          "A": "als",
+          "B": "nach",
+          "C": "wie"
+        },
+        "28": {
+          "A": "nahmen",
+          "B": "nehmen",
+          "C": "nimmt"
+        },
         "29": {
           "A": "mein",
           "B": "mich",
           "C": "mir"
+        },
+        "30": {
+          "A": "denen",
+          "B": "der",
+          "C": "die"
         }
       }
     },

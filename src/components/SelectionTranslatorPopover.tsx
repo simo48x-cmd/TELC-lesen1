@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Globe, Loader2, Search, Star, Volume2, X, Check } from 'lucide-react';
+import { Globe, Loader2, Search, Square, Star, Volume2, X, Check } from 'lucide-react';
 import {
   cleanGermanToken,
+  playGermanAudio,
   sanitizeUtf8Text,
   speakGermanText,
+  stopGermanAudio,
   translateDeToAr,
 } from '../utils/b2StudyEngine';
 import { WordLookupResult } from '../data/verbatimTypes';
@@ -152,27 +154,37 @@ export const SelectionTranslatorPopover: React.FC<SelectionTranslatorPopoverProp
           <span>🌐 الترجمة الفورية لما حددته</span>
         </div>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex flex-wrap items-center gap-1.5">
           <button
             type="button"
-            onClick={() => speakGermanText(selectedText, 1.0)}
+            onClick={() => void playGermanAudio(selectedText, 1.0)}
             className="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-300 text-xs font-extrabold border border-slate-700 cursor-pointer"
             title="نطق بالألمانية (1x)"
           >
             <Volume2 className="w-3.5 h-3.5" />
-            <span>🔊 نطق بالألمانية (1x)</span>
+            <span>🔊 1x</span>
           </button>
           <button
             type="button"
-            onClick={() => speakGermanText(selectedText, 0.8)}
+            onClick={() => void playGermanAudio(selectedText, 0.8)}
             className="inline-flex items-center gap-1 px-2 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-mono font-bold border border-slate-700 cursor-pointer"
             title="نطق بطيء بالألمانية (0.8x)"
           >
-            <span>0.8x</span>
+            <span>🐢 0.8x</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => stopGermanAudio()}
+            className="inline-flex items-center gap-1 px-2 py-1 rounded-xl bg-rose-950/60 hover:bg-rose-900/70 text-rose-300 text-xs font-extrabold border border-rose-500/40 cursor-pointer"
+            title="إيقاف الصوت"
+          >
+            <Square className="w-3 h-3 fill-current" />
+            <span>⏹️ إيقاف الصوت</span>
           </button>
           <button
             type="button"
             onClick={() => {
+              stopGermanAudio();
               window.getSelection()?.removeAllRanges();
               setSelectedText('');
             }}

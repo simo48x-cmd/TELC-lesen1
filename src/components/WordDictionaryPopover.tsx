@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { WordLookupResult } from '../data/verbatimTypes';
 import {
+  playGermanAudio,
   sanitizeUtf8Text,
-  speakGermanText,
+  stopGermanAudio,
   translateDeToAr,
 } from '../utils/b2StudyEngine';
-import { BookOpen, Check, Loader2, Star, Volume2, X } from 'lucide-react';
+import { BookOpen, Check, Loader2, Square, Star, Volume2, X } from 'lucide-react';
 
 interface WordDictionaryPopoverProps {
   lookup: WordLookupResult | null;
@@ -91,18 +92,27 @@ export const WordDictionaryPopover: React.FC<WordDictionaryPopoverProps> = ({
               <BookOpen className="w-3 h-3" />
               <span>قاموس النقر الذكي (B2 Smart-Click Dictionary)</span>
             </div>
-            <div className="flex items-center gap-2" dir="ltr">
+            <div className="flex flex-wrap items-center gap-2" dir="ltr">
               <h3 className="text-xl font-black text-white font-mono">
                 {sanitizeUtf8Text(lookup.cleanWord)}
               </h3>
               <button
                 type="button"
-                onClick={() => speakGermanText(lookup.cleanWord, 0.9)}
+                onClick={() => void playGermanAudio(lookup.cleanWord, 0.9)}
                 className="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-sm cursor-pointer"
                 title="نطق الكلمة بالألمانية"
               >
                 <Volume2 className="w-3.5 h-3.5" />
-                <span>نطق</span>
+                <span>نطق 🔊</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => stopGermanAudio()}
+                className="inline-flex items-center gap-1 px-2 py-1 rounded-xl bg-rose-950/60 hover:bg-rose-900/70 text-rose-300 border border-rose-500/40 text-xs font-bold cursor-pointer"
+                title="إيقاف الصوت"
+              >
+                <Square className="w-3 h-3 fill-current" />
+                <span>⏹️ إيقاف الصوت</span>
               </button>
             </div>
           </div>
@@ -155,11 +165,11 @@ export const WordDictionaryPopover: React.FC<WordDictionaryPopoverProps> = ({
               </span>
               <button
                 type="button"
-                onClick={() => speakGermanText(lookup.contextSentence || '', 0.9)}
+                onClick={() => void playGermanAudio(lookup.contextSentence || '', 0.9)}
                 className="inline-flex items-center gap-1 text-[11px] text-indigo-300 hover:text-white cursor-pointer"
               >
                 <Volume2 className="w-3 h-3" />
-                <span>نطق الجملة</span>
+                <span>نطق الجملة 🔊</span>
               </button>
             </div>
             <p dir="ltr" className="text-xs text-slate-200 font-sans leading-relaxed">

@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { VERBATIM_DB } from '../data/verbatimTypes';
+import { VERBATIM_DB, sanitizeVerbatimDatabase } from '../data/verbatimTypes';
 import {
   buildTeil1SpeedDrill,
   buildTeil2SpeedDrill,
@@ -19,11 +19,13 @@ import {
   explainSprachbausteinChoice,
   generateLocalAiTutorResponse,
   lookupGermanWord,
+  playGermanAudio,
+  stopGermanAudio,
   translateGermanTextToArabic,
 } from './b2StudyEngine';
 
-describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & V4 QA Tests', () => {
-  it('loads all 210 verbatim exam modules with exact counts and zero spelling typos', () => {
+describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & V5 QA Tests', () => {
+  it('loads all 210 verbatim exam modules with exact counts and zero spelling typos or square boxes', () => {
     assert.equal(VERBATIM_DB.pruefungen.length, 34, 'Should have 34 Prüfungen');
     assert.equal(VERBATIM_DB.teil1.length, 45, 'Should have 45 Lesen Teil 1 topics');
     assert.equal(VERBATIM_DB.teil2.length, 28, 'Should have 28 Lesen Teil 2 topics');
@@ -44,17 +46,90 @@ describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & V4 QA Tests', () 
     assert.equal(serialized.includes('Insell'), false, 'Should not contain typo Insell');
     assert.equal(serialized.includes('Forscherr'), false, 'Should not contain typo Forscherr');
     assert.equal(serialized.includes('\uFFFD'), false, 'Should not contain replacement char \\uFFFD');
+    assert.equal(serialized.includes('🔲'), false, 'Should not contain square box 🔲');
   });
 
-  it('verifies Sprach 1 Liebe Vanessa has distinct gap ___23___ without colliding with ___21___', () => {
-    const vanessa = VERBATIM_DB.sb1.find((s) => s.title.toLowerCase().includes('vanessa'));
-    assert.ok(vanessa, 'Should find Liebe Vanessa in SB1');
-    for (let g = 21; g <= 30; g++) {
-      assert.ok(
-        new RegExp(`_{2,4}\\s*${g}\\s*_{2,4}`).test(vanessa.text),
-        `Liebe Vanessa should contain gap ___${g}___`
+  it('verifies all 35 SB1 and 36 SB2 modules have strictly unique gap IDs (zero duplicate gap numbers)', () => {
+    for (const s1 of VERBATIM_DB.sb1) {
+      const gapMatches = [...s1.text.matchAll(/_{1,5}\s*(2[1-9]|30)\s*_{1,5}/g)].map((m) => m[1]);
+      const unique = new Set(gapMatches);
+      assert.equal(
+        gapMatches.length,
+        unique.size,
+        `SB1 ${s1.id} (${s1.title}) should have zero duplicate gaps, found: ${gapMatches.join(',')}`
       );
     }
+
+    const vanessaAll = VERBATIM_DB.sb1.filter((s) => s.title.toLowerCase().includes('vanessa'));
+    assert.ok(vanessaAll.length >= 1, 'Should find Liebe Vanessa in SB1');
+    for (const v of vanessaAll) {
+      for (let g = 21; g <= 30; g++) {
+        assert.ok(
+          new RegExp(`_{2,5}\\s*${g}\\s*_{2,5}`).test(v.text),
+          `Liebe Vanessa (${v.id}) should contain gap ___${g}___`
+        );
+      }
+    }
+
+    for (const s2 of VERBATIM_DB.sb2) {
+      const gapMatches = [...s2.text.matchAll(/_{1,5}\s*(3[1-9]|40)\s*_{1,5}/g)].map((m) => m[1]);
+      const unique = new Set(gapMatches);
+      assert.equal(
+        gapMatches.length,
+        unique.size,
+        `SB2 ${s2.id} (${s2.title}) should have zero duplicate gaps, found: ${gapMatches.join(',')}`
+      );
+    }
+  });
+
+  it('verifies runtime auto-sanitizer fixes dirty JSON inputs automatically', () => {
+    const dirtyMock = {
+      pruefungen: [
+        {
+          id: 'p1',
+          title: 'Insell',
+          arTitle: 'الجزر\uFFFD',
+          modCount: 1,
+          t1: 't1',
+          t2: 't2',
+          t3: 't3',
+          sb1: 'sb1',
+          sb2: 'sb2',
+          badge: '🔓 مفتوح🔲',
+        },
+      ],
+      teil1: [
+        {
+          id: 't1',
+          sahlaTitle: 'Kellner(Jugend Forscherr)',
+          arTitle: 'النادل',
+          pdfTitle: 'Insell',
+          ansBase: ['A', 'B', 'C', 'D', 'E'],
+          headings: { A: 'Heading A 🔲' },
+          texts: { '1': 'Text 1 \uFFFD' },
+        },
+      ],
+      teil2: [],
+      teil3: [],
+      sb1: [
+        {
+          id: 'vanessa',
+          title: 'Liebe Vanessa',
+          text: 'Danke ___21___ deinen Brief. ___22___ gehört. Du weißt ___21___ selbst. ___24___ erstens ___24___ zweitens.',
+          optionsRaw: '',
+          ansBase: ['A', 'B', 'C', 'A', 'B', 'C', 'A', 'B', 'C', 'A'],
+        },
+      ],
+      sb2: [],
+    };
+
+    const sanitized = sanitizeVerbatimDatabase(dirtyMock);
+    assert.equal(sanitized.pruefungen[0].title, 'Inseln');
+    assert.equal(sanitized.pruefungen[0].arTitle, 'الجزر');
+    assert.equal(sanitized.teil1[0].sahlaTitle, 'Kellner (Jugend forscht)');
+    assert.equal(sanitized.teil1[0].pdfTitle, 'Inseln');
+    assert.ok(sanitized.sb1[0].text.includes('Du weißt ___23___ selbst'));
+    assert.ok(sanitized.sb1[0].text.includes('___24___ erstens ... zweitens'));
   });
 
   it('validates that all 34 Prüfungen link to existing Teil 1, Teil 2, Teil 3, SB1, and SB2 modules', () => {
@@ -154,14 +229,19 @@ describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & V4 QA Tests', () 
     assert.equal(allRadar.length, 210);
     for (const row of allRadar) {
       assert.equal(
-        /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]|\uFFFD/.test(row.keywordsSample),
+        /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]|\uFFFD|🔲/.test(row.keywordsSample),
         false,
-        `Radar row ${row.id} should have zero lone surrogates or replacement chars`
+        `Radar row ${row.id} should have zero lone surrogates, square boxes, or replacement chars`
       );
     }
   });
 
-  it('never returns the fake dictionary placeholder and provides B2 grammar & AI tutor explanations', () => {
+  it('verifies German audio engine and dictionary/tutor functions work cleanly', async () => {
+    assert.equal(typeof playGermanAudio, 'function');
+    assert.equal(typeof stopGermanAudio, 'function');
+    await playGermanAudio('Hallo Welt! ___21___ Test.', 1.0);
+    stopGermanAudio();
+
     const wordObwohl = lookupGermanWord('Obwohl,', 'Obwohl es regnet, gehen wir spazieren.');
     assert.equal(wordObwohl.cleanWord, 'Obwohl');
     assert.ok(wordObwohl.meaningAr.includes('رغم'));
@@ -173,7 +253,7 @@ describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & V4 QA Tests', () 
       'Must never return the deleted fake placeholder'
     );
 
-    const grammarExp = explainSprachbausteinChoice('weil', 22, 'Ich komme heute nicht, [ الفراغ 22 ] ich krank bin.');
+    const grammarExp = explainSprachbausteinChoice('weil', 22, 'Ich komme heute nicht, [ 22: ❓ ] ich krank bin.');
     assert.ok(grammarExp.ruleAr.includes('weil'));
 
     const translation = translateGermanTextToArabic('Die Wissenschaftler haben kaum Zeit für eine neue Studie.');

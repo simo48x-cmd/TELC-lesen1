@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Volume2, Square } from 'lucide-react';
-import { speakGermanText, stopGermanSpeech } from '../utils/b2StudyEngine';
+import { playGermanAudio, stopGermanAudio } from '../utils/b2StudyEngine';
 
 interface AudioListenButtonProps {
   text: string;
@@ -18,14 +18,20 @@ export const AudioListenButton: React.FC<AudioListenButtonProps> = ({
   const handlePlay = (rate: number, e: React.MouseEvent) => {
     e.stopPropagation();
     if (playingRate === rate) {
-      stopGermanSpeech();
+      stopGermanAudio();
       setPlayingRate(null);
       return;
     }
     setPlayingRate(rate);
-    speakGermanText(text, rate, () => {
+    void playGermanAudio(text, rate, () => {
       setPlayingRate(null);
     });
+  };
+
+  const handleStop = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    stopGermanAudio();
+    setPlayingRate(null);
   };
 
   return (
@@ -43,9 +49,9 @@ export const AudioListenButton: React.FC<AudioListenButtonProps> = ({
         }`}
         title="الاستماع للنص بالسرعة العادية (1.0x)"
       >
-        {playingRate === 1.0 ? <Square className="w-3 h-3 fill-current" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
+        <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
         {!compact && <span dir="rtl">{label}</span>}
-        <span className="font-mono">1x</span>
+        <span className="font-mono">🔊 1x</span>
       </button>
 
       <button
@@ -59,6 +65,16 @@ export const AudioListenButton: React.FC<AudioListenButtonProps> = ({
         title="الاستماع للنص ببطء لتسهيل الفهم (0.8x)"
       >
         <span>🐢 0.8x</span>
+      </button>
+
+      <button
+        type="button"
+        onClick={handleStop}
+        className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold text-rose-300 hover:bg-rose-500/20 hover:text-rose-200 transition-all cursor-pointer"
+        title="إيقاف الصوت فوراً"
+      >
+        <Square className="w-3 h-3 fill-current" />
+        <span dir="rtl">{compact ? '⏹️' : '⏹️ إيقاف الصوت'}</span>
       </button>
     </div>
   );

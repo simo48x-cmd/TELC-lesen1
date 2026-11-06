@@ -116,17 +116,17 @@ export const SprachView: React.FC<SprachViewProps> = ({
       .filter(Boolean);
 
     gapNumbers.forEach((num) => {
-      const gapPattern = new RegExp(`_{1,4}\\s*${num}\\s*_{1,4}`);
+      const gapPattern = new RegExp(`_{1,5}\\s*${num}\\s*_{1,5}`);
       const matchingSentence = rawSentences.find((s) => gapPattern.test(s));
       if (matchingSentence) {
         const formatted = matchingSentence
-          .replace(gapPattern, ` [ الفراغ ${num} ] `)
-          .replace(/_{1,4}\s*(\d+)\s*_{1,4}/g, ' [ الفراغ $1 ] ')
+          .replace(gapPattern, ` [ ${num}: ❓ ] `)
+          .replace(/_{1,5}\s*(\d+)\s*_{1,5}/g, ' [ $1: ❓ ] ')
           .replace(/\s+/g, ' ')
           .trim();
         map[num] = formatted;
       } else {
-        map[num] = `[ الفراغ ${num} ]`;
+        map[num] = `[ ${num}: ❓ ]`;
       }
     });
     return map;
