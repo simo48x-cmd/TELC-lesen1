@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Arabic', sans-serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.arabic-text {
+  font-family: 'Noto Sans Arabic', 'Plus Jakarta Sans', sans-serif;
+  direction: rtl;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
