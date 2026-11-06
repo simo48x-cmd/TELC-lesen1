@@ -30,6 +30,7 @@ import { Teil3View } from './components/Teil3View';
 import { SprachView } from './components/SprachView';
 import { ExamRadarTab } from './components/ExamRadarTab';
 import { WordDictionaryPopover } from './components/WordDictionaryPopover';
+import { SelectionTranslatorPopover } from './components/SelectionTranslatorPopover';
 import { AskAiTutorModal } from './components/AskAiTutorModal';
 import { AntwortbogenDrawer } from './components/AntwortbogenDrawer';
 import { SavedWordsMistakesDrawer } from './components/SavedWordsMistakesDrawer';
@@ -1599,7 +1600,7 @@ export function App() {
       <WordDictionaryPopover
         lookup={activeWordLookup}
         onClose={() => setActiveWordLookup(null)}
-        onSaveWord={handleSaveWord}
+        onToggleSave={handleSaveWord}
         isSaved={Boolean(
           activeWordLookup &&
             savedWords.some(
@@ -1607,6 +1608,8 @@ export function App() {
             )
         )}
       />
+
+      <SelectionTranslatorPopover onSaveWordToBank={handleSaveWord} />
 
       <AskAiTutorModal
         context={activeAskAiContext}

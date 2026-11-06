@@ -1,5 +1,6 @@
 import React from 'react';
 import { splitTextWithHighlights } from '../utils/examEngine';
+import { sanitizeUtf8Text } from '../utils/b2StudyEngine';
 
 interface HighlightedTextProps {
   text: string;
@@ -16,6 +17,8 @@ export const HighlightedText: React.FC<HighlightedTextProps> = ({
   className = '',
   onWordClick,
 }) => {
+  const cleanText = sanitizeUtf8Text(text);
+
   const renderInteractiveWords = (chunk: string, isHighlighted: boolean) => {
     if (!onWordClick) {
       return chunk;
@@ -29,10 +32,15 @@ export const HighlightedText: React.FC<HighlightedTextProps> = ({
         <span
           key={idx}
           onClick={(e) => {
+            const sel = window.getSelection()?.toString().trim() || '';
+            if (sel.length > token.trim().length) {
+              // User dragged to highlight a phrase — let SelectionTranslatorPopover handle it
+              return;
+            }
             e.stopPropagation();
-            onWordClick(token, text);
+            onWordClick(token, cleanText);
           }}
-          title="اضغط لترجمة الكلمة وسماع نطقها (قاموس النقر الذكي)"
+          title="اضغط لترجمة الكلمة وسماع نطقها، أو ظلل جملة كاملة بالماوس لترجمتها فوراً"
           className={`cursor-pointer rounded-xs transition-colors ${
             isHighlighted
               ? 'hover:bg-amber-500 hover:text-slate-950'
@@ -46,10 +54,10 @@ export const HighlightedText: React.FC<HighlightedTextProps> = ({
   };
 
   if (!highlightEnabled || !keywords || keywords.length === 0) {
-    return <span className={className}>{renderInteractiveWords(text, false)}</span>;
+    return <span className={className}>{renderInteractiveWords(cleanText, false)}</span>;
   }
 
-  const segments = splitTextWithHighlights(text, keywords);
+  const segments = splitTextWithHighlights(cleanText, keywords);
   return (
     <span className={className}>
       {segments.map((seg, idx) =>

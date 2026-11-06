@@ -92,6 +92,7 @@ export interface Teil3Topic {
 export interface Sb1Topic {
   id: string;
   title: string;
+  arTitle?: string;
   text: string;
   optionsRaw: string;
   parsedOptions?: Record<string, Record<'A' | 'B' | 'C', string>>;
@@ -102,11 +103,21 @@ export interface Sb1Topic {
 export interface Sb2Topic {
   id: string;
   title: string;
+  arTitle?: string;
   text: string;
   wordBoxRaw: string;
   parsedWordBox?: Record<string, string>;
   ansBase: string[];
   ansMod1?: string[];
+}
+
+export interface WordLookupResult {
+  word: string;
+  cleanWord: string;
+  meaningAr: string;
+  category: string;
+  grammarTipAr: string;
+  contextSentence?: string;
 }
 
 export interface SavedWordItem {

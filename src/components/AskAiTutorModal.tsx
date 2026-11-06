@@ -57,7 +57,7 @@ export const AskAiTutorModal: React.FC<AskAiTutorModalProps> = ({ context, onClo
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="text-base md:text-lg font-black text-white">
-                  🤖 المعلم الذكي المحلي (Ask AI Tutor — 100% مجاني)
+                  🤖 المعلم الذكي — تحليل TELC B2
                 </h3>
                 <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
                   {context.itemLabel}

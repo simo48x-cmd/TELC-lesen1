@@ -187,7 +187,7 @@ export const ExamRadarTab: React.FC<ExamRadarTabProps> = ({ onOpenModule }) => {
                   <td className="p-3.5 text-xs text-slate-300 max-w-xs" dir="ltr">
                     <div className="line-clamp-2 font-mono text-[11px] text-yellow-200/90">
                       <Sparkles className="w-3 h-3 inline mr-1 text-yellow-400" />
-                      {row.keywordsSample}
+                      {row.keywordsSample.replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]|\uFFFD/g, '')}
                     </div>
                   </td>
 

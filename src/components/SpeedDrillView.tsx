@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { SpeedDrillItem } from '../utils/examEngine';
+import { SpeedDrillItem, extractGermanKeywords } from '../utils/examEngine';
+import { sanitizeUtf8Text } from '../utils/b2StudyEngine';
 import { HighlightedText } from './HighlightedText';
-import { extractGermanKeywords } from '../utils/examEngine';
 import { ArrowLeft, ArrowRight, CheckCircle2, Flame, HelpCircle, RotateCcw, Sparkles, XCircle } from 'lucide-react';
 
 interface SpeedDrillViewProps {
@@ -21,7 +21,7 @@ export const SpeedDrillView: React.FC<SpeedDrillViewProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
-  const [showHint, setShowHint] = useState(true);
+  const [showHint, setShowHint] = useState(false);
   const [scoreMap, setScoreMap] = useState<Record<string, boolean>>({});
 
   const currentItem = items[currentIndex] || items[0];
@@ -32,6 +32,17 @@ export const SpeedDrillView: React.FC<SpeedDrillViewProps> = ({
   const isAnswered = selectedChoice !== null;
   const isCorrect = selectedChoice === currentItem.correctText;
   const keywords = extractGermanKeywords(currentItem.motCleDe);
+
+  // Ensure pre-click hint never leaks the exact German answer word or letter
+  const safePreClickHint = (() => {
+    const rawHint = sanitizeUtf8Text(currentItem.hintAr || '');
+    if (!rawHint) return 'اقرأ النص الألماني بتركيز وحدد الجواب الصحيح بناءً على المعنى.';
+    // Strip any accidental German answer word from pre-click hint
+    if (currentItem.correctText && rawHint.toLowerCase().includes(currentItem.correctText.toLowerCase())) {
+      return `اقرأ سياق (${currentItem.label}) بتمعن واختر الجواب الألماني المناسب دون الاعتماد على الحروف.`;
+    }
+    return rawHint;
+  })();
 
   const handleSelectChoice = (choice: string) => {
     if (isAnswered) return;
@@ -73,7 +84,7 @@ export const SpeedDrillView: React.FC<SpeedDrillViewProps> = ({
             <Sparkles className="w-3.5 h-3.5" />
             <span>⚡ تحدي الحفاظة البرقية بدون حروف (Anti-Rote Active Recall)</span>
           </div>
-          <h3 className="text-lg font-extrabold text-white">{title}</h3>
+          <h3 className="text-lg font-extrabold text-white">{sanitizeUtf8Text(title)}</h3>
           <p className="text-xs text-slate-400">
             اختار العنوان أو الجواب الألماني الصحيح بلا ما تعتمد على الحروف (A–J) باش ترسخ الكلمات المفتاحية فدماغك!
           </p>
@@ -134,26 +145,30 @@ export const SpeedDrillView: React.FC<SpeedDrillViewProps> = ({
         })}
       </div>
 
-      {/* Darija Hint + Mot-Clé Box */}
+      {/* Darija Hint Box (Spoiler-Free before answering!) */}
       <div className="flex flex-wrap items-center justify-between gap-2 bg-indigo-950/50 border border-indigo-500/30 rounded-xl p-3.5">
         <div className="space-y-1">
           <div className="text-xs font-bold text-indigo-300 flex items-center gap-1.5">
             <HelpCircle className="w-4 h-4 text-amber-400" />
-            <span>الفهم بالدارجة / العربية ({currentItem.label}):</span>
+            <span>تلميح السياق بالدارجة ({currentItem.label}):</span>
           </div>
-          {showHint ? (
-            <p className="text-sm font-bold text-amber-200">{currentItem.hintAr}</p>
+          {isAnswered || showHint ? (
+            <p className="text-sm font-bold text-amber-200">{safePreClickHint}</p>
           ) : (
-            <p className="text-xs text-slate-400 italic">التلميح مخفي باش تختبر راسك 100% بالألمانية</p>
+            <p className="text-xs text-slate-400 italic">
+              التلميح مخفي باش تختبر راسك 100% بالألمانية قبل اختيار الجواب (اضغط «إظهار تلميح السياق» إذا احتجته)
+            </p>
           )}
         </div>
-        <button
-          type="button"
-          onClick={() => setShowHint((v) => !v)}
-          className="text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 cursor-pointer"
-        >
-          {showHint ? 'إخفاء التلميح' : 'إظهار التلميح بالدارجة'}
-        </button>
+        {!isAnswered && (
+          <button
+            type="button"
+            onClick={() => setShowHint((v) => !v)}
+            className="text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 cursor-pointer"
+          >
+            {showHint ? 'إخفاء التلميح' : 'إظهار تلميح السياق'}
+          </button>
+        )}
       </div>
 
       {/* Verbatim German Prompt */}
@@ -225,7 +240,7 @@ export const SpeedDrillView: React.FC<SpeedDrillViewProps> = ({
         </div>
       </div>
 
-      {/* Instant Feedback & Mot-Clé Explanation */}
+      {/* Instant Feedback & Mot-Clé Explanation (Revealed ONLY after clicking a choice!) */}
       {isAnswered && (
         <div
           className={`p-4 rounded-xl border flex flex-wrap items-center justify-between gap-4 ${
@@ -234,17 +249,17 @@ export const SpeedDrillView: React.FC<SpeedDrillViewProps> = ({
               : 'bg-rose-950/60 border-rose-500/50 text-rose-100'
           }`}
         >
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <div className="font-extrabold text-sm flex items-center gap-2">
               {isCorrect ? (
                 <>
                   <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                  <span>برافو عليك! جواب صحيح 100% ({currentItem.correctLetter})</span>
+                  <span>برافو عليك! جواب صحيح 100% ({currentItem.correctLetter} = {sanitizeUtf8Text(currentItem.correctText)})</span>
                 </>
               ) : (
                 <>
                   <XCircle className="w-5 h-5 text-rose-400" />
-                  <span>الجواب الصحيح هو ({currentItem.correctLetter}):</span>
+                  <span>الجواب الصحيح هو ({currentItem.correctLetter}): {sanitizeUtf8Text(currentItem.correctText)}</span>
                 </>
               )}
             </div>
@@ -255,7 +270,7 @@ export const SpeedDrillView: React.FC<SpeedDrillViewProps> = ({
                   dir="ltr"
                   className="bg-yellow-300 text-slate-950 font-extrabold px-2 py-0.5 rounded font-mono"
                 >
-                  {currentItem.motCleDe}
+                  {sanitizeUtf8Text(currentItem.motCleDe)}
                 </span>
               </div>
             )}

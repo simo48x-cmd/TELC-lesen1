@@ -95,8 +95,8 @@ export function parseSb1Options(
   raw: string,
   ansBase?: string[],
   parsedOptions?: Record<string, Record<'A' | 'B' | 'C', string>>
-): Record<number, Record<'A' | 'B' | 'C', string>> {
-  const map: Record<number, Record<'A' | 'B' | 'C', string>> = {};
+): Record<number, Record<string, string>> {
+  const map: Record<number, Record<string, string>> = {};
   for (let i = 21; i <= 30; i++) {
     const fromJson = parsedOptions?.[String(i)];
     map[i] = {
@@ -178,14 +178,20 @@ export function parseSb1Options(
   return map;
 }
 
+export function parseSb1OptionsMap(topic: Sb1Topic): Record<number, Record<string, string>> {
+  return parseSb1Options(topic.optionsRaw, topic.ansBase, topic.parsedOptions);
+}
+
 /**
  * Parses SB2 `wordBoxRaw` and `parsedWordBox` into a map of A..O -> German word/phrase.
  */
 export function parseSb2WordBox(
-  raw: string,
+  rawOrTopic: string | Sb2Topic,
   parsedWordBox?: Record<string, string>
 ): Record<string, string> {
-  const result: Record<string, string> = { ...(parsedWordBox || {}) };
+  const raw = typeof rawOrTopic === 'string' ? rawOrTopic : rawOrTopic.wordBoxRaw;
+  const parsed = typeof rawOrTopic === 'string' ? parsedWordBox : rawOrTopic.parsedWordBox;
+  const result: Record<string, string> = { ...(parsed || {}) };
   if (Object.keys(result).length >= 12) return result;
   if (!raw) return result;
 
@@ -625,7 +631,7 @@ export function buildTeil3SpeedDrill(topic: Teil3Topic, variant: ExamVariant): S
       id: `${topic.id}-t3-${sit.num}`,
       label: `Situation ${sit.num}`,
       promptDe: sit.text,
-      hintAr: helper.arHint,
+      hintAr: `الوضعية رقم ${sit.num} — ركز على الكلمات المفتاحية (${helper.sKey}) في السؤال وابحث عن الإعلان المطابق لها أو اختر X`,
       motCleDe: `${helper.sKey} ➔ ${helper.adKey}`,
       correctText,
       correctLetter,
@@ -725,7 +731,7 @@ export function searchRadarModules(query: string): RadarRow[] {
       codeMod2: t3.ansMod2 ? t3.ansMod2.join(' - ') : '—',
       keywordsSample: t3.situations
         .slice(0, 2)
-        .map((s) => s.text.slice(0, 45))
+        .map((s) => Array.from(s.text).slice(0, 45).join(''))
         .join(' • '),
     });
   }
@@ -740,7 +746,7 @@ export function searchRadarModules(query: string): RadarRow[] {
       codeBase: s1.ansBase.join(' - '),
       codeMod1: s1.ansMod1 ? s1.ansMod1.join(' - ') : '—',
       codeMod2: '—',
-      keywordsSample: s1.text.slice(0, 70),
+      keywordsSample: Array.from(s1.text.replace(/_{1,4}\s*(\d+)\s*_{1,4}/g, '[$1]')).slice(0, 70).join(''),
     });
   }
 
@@ -754,7 +760,7 @@ export function searchRadarModules(query: string): RadarRow[] {
       codeBase: s2.ansBase.join(' - '),
       codeMod1: s2.ansMod1 ? s2.ansMod1.join(' - ') : '—',
       codeMod2: '—',
-      keywordsSample: s2.wordBoxRaw.replace(/\r?\n/g, ' ').slice(0, 75),
+      keywordsSample: Array.from(s2.wordBoxRaw.replace(/\r?\n/g, ' ')).slice(0, 75).join(''),
     });
   }
 

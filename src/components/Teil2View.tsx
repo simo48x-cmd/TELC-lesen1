@@ -5,11 +5,12 @@ import {
   extractGermanKeywords,
   getTeil2AnswerKey,
 } from '../utils/examEngine';
-import { translateGermanTextToArabic } from '../utils/b2StudyEngine';
+import { sanitizeUtf8Text } from '../utils/b2StudyEngine';
 import { HighlightedText } from './HighlightedText';
 import { SpeedDrillView } from './SpeedDrillView';
 import { AudioListenButton } from './AudioListenButton';
-import { Bot, CheckCircle2, KeyRound, Languages, Sparkles, XCircle } from 'lucide-react';
+import { LiveArabicTranslation } from './LiveArabicTranslation';
+import { Bot, CheckCircle2, KeyRound, Sparkles, XCircle } from 'lucide-react';
 
 interface Teil2ViewProps {
   topic: Teil2Topic;
@@ -118,10 +119,10 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
                     </span>
                   </div>
                   <p className="text-sm font-bold text-slate-100 mb-2">
-                    {q.trigger?.ar || `السؤال ${q.num} من موضوع ${topic.arTitle}`}
+                    {sanitizeUtf8Text(q.trigger?.ar || `السؤال ${q.num} من موضوع ${topic.arTitle}`)}
                   </p>
                   <p dir="ltr" className="text-xs text-indigo-200/90 font-semibold border-t border-indigo-500/20 pt-1.5">
-                    {qStem}
+                    {sanitizeUtf8Text(qStem)}
                   </p>
                 </div>
 
@@ -133,7 +134,7 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
                   </div>
                   <div dir="ltr">
                     <span className="inline-block bg-yellow-300 text-slate-950 font-black px-2.5 py-1 rounded-lg text-xs md:text-sm font-mono">
-                      {q.trigger?.key || '—'}
+                      {sanitizeUtf8Text(q.trigger?.key || '—')}
                     </span>
                   </div>
                 </div>
@@ -197,22 +198,12 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
           />
         </div>
 
-        {showTranslation && (
-          <div
-            dir="rtl"
-            className="mt-4 bg-cyan-950/45 border border-cyan-500/40 rounded-xl p-3.5 text-xs md:text-sm font-bold text-cyan-200 space-y-1.5"
-          >
-            <div className="flex items-center gap-1.5 text-cyan-300 font-black">
-              <Languages className="w-4 h-4" />
-              <span>ملخص وترجمة المقال ({topic.arTitle}):</span>
-            </div>
-            {topic.questions.map((q) => (
-              <p key={q.num} className="leading-relaxed">
-                • <strong>الفقرة المرتبطة بالسؤال {q.num}:</strong> {q.trigger?.ar || topic.arTitle}
-              </p>
-            ))}
-          </div>
-        )}
+        {/* Live Real Arabic Translation of the Full Article */}
+        <LiveArabicTranslation
+          textDe={topic.article}
+          label={`${topic.title} (${topic.arTitle})`}
+          showGlobalTranslation={showTranslation}
+        />
       </div>
 
       {/* Right 5 Columns: Verbatim Questions 6-10 */}
@@ -225,6 +216,8 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
           const qKeywords = extractGermanKeywords(q.trigger?.key);
           const optionLetters = shuffleMode ? ['C', 'B', 'A'] : ['A', 'B', 'C'];
 
+          const fullQuestionAndOptionsDe = `${qStem}\nA: ${q.options.A || ''}\nB: ${q.options.B || ''}\nC: ${q.options.C || ''}`;
+
           const handleOpenTutor = () => {
             const distractors = ['A', 'B', 'C']
               .filter((l) => l !== correctLetter)
@@ -234,9 +227,7 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
               moduleTitle: `${topic.title} (${topic.arTitle})`,
               itemLabel: `Frage ${q.num}`,
               questionNum: q.num,
-              textDe: `${qStem}\n${Object.entries(q.options)
-                .map(([k, v]) => `${k}: ${v}`)
-                .join('\n')}`,
+              textDe: fullQuestionAndOptionsDe,
               correctLetter,
               correctTextDe: q.options[correctLetter] || '',
               tKey: q.trigger?.key,
@@ -286,18 +277,6 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
                   </button>
                 </div>
               </div>
-
-              {showTranslation && (
-                <div
-                  dir="rtl"
-                  className="mb-3 bg-cyan-950/45 border border-cyan-500/40 rounded-xl p-2.5 text-xs font-bold text-cyan-200 flex items-center gap-1.5"
-                >
-                  <Languages className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                  <span>
-                    {translateGermanTextToArabic(qStem, q.trigger?.ar, `السؤال ${q.num}`)}
-                  </span>
-                </div>
-              )}
 
               <div className="space-y-2">
                 {optionLetters.map((letter) => {
@@ -355,6 +334,15 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
                 })}
               </div>
 
+              {/* Live Real Arabic Translation of Question + Options */}
+              <LiveArabicTranslation
+                textDe={fullQuestionAndOptionsDe}
+                curatedAr={q.trigger?.ar}
+                label={`Frage ${q.num}`}
+                showGlobalTranslation={showTranslation}
+                compact
+              />
+
               {/* Under-Question Darija + Mot-Clé Card */}
               {(showUnderSummary || memorizeMode || isChecked) && q.trigger && (
                 <div
@@ -370,11 +358,11 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
                       {q.num}:{correctLetter}
                     </span>
                   </div>
-                  <p className="text-xs font-bold text-slate-200">{q.trigger.ar}</p>
+                  <p className="text-xs font-bold text-slate-200">{sanitizeUtf8Text(q.trigger.ar)}</p>
                   {q.trigger.key && (
                     <div dir="ltr" className="pt-0.5">
                       <span className="inline-block bg-yellow-300 text-slate-950 font-mono font-black text-xs px-2 py-0.5 rounded">
-                        🔑 {q.trigger.key}
+                        🔑 {sanitizeUtf8Text(q.trigger.key)}
                       </span>
                     </div>
                   )}

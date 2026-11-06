@@ -5,11 +5,12 @@ import {
   extractGermanKeywords,
   getTeil1AnswerKey,
 } from '../utils/examEngine';
-import { translateGermanTextToArabic } from '../utils/b2StudyEngine';
+import { sanitizeUtf8Text } from '../utils/b2StudyEngine';
 import { HighlightedText } from './HighlightedText';
 import { SpeedDrillView } from './SpeedDrillView';
 import { AudioListenButton } from './AudioListenButton';
-import { ArrowLeft, Bot, CheckCircle2, KeyRound, Languages, Sparkles, XCircle } from 'lucide-react';
+import { LiveArabicTranslation } from './LiveArabicTranslation';
+import { ArrowLeft, Bot, CheckCircle2, KeyRound, Sparkles, XCircle } from 'lucide-react';
 
 interface Teil1ViewProps {
   topic: Teil1Topic;
@@ -143,7 +144,7 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
                     </span>
                   </div>
                   <p className="text-sm font-bold text-slate-100 leading-relaxed">
-                    {trig?.ar || `النص ${num} من موضوع ${topic.arTitle}`}
+                    {sanitizeUtf8Text(trig?.ar || `النص ${num} من موضوع ${topic.arTitle}`)}
                   </p>
                 </div>
 
@@ -155,13 +156,13 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
                   </div>
                   <div dir="ltr" className="space-y-1.5">
                     <div className="inline-block bg-yellow-300 text-slate-950 font-black px-2.5 py-1 rounded-lg text-xs md:text-sm font-mono shadow-xs">
-                      {trig?.tKey || '—'}
+                      {sanitizeUtf8Text(trig?.tKey || '—')}
                     </div>
                     {trig?.hKey && (
                       <div className="text-xs text-amber-200 font-mono flex items-center gap-1.5">
                         <span>➔ يطابق في العنوان:</span>
                         <span className="bg-amber-400/20 border border-amber-400/40 text-yellow-200 px-2 py-0.5 rounded font-bold">
-                          {trig.hKey}
+                          {sanitizeUtf8Text(trig.hKey)}
                         </span>
                       </div>
                     )}
@@ -209,7 +210,7 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
               <span>📋 العناوين العشرة الأصلية حرف بحرف (Überschriften A–J)</span>
             </h3>
             <p className="text-xs text-slate-400">
-              اضغط على أي كلمة ألمانية لترجمتها فوراً وسماع نطقها — العناوين المستعملة كيتكتب قدامها رقم النص!
+              اضغط على أي كلمة ألمانية لترجمتها فوراً أو ظلل أي جملة بالماوس لترجمتها — العناوين المستعملة كيتكتب قدامها رقم النص!
             </p>
           </div>
           <span dir="ltr" className="text-xs font-mono font-bold text-indigo-300 bg-indigo-950/70 px-3 py-1 rounded-lg border border-indigo-500/30">
@@ -277,22 +278,14 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
                   </div>
                 </div>
 
-                {/* Inline Arabic Translation under Heading when showTranslation is enabled */}
-                {showTranslation && (
-                  <div
-                    dir="rtl"
-                    className="text-xs font-bold text-cyan-300 bg-cyan-950/40 border border-cyan-500/30 rounded-lg px-2.5 py-1.5 flex items-center gap-1.5"
-                  >
-                    <Languages className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                    <span>
-                      {translateGermanTextToArabic(
-                        headingText,
-                        matchedTrig ? `يطابق النص ${matchedTextIndex + 1}: ${matchedTrig.ar}` : undefined,
-                        `العنوان ${letter}`
-                      )}
-                    </span>
-                  </div>
-                )}
+                {/* Live Real Arabic Translation under Heading */}
+                <LiveArabicTranslation
+                  textDe={headingText}
+                  curatedAr={matchedTrig && (memorizeMode || isChecked) ? `يطابق النص ${matchedTextIndex + 1}: ${matchedTrig.ar}` : undefined}
+                  label={`Überschrift ${letter}`}
+                  showGlobalTranslation={showTranslation}
+                  compact
+                />
               </div>
             );
           })}
@@ -434,7 +427,7 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
                 </div>
               )}
 
-              {/* Verbatim German Paragraph (Clickable Words) */}
+              {/* Verbatim German Paragraph (Clickable Words + Mouse Selection) */}
               <div
                 dir="ltr"
                 className={`${fontSizeClass} text-slate-100 leading-relaxed whitespace-pre-line font-sans bg-slate-950/70 p-4 rounded-xl border border-slate-800/80`}
@@ -447,21 +440,13 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
                 />
               </div>
 
-              {/* Inline Arabic Translation under Paragraph when showTranslation is enabled */}
-              {showTranslation && (
-                <div
-                  dir="rtl"
-                  className="mt-3 bg-cyan-950/45 border border-cyan-500/40 rounded-xl p-3.5 text-xs md:text-sm font-bold text-cyan-200 space-y-1"
-                >
-                  <div className="flex items-center gap-1.5 text-cyan-300 font-black">
-                    <Languages className="w-4 h-4" />
-                    <span>الترجمة العربية الفورية (Text {num}):</span>
-                  </div>
-                  <p className="leading-relaxed">
-                    {translateGermanTextToArabic(verbatimParagraph, trig?.ar, `النص ${num}`)}
-                  </p>
-                </div>
-              )}
+              {/* Live Real Arabic Translation under Paragraph */}
+              <LiveArabicTranslation
+                textDe={verbatimParagraph}
+                curatedAr={trig?.ar}
+                label={`Text ${num}`}
+                showGlobalTranslation={showTranslation}
+              />
 
               {/* Under-Text Darija Summary + Golden Mot-Clé Match Card */}
               {(showUnderSummary || memorizeMode || isChecked) && trig && (
@@ -475,14 +460,14 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
                       Lösung: {correctLetter}
                     </span>
                   </div>
-                  <p className="text-xs md:text-sm font-bold text-slate-200">{trig.ar}</p>
+                  <p className="text-xs md:text-sm font-bold text-slate-200">{sanitizeUtf8Text(trig.ar)}</p>
                   <div dir="ltr" className="flex flex-wrap items-center gap-2 text-xs font-mono pt-1">
                     <span className="bg-yellow-300 text-slate-950 font-black px-2 py-0.5 rounded">
-                      Text-Key: {trig.tKey}
+                      Text-Key: {sanitizeUtf8Text(trig.tKey)}
                     </span>
                     <ArrowLeft className="w-3.5 h-3.5 text-amber-400 rotate-180" />
                     <span className="bg-emerald-400 text-slate-950 font-black px-2 py-0.5 rounded">
-                      Heading ({correctLetter}): {trig.hKey}
+                      Heading ({correctLetter}): {sanitizeUtf8Text(trig.hKey)}
                     </span>
                   </div>
                 </div>

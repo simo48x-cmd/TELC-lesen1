@@ -6,11 +6,12 @@ import {
   getTeil3AnswerKey,
   getTeil3SituationHelper,
 } from '../utils/examEngine';
-import { translateGermanTextToArabic } from '../utils/b2StudyEngine';
+import { sanitizeUtf8Text } from '../utils/b2StudyEngine';
 import { HighlightedText } from './HighlightedText';
 import { SpeedDrillView } from './SpeedDrillView';
 import { AudioListenButton } from './AudioListenButton';
-import { ArrowUpRight, Bot, CheckCircle2, KeyRound, Languages, Sparkles } from 'lucide-react';
+import { LiveArabicTranslation } from './LiveArabicTranslation';
+import { ArrowUpRight, Bot, CheckCircle2, KeyRound, Sparkles } from 'lucide-react';
 
 interface Teil3ViewProps {
   topic: Teil3Topic;
@@ -162,7 +163,7 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
                     />
                   </p>
                   <p className="text-xs text-amber-200/90 font-semibold border-t border-indigo-500/20 pt-1.5">
-                    {helper.arHint}
+                    {sanitizeUtf8Text(helper.arHint)}
                   </p>
                 </div>
 
@@ -174,10 +175,10 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
                   </div>
                   <div dir="ltr" className="space-y-1.5">
                     <div className="inline-block bg-yellow-300 text-slate-950 font-black px-2 py-0.5 rounded text-xs font-mono">
-                      {helper.sKey || '—'}
+                      {sanitizeUtf8Text(helper.sKey || '—')}
                     </div>
                     <div className="text-xs font-mono text-emerald-300 font-bold">
-                      ➔ {helper.adKey}
+                      ➔ {sanitizeUtf8Text(helper.adKey)}
                     </div>
                   </div>
                 </div>
@@ -320,20 +321,17 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
                 </div>
               </div>
 
-              {showTranslation && (
-                <div
-                  dir="rtl"
-                  className="mb-3 bg-cyan-950/45 border border-cyan-500/40 rounded-xl p-2.5 text-xs font-bold text-cyan-200 flex items-center gap-1.5"
-                >
-                  <Languages className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                  <span>
-                    {translateGermanTextToArabic(sit.text, helper.arHint, `الوضعية ${sit.num}`)}
-                  </span>
-                </div>
-              )}
+              {/* Live Real Arabic Translation of Situation */}
+              <LiveArabicTranslation
+                textDe={sit.text}
+                curatedAr={memorizeMode || isChecked ? helper.arHint : undefined}
+                label={`Situation ${sit.num}`}
+                showGlobalTranslation={showTranslation}
+                compact
+              />
 
               {/* A-L Buttons + Dedicated Red X Button */}
-              <div className="flex flex-wrap items-center gap-1 pt-2 border-t border-slate-800/80">
+              <div className="flex flex-wrap items-center gap-1 pt-2.5 mt-2 border-t border-slate-800/80">
                 {AD_LETTERS.map((letter) => {
                   const isSelected = selectedLetter === letter;
                   const isRight = correctLetter === letter;
@@ -412,7 +410,7 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
                       {sit.num} ➔ {correctLetter}
                     </button>
                   </div>
-                  <p className="text-xs font-bold text-slate-200">{helper.arHint}</p>
+                  <p className="text-xs font-bold text-slate-200">{sanitizeUtf8Text(helper.arHint)}</p>
                 </div>
               )}
             </div>
@@ -426,7 +424,7 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
           <div>
             <h3 className="text-base font-black text-white">Info-Texte / Anzeigen (A–L)</h3>
             <p className="text-xs text-slate-400" dir="rtl">
-              النصوص الـ 12 الأصلية حرف بحرف بدون اختصار — اضغط على أي كلمة لترجمتها فوراً!
+              النصوص الـ 12 الأصلية حرف بحرف بدون اختصار — اضغط على أي كلمة أو ظلل أي جملة لترجمتها فوراً!
             </p>
           </div>
           <span className="px-3 py-1 rounded-lg bg-emerald-950 text-emerald-300 font-mono font-bold text-xs border border-emerald-500/30">
@@ -490,17 +488,12 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
                 />
               </div>
 
-              {showTranslation && (
-                <div
-                  dir="rtl"
-                  className="mt-3 bg-cyan-950/45 border border-cyan-500/40 rounded-xl p-2.5 text-xs font-bold text-cyan-200 flex items-center gap-1.5"
-                >
-                  <Languages className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                  <span>
-                    {translateGermanTextToArabic(adText, undefined, `الإعلان ${letter}`)}
-                  </span>
-                </div>
-              )}
+              {/* Live Real Arabic Translation of Advertisement */}
+              <LiveArabicTranslation
+                textDe={adText}
+                label={`Anzeige ${letter}`}
+                showGlobalTranslation={showTranslation}
+              />
             </div>
           );
         })}

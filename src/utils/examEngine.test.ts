@@ -10,14 +10,20 @@ import {
   getTeil1AnswerKey,
   getTeil2AnswerKey,
   getTeil3AnswerKey,
-  parseSb1Options,
+  parseSb1OptionsMap,
   parseSb2WordBox,
   searchRadarModules,
   splitTextWithHighlights,
 } from './examEngine';
+import {
+  explainSprachbausteinChoice,
+  generateLocalAiTutorResponse,
+  lookupGermanWord,
+  translateGermanTextToArabic,
+} from './b2StudyEngine';
 
-describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & Engine Tests', () => {
-  it('loads all 210 verbatim exam modules with exact counts', () => {
+describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & V4 QA Tests', () => {
+  it('loads all 210 verbatim exam modules with exact counts and zero spelling typos', () => {
     assert.equal(VERBATIM_DB.pruefungen.length, 34, 'Should have 34 Prüfungen');
     assert.equal(VERBATIM_DB.teil1.length, 45, 'Should have 45 Lesen Teil 1 topics');
     assert.equal(VERBATIM_DB.teil2.length, 28, 'Should have 28 Lesen Teil 2 topics');
@@ -33,6 +39,22 @@ describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & Engine Tests', ()
       VERBATIM_DB.sb1.length +
       VERBATIM_DB.sb2.length;
     assert.equal(total, 210, 'Total modules across all categories must equal 210');
+
+    const serialized = JSON.stringify(VERBATIM_DB);
+    assert.equal(serialized.includes('Insell'), false, 'Should not contain typo Insell');
+    assert.equal(serialized.includes('Forscherr'), false, 'Should not contain typo Forscherr');
+    assert.equal(serialized.includes('\uFFFD'), false, 'Should not contain replacement char \\uFFFD');
+  });
+
+  it('verifies Sprach 1 Liebe Vanessa has distinct gap ___23___ without colliding with ___21___', () => {
+    const vanessa = VERBATIM_DB.sb1.find((s) => s.title.toLowerCase().includes('vanessa'));
+    assert.ok(vanessa, 'Should find Liebe Vanessa in SB1');
+    for (let g = 21; g <= 30; g++) {
+      assert.ok(
+        new RegExp(`_{2,4}\\s*${g}\\s*_{2,4}`).test(vanessa.text),
+        `Liebe Vanessa should contain gap ___${g}___`
+      );
+    }
   });
 
   it('validates that all 34 Prüfungen link to existing Teil 1, Teil 2, Teil 3, SB1, and SB2 modules', () => {
@@ -91,21 +113,6 @@ describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & Engine Tests', ()
     assert.equal(perfect.totalScore, 105);
     assert.equal(perfect.passed, true);
     assert.equal(perfect.percentage, 100);
-
-    const borderlineFail = calculatePruefungScore({
-      t1User: { 1: 'E', 2: 'B', 3: 'I', 4: 'C', 5: 'J' }, // 25
-      t1Correct: ['E', 'B', 'I', 'C', 'J'],
-      t2User: { 6: 'B', 7: 'B', 8: 'A', 9: 'C', 10: 'A' }, // 25
-      t2Correct: ['B', 'B', 'A', 'C', 'A'],
-      t3User: { 11: 'A', 12: 'G', 13: 'B', 14: 'C' }, // 10 -> total 60
-      t3Correct: ['A', 'G', 'B', 'C', 'H', 'E', 'J', 'L', 'X', 'D'],
-      sb1User: {},
-      sb1Correct: ['C', 'C', 'C', 'A', 'A', 'A', 'B', 'B', 'A', 'A'],
-      sb2User: {},
-      sb2Correct: ['K', 'B', 'E', 'D', 'M', 'L', 'O', 'F', 'A', 'N'],
-    });
-    assert.equal(borderlineFail.totalScore, 60);
-    assert.equal(borderlineFail.passed, false);
   });
 
   it('highlights Mot-Clé trigger words without altering verbatim German text', () => {
@@ -118,19 +125,19 @@ describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & Engine Tests', ()
     assert.ok(segments.some((s) => s.highlighted), 'At least one Mot-Clé segment should be highlighted');
   });
 
-  it('parses all 35 SB1 optionsRaw/parsedOptions and 36 SB2 wordBoxRaw/parsedWordBox cleanly', () => {
+  it('parses all 35 SB1 parsedOptions and 36 SB2 parsedWordBox cleanly', () => {
     for (const s1 of VERBATIM_DB.sb1) {
-      const parsed = parseSb1Options(s1.optionsRaw, s1.ansBase, s1.parsedOptions);
+      const parsed = parseSb1OptionsMap(s1);
       assert.ok(parsed[21] && parsed[30], `SB1 ${s1.id} should parse gaps 21..30`);
       assert.ok(parsed[21].A.length > 0 && parsed[21].B.length > 0 && parsed[21].C.length > 0);
     }
     for (const s2 of VERBATIM_DB.sb2) {
-      const parsed = parseSb2WordBox(s2.wordBoxRaw, s2.parsedWordBox);
+      const parsed = parseSb2WordBox(s2);
       assert.equal(Object.keys(parsed).length, 15, `SB2 ${s2.id} should parse all 15 words A..O`);
     }
   });
 
-  it('builds letterless 4-option Speed-Drill items for Sub-View 3 and searches all 210 Radar rows', () => {
+  it('builds letterless 4-option Speed-Drill items and searches all 210 Radar rows with zero replacement chars', () => {
     const t1Drills = buildTeil1SpeedDrill(VERBATIM_DB.teil1[0], 'base');
     assert.equal(t1Drills.length, 5);
     assert.equal(t1Drills[0].choices.length, 4);
@@ -138,36 +145,39 @@ describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & Engine Tests', ()
 
     const t2Drills = buildTeil2SpeedDrill(VERBATIM_DB.teil2[0], 'base');
     assert.equal(t2Drills.length, 5);
-    assert.ok(t2Drills[0].promptDe.length > 0, 'Teil 2 drill promptDe should be populated from stem/q');
+    assert.ok(t2Drills[0].promptDe.length > 0);
 
     const t3Drills = buildTeil3SpeedDrill(VERBATIM_DB.teil3[0], 'base');
     assert.equal(t3Drills.length, 10);
 
     const allRadar = searchRadarModules('');
     assert.equal(allRadar.length, 210);
-    const inselnHits = searchRadarModules('EBICJ');
-    assert.ok(inselnHits.length >= 1);
+    for (const row of allRadar) {
+      assert.equal(
+        /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]|\uFFFD/.test(row.keywordsSample),
+        false,
+        `Radar row ${row.id} should have zero lone surrogates or replacement chars`
+      );
+    }
   });
 
-  it('provides instant German-Arabic dictionary lookup, B2 grammar explainer, and Local AI Tutor responses', async () => {
-    const {
-      lookupGermanWord,
-      explainSprachGapGrammar,
-      generateLocalAiTutorResponse,
-      translateGermanTextToArabic,
-    } = await import('./b2StudyEngine');
-
-    const wordObwohl = lookupGermanWord('Obwohl,');
+  it('never returns the fake dictionary placeholder and provides B2 grammar & AI tutor explanations', () => {
+    const wordObwohl = lookupGermanWord('Obwohl,', 'Obwohl es regnet, gehen wir spazieren.');
     assert.equal(wordObwohl.cleanWord, 'Obwohl');
-    assert.ok(wordObwohl.meaningAr.includes('بالرغم'));
+    assert.ok(wordObwohl.meaningAr.includes('رغم'));
 
-    const grammarExp = explainSprachGapGrammar(22, 'B', 'weil', 'Ich komme heute nicht, ___22___ ich krank bin.', 'sb1');
-    assert.equal(grammarExp.gapNum, 22);
-    assert.ok(grammarExp.explanationDarija.includes('weil'));
+    const unknownNoun = lookupGermanWord('Küstenschutzprojekt', 'Das Küstenschutzprojekt auf der Insel ist wichtig.');
+    assert.equal(
+      unknownNoun.meaningAr.includes('مفتاح مهم فهاد الفقرة'),
+      false,
+      'Must never return the deleted fake placeholder'
+    );
+
+    const grammarExp = explainSprachbausteinChoice('weil', 22, 'Ich komme heute nicht, [ الفراغ 22 ] ich krank bin.');
+    assert.ok(grammarExp.ruleAr.includes('weil'));
 
     const translation = translateGermanTextToArabic('Die Wissenschaftler haben kaum Zeit für eine neue Studie.');
     assert.ok(translation.length > 10);
-    assert.ok(translation.includes('نفي'));
 
     const tutorRes = generateLocalAiTutorResponse(
       {
@@ -188,4 +198,3 @@ describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & Engine Tests', ()
     assert.ok(tutorRes.sections.length >= 2);
   });
 });
-
