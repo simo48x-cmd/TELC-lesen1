@@ -1,13 +1,15 @@
 import React, { useMemo } from 'react';
-import { ExamVariant, SubViewMode, Teil2Topic } from '../data/verbatimTypes';
+import { AskAiContextItem, ExamVariant, SubViewMode, Teil2Topic } from '../data/verbatimTypes';
 import {
   buildTeil2SpeedDrill,
   extractGermanKeywords,
   getTeil2AnswerKey,
 } from '../utils/examEngine';
+import { translateGermanTextToArabic } from '../utils/b2StudyEngine';
 import { HighlightedText } from './HighlightedText';
 import { SpeedDrillView } from './SpeedDrillView';
-import { CheckCircle2, KeyRound, Sparkles, XCircle } from 'lucide-react';
+import { AudioListenButton } from './AudioListenButton';
+import { Bot, CheckCircle2, KeyRound, Languages, Sparkles, XCircle } from 'lucide-react';
 
 interface Teil2ViewProps {
   topic: Teil2Topic;
@@ -18,12 +20,15 @@ interface Teil2ViewProps {
   highlightMotCle: boolean;
   memorizeMode: boolean;
   showUnderSummary: boolean;
+  showTranslation: boolean;
   shuffleMode: boolean;
   isChecked: boolean;
   fontScale: number;
   streak: number;
   onIncrementStreak: () => void;
   onResetStreak: () => void;
+  onWordClick: (word: string, contextText: string) => void;
+  onAskAi: (ctx: AskAiContextItem) => void;
 }
 
 export const Teil2View: React.FC<Teil2ViewProps> = ({
@@ -35,12 +40,15 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
   highlightMotCle,
   memorizeMode,
   showUnderSummary,
+  showTranslation,
   shuffleMode,
   isChecked,
   fontScale,
   streak,
   onIncrementStreak,
   onResetStreak,
+  onWordClick,
+  onAskAi,
 }) => {
   const activeKey = useMemo(() => getTeil2AnswerKey(topic, variant), [topic, variant]);
 
@@ -91,6 +99,7 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
 
         <div className="grid grid-cols-1 gap-4">
           {topic.questions.map((q, idx) => {
+            const qStem = q.stem || q.q || '';
             const correctLetter = activeKey[idx] || q.correctBase || 'A';
             const correctOptionDe = q.options[correctLetter] || '';
             const qKeywords = extractGermanKeywords(q.trigger?.key);
@@ -112,7 +121,7 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
                     {q.trigger?.ar || `السؤال ${q.num} من موضوع ${topic.arTitle}`}
                   </p>
                   <p dir="ltr" className="text-xs text-indigo-200/90 font-semibold border-t border-indigo-500/20 pt-1.5">
-                    {q.q}
+                    {qStem}
                   </p>
                 </div>
 
@@ -143,7 +152,12 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
                     </span>
                   </div>
                   <p className="text-sm md:text-base font-bold text-white leading-snug">
-                    <HighlightedText text={correctOptionDe} keywords={qKeywords} highlightEnabled={true} />
+                    <HighlightedText
+                      text={correctOptionDe}
+                      keywords={qKeywords}
+                      highlightEnabled={true}
+                      onWordClick={onWordClick}
+                    />
                   </p>
                 </div>
               </div>
@@ -166,9 +180,12 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
             </span>
             <h3 className="text-lg md:text-xl font-black text-white">{topic.title}</h3>
           </div>
-          <span className="text-xs font-bold text-amber-300 bg-amber-950/60 border border-amber-500/30 px-3 py-1 rounded-lg" dir="rtl">
-            {topic.arTitle}
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <AudioListenButton text={topic.article} label="استمع للمقال" />
+            <span className="text-xs font-bold text-amber-300 bg-amber-950/60 border border-amber-500/30 px-3 py-1 rounded-lg" dir="rtl">
+              {topic.arTitle}
+            </span>
+          </div>
         </div>
 
         <div className={`${fontSizeClass} text-slate-100 leading-relaxed whitespace-pre-line font-sans`}>
@@ -176,18 +193,60 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
             text={topic.article}
             keywords={articleKeywords}
             highlightEnabled={highlightMotCle}
+            onWordClick={onWordClick}
           />
         </div>
+
+        {showTranslation && (
+          <div
+            dir="rtl"
+            className="mt-4 bg-cyan-950/45 border border-cyan-500/40 rounded-xl p-3.5 text-xs md:text-sm font-bold text-cyan-200 space-y-1.5"
+          >
+            <div className="flex items-center gap-1.5 text-cyan-300 font-black">
+              <Languages className="w-4 h-4" />
+              <span>ملخص وترجمة المقال ({topic.arTitle}):</span>
+            </div>
+            {topic.questions.map((q) => (
+              <p key={q.num} className="leading-relaxed">
+                • <strong>الفقرة المرتبطة بالسؤال {q.num}:</strong> {q.trigger?.ar || topic.arTitle}
+              </p>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Right 5 Columns: Verbatim Questions 6-10 */}
       <div className="lg:col-span-5 space-y-4">
         {topic.questions.map((q, idx) => {
+          const qStem = q.stem || q.q || '';
           const correctLetter = activeKey[idx] || q.correctBase || 'A';
           const selectedLetter = memorizeMode ? correctLetter : userAnswers[q.num] || '';
           const isCorrect = selectedLetter === correctLetter;
           const qKeywords = extractGermanKeywords(q.trigger?.key);
           const optionLetters = shuffleMode ? ['C', 'B', 'A'] : ['A', 'B', 'C'];
+
+          const handleOpenTutor = () => {
+            const distractors = ['A', 'B', 'C']
+              .filter((l) => l !== correctLetter)
+              .map((l) => ({ letter: l, text: q.options[l] || '' }));
+            onAskAi({
+              moduleType: 'teil2',
+              moduleTitle: `${topic.title} (${topic.arTitle})`,
+              itemLabel: `Frage ${q.num}`,
+              questionNum: q.num,
+              textDe: `${qStem}\n${Object.entries(q.options)
+                .map(([k, v]) => `${k}: ${v}`)
+                .join('\n')}`,
+              correctLetter,
+              correctTextDe: q.options[correctLetter] || '',
+              tKey: q.trigger?.key,
+              hKey: q.options[correctLetter],
+              arSummary: q.trigger?.ar,
+              distractors,
+              baseAnswer: topic.ansBase[idx] || q.correctBase,
+              mod1Answer: topic.ansMod1?.[idx] || q.correctMod,
+            });
+          };
 
           return (
             <div
@@ -200,16 +259,45 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
                   : 'border-slate-700/80'
               }`}
             >
-              <div className="flex items-start justify-between gap-3 mb-3">
-                <div className="flex items-start gap-2.5">
+              <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
+                <div className="flex items-start gap-2.5 flex-1">
                   <span className="px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-mono font-black text-xs shrink-0">
                     {q.num}
                   </span>
                   <h4 className={`${fontSizeClass} font-extrabold text-white leading-snug`}>
-                    <HighlightedText text={q.q} keywords={qKeywords} highlightEnabled={highlightMotCle} />
+                    <HighlightedText
+                      text={qStem}
+                      keywords={qKeywords}
+                      highlightEnabled={highlightMotCle}
+                      onWordClick={onWordClick}
+                    />
                   </h4>
                 </div>
+
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <AudioListenButton text={`${qStem}. ${q.options[correctLetter] || ''}`} compact />
+                  <button
+                    type="button"
+                    onClick={handleOpenTutor}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-[11px] font-extrabold shadow-xs border border-indigo-400/40 cursor-pointer"
+                  >
+                    <Bot className="w-3.5 h-3.5 text-amber-300" />
+                    <span dir="rtl">Ask AI</span>
+                  </button>
+                </div>
               </div>
+
+              {showTranslation && (
+                <div
+                  dir="rtl"
+                  className="mb-3 bg-cyan-950/45 border border-cyan-500/40 rounded-xl p-2.5 text-xs font-bold text-cyan-200 flex items-center gap-1.5"
+                >
+                  <Languages className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                  <span>
+                    {translateGermanTextToArabic(qStem, q.trigger?.ar, `السؤال ${q.num}`)}
+                  </span>
+                </div>
+              )}
 
               <div className="space-y-2">
                 {optionLetters.map((letter) => {
@@ -254,6 +342,7 @@ export const Teil2View: React.FC<Teil2ViewProps> = ({
                             text={optText}
                             keywords={qKeywords}
                             highlightEnabled={highlightMotCle}
+                            onWordClick={onWordClick}
                           />
                         </span>
                       </div>

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { ExamVariant, Sb1Topic, Sb2Topic, SubViewMode } from '../data/verbatimTypes';
+import { AskAiContextItem, ExamVariant, Sb1Topic, Sb2Topic, SubViewMode } from '../data/verbatimTypes';
 import {
   getSb1AnswerKey,
   getSb2AnswerKey,
@@ -7,8 +7,11 @@ import {
   parseSb2WordBox,
   SpeedDrillItem,
 } from '../utils/examEngine';
+import { explainSprachGapGrammar, translateGermanTextToArabic } from '../utils/b2StudyEngine';
 import { SpeedDrillView } from './SpeedDrillView';
-import { CheckCircle2, KeyRound, Sparkles, XCircle } from 'lucide-react';
+import { AudioListenButton } from './AudioListenButton';
+import { HighlightedText } from './HighlightedText';
+import { Bot, CheckCircle2, ChevronDown, KeyRound, Languages, Sparkles, XCircle } from 'lucide-react';
 
 interface SprachViewProps {
   mode: 'sb1' | 'sb2';
@@ -20,11 +23,14 @@ interface SprachViewProps {
   highlightMotCle: boolean;
   memorizeMode: boolean;
   showUnderSummary: boolean;
+  showTranslation: boolean;
   isChecked: boolean;
   fontScale: number;
   streak: number;
   onIncrementStreak: () => void;
   onResetStreak: () => void;
+  onWordClick: (word: string, contextText: string) => void;
+  onAskAi: (ctx: AskAiContextItem) => void;
 }
 
 const SB1_LETTERS: ('A' | 'B' | 'C')[] = ['A', 'B', 'C'];
@@ -40,13 +46,17 @@ export const SprachView: React.FC<SprachViewProps> = ({
   highlightMotCle,
   memorizeMode,
   showUnderSummary,
+  showTranslation,
   isChecked,
   fontScale,
   streak,
   onIncrementStreak,
   onResetStreak,
+  onWordClick,
+  onAskAi,
 }) => {
   const [activeGapNum, setActiveGapNum] = useState<number>(mode === 'sb1' ? 21 : 31);
+  const [openDropdownGap, setOpenDropdownGap] = useState<number | null>(null);
 
   const startNum = mode === 'sb1' ? 21 : 31;
   const gapNumbers = useMemo(
@@ -63,12 +73,22 @@ export const SprachView: React.FC<SprachViewProps> = ({
   );
 
   const sb1Parsed = useMemo(
-    () => (mode === 'sb1' ? parseSb1Options((topic as Sb1Topic).optionsRaw, topic.ansBase) : {}),
+    () =>
+      mode === 'sb1'
+        ? parseSb1Options(
+            (topic as Sb1Topic).optionsRaw,
+            topic.ansBase,
+            (topic as Sb1Topic).parsedOptions
+          )
+        : {},
     [mode, topic]
   );
 
   const sb2WordBox = useMemo(
-    () => (mode === 'sb2' ? parseSb2WordBox((topic as Sb2Topic).wordBoxRaw) : {}),
+    () =>
+      mode === 'sb2'
+        ? parseSb2WordBox((topic as Sb2Topic).wordBoxRaw, (topic as Sb2Topic).parsedWordBox)
+        : {},
     [mode, topic]
   );
 
@@ -85,7 +105,7 @@ export const SprachView: React.FC<SprachViewProps> = ({
   const gapContexts = useMemo(() => {
     const map: Record<number, string> = {};
     for (const num of gapNumbers) {
-      const regex = new RegExp(`([^.!?\\n]{0,75})\\b_*${num}_*\\b([^.!?\\n]{0,75})`);
+      const regex = new RegExp(`([^.!?\\n]{0,75})(?:_{1,4}${num}_{1,4}|\\b${num}\\b)([^.!?\\n]{0,75})`);
       const m = topic.text.match(regex);
       if (m) {
         map[num] = `${m[1].trim()} [ ___${num}___ ] ${m[2].trim()}`;
@@ -128,56 +148,167 @@ export const SprachView: React.FC<SprachViewProps> = ({
     });
   }, [gapNumbers, activeKey, mode, topic, gapContexts]);
 
-  // Render verbatim text with interactive inline badges for 21..30 or 31..40
+  // Render verbatim text with interactive inline dropdown pills for 21..30 or 31..40 (Exact Sahla B2 Style)
   const renderedVerbatimTextWithGaps = useMemo(() => {
-    const pattern = mode === 'sb1' ? /(_{0,3}\b(?:2[1-9]|30)\b_{0,3})/g : /(_{0,3}\b(?:3[1-9]|40)\b_{0,3})/g;
+    const pattern =
+      mode === 'sb1'
+        ? /(_{1,4}(?:2[1-9]|30)_{1,4}|\b(?:2[1-9]|30)\b)/g
+        : /(_{1,4}(?:3[1-9]|40)_{1,4}|\b(?:3[1-9]|40)\b)/g;
     const parts = topic.text.split(pattern);
 
     return parts.map((part, idx) => {
-      const numMatch = part.match(/\b(2[1-9]|30|3[1-9]|40)\b/);
+      const numMatch = part.match(/^(?:_{1,4})?(2[1-9]|30|3[1-9]|40)(?:_{1,4})?$/);
       if (numMatch) {
         const gapNum = parseInt(numMatch[1], 10);
         const gapIdx = gapNum - startNum;
         if (gapIdx >= 0 && gapIdx < 10) {
           const correctLetter = activeKey[gapIdx] || 'A';
           const selectedLetter = memorizeMode ? correctLetter : userAnswers[gapNum] || '';
-          const word = getWordForLetter(gapNum, selectedLetter || correctLetter);
+          const activeDisplayLetter = memorizeMode || isChecked ? (selectedLetter || correctLetter) : selectedLetter;
+          const displayWord = activeDisplayLetter ? getWordForLetter(gapNum, activeDisplayLetter) : '';
           const isCorrect = selectedLetter === correctLetter;
+          const isDropdownOpen = openDropdownGap === gapNum;
 
           return (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => setActiveGapNum(gapNum)}
-              className={`inline-flex items-center gap-1.5 mx-1 px-2.5 py-0.5 rounded-lg font-mono text-xs md:text-sm font-black border transition-all cursor-pointer ${
-                memorizeMode || highlightMotCle
-                  ? 'bg-yellow-300 text-slate-950 border-yellow-400 shadow-xs'
-                  : isChecked
-                  ? isCorrect
-                    ? 'bg-emerald-500 text-slate-950 border-emerald-300'
-                    : 'bg-rose-600 text-white border-rose-400'
-                  : selectedLetter
-                  ? 'bg-indigo-600 text-white border-indigo-400'
-                  : activeGapNum === gapNum
-                  ? 'bg-amber-400 text-slate-950 border-amber-300 ring-2 ring-amber-300'
-                  : 'bg-slate-800 text-amber-300 border-amber-500/40 hover:bg-slate-700'
-              }`}
-            >
-              <span className="opacity-75">[{gapNum}]</span>
-              <span>
-                {memorizeMode || highlightMotCle
-                  ? `${correctLetter}: ${getWordForLetter(gapNum, correctLetter)}`
-                  : selectedLetter
-                  ? `${selectedLetter}: ${word}`
-                  : '___'}
-              </span>
-            </button>
+            <span key={idx} className="relative inline-block mx-1 align-middle">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveGapNum(gapNum);
+                  setOpenDropdownGap((prev) => (prev === gapNum ? null : gapNum));
+                }}
+                className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg font-mono text-xs md:text-sm font-black border transition-all cursor-pointer ${
+                  memorizeMode
+                    ? 'bg-yellow-300 text-slate-950 border-yellow-400 shadow-xs'
+                    : isChecked
+                    ? isCorrect
+                      ? 'bg-emerald-500 text-slate-950 border-emerald-300'
+                      : 'bg-rose-600 text-white border-rose-400'
+                    : selectedLetter
+                    ? highlightMotCle
+                      ? 'bg-yellow-300 text-slate-950 border-yellow-400 shadow-xs'
+                      : 'bg-indigo-600 text-white border-indigo-400'
+                    : activeGapNum === gapNum
+                    ? 'bg-amber-400 text-slate-950 border-amber-300 ring-2 ring-amber-300'
+                    : 'bg-slate-800 text-amber-300 border-amber-500/40 hover:bg-slate-700'
+                }`}
+              >
+                <span>
+                  {activeDisplayLetter
+                    ? `[ ${gapNum}: (${activeDisplayLetter}) ${displayWord} ✓`
+                    : `[ ${gapNum}: (?)`}
+                </span>
+                <ChevronDown className="w-3.5 h-3.5 opacity-80" />
+                <span>]</span>
+              </button>
+
+              {/* Inline Interactive Dropdown Popover Right Inside the Sentence */}
+              {isDropdownOpen && (
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="absolute left-0 top-full mt-1.5 z-30 min-w-[230px] max-w-[310px] bg-slate-900 border-2 border-amber-400 rounded-2xl p-2.5 shadow-2xl space-y-1.5"
+                >
+                  <div className="flex items-center justify-between text-[11px] font-bold text-amber-300 border-b border-slate-800 pb-1">
+                    <span>اختر الكلمة للفراغ [{gapNum}]:</span>
+                    <button
+                      type="button"
+                      onClick={() => setOpenDropdownGap(null)}
+                      className="text-slate-400 hover:text-white px-1 cursor-pointer"
+                    >
+                      ✕
+                    </button>
+                  </div>
+
+                  {mode === 'sb1' ? (
+                    <div className="space-y-1">
+                      {SB1_LETTERS.map((l) => {
+                        const w = getWordForLetter(gapNum, l);
+                        const chosen = selectedLetter === l;
+                        const right = correctLetter === l;
+                        return (
+                          <button
+                            key={l}
+                            type="button"
+                            onClick={() => {
+                              onSelectAnswer(gapNum, l);
+                              setOpenDropdownGap(null);
+                            }}
+                            className={`w-full text-left px-2.5 py-1.5 rounded-xl font-mono text-xs font-bold flex items-center justify-between cursor-pointer ${
+                              chosen
+                                ? 'bg-indigo-600 text-white'
+                                : memorizeMode && right
+                                ? 'bg-emerald-500 text-slate-950'
+                                : 'bg-slate-950 hover:bg-slate-800 text-slate-200'
+                            }`}
+                          >
+                            <span>
+                              <strong className="text-amber-300 mr-1.5">{l}:</strong> {w}
+                            </span>
+                            {(memorizeMode || isChecked) && right && <span>✓</span>}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-1 max-h-56 overflow-y-auto">
+                      {SB2_LETTERS.map((l) => {
+                        const w = sb2WordBox[l] || l;
+                        const chosen = selectedLetter === l;
+                        const right = correctLetter === l;
+                        return (
+                          <button
+                            key={l}
+                            type="button"
+                            onClick={() => {
+                              onSelectAnswer(gapNum, l);
+                              setOpenDropdownGap(null);
+                            }}
+                            className={`text-left px-2 py-1 rounded-lg font-mono text-[11px] font-bold truncate cursor-pointer ${
+                              chosen
+                                ? 'bg-indigo-600 text-white'
+                                : memorizeMode && right
+                                ? 'bg-emerald-500 text-slate-950'
+                                : 'bg-slate-950 hover:bg-slate-800 text-slate-200'
+                            }`}
+                          >
+                            <strong className="text-amber-300">{l}:</strong> {w}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+            </span>
           );
         }
       }
-      return <React.Fragment key={idx}>{part}</React.Fragment>;
+      return (
+        <HighlightedText
+          key={idx}
+          text={part}
+          keywords={[]}
+          highlightEnabled={false}
+          onWordClick={onWordClick}
+        />
+      );
     });
-  }, [topic.text, mode, startNum, activeKey, memorizeMode, userAnswers, highlightMotCle, isChecked, activeGapNum]);
+  }, [
+    topic.text,
+    mode,
+    startNum,
+    activeKey,
+    memorizeMode,
+    userAnswers,
+    highlightMotCle,
+    isChecked,
+    activeGapNum,
+    openDropdownGap,
+    sb1Parsed,
+    sb2WordBox,
+    onWordClick,
+  ]);
 
   const fontSizeClass =
     fontScale <= -1
@@ -209,7 +340,7 @@ export const SprachView: React.FC<SprachViewProps> = ({
               🧠 فاصو الاختصارات والحفظ السريع — {mode === 'sb1' ? 'Sprachbausteine 1' : 'Sprachbausteine 2'} ({topic.title})
             </h3>
             <p className="text-xs text-slate-300">
-              احفظ الفراغات الـ 10 ({startNum}–{startNum + 9}) مع الجملة ديالهم والكلمة الألمانية الصحيحة حرف بحرف!
+              احفظ الفراغات الـ 10 ({startNum}–{startNum + 9}) مع الجملة ديالهم والكلمة الألمانية الصحيحة والقاعدة بالدارجة!
             </p>
           </div>
           <div dir="ltr" className="font-mono text-xs font-extrabold bg-slate-950 px-3 py-1.5 rounded-xl border border-amber-400/40 text-amber-300">
@@ -221,6 +352,13 @@ export const SprachView: React.FC<SprachViewProps> = ({
           {gapNumbers.map((num, idx) => {
             const correctLetter = activeKey[idx] || 'A';
             const correctWord = getWordForLetter(num, correctLetter);
+            const grammarExp = explainSprachGapGrammar(
+              num,
+              correctLetter,
+              correctWord,
+              gapContexts[num] || '',
+              mode
+            );
 
             return (
               <div
@@ -243,6 +381,12 @@ export const SprachView: React.FC<SprachViewProps> = ({
                 <p className="text-xs md:text-sm text-slate-200 font-medium leading-relaxed">
                   {gapContexts[num]}
                 </p>
+                <div
+                  dir="rtl"
+                  className="bg-indigo-950/60 border border-indigo-500/30 rounded-xl p-2.5 text-xs font-bold text-amber-200"
+                >
+                  💡 {grammarExp.explanationDarija}
+                </div>
               </div>
             );
           })}
@@ -253,7 +397,7 @@ export const SprachView: React.FC<SprachViewProps> = ({
 
   // Sub-View 1: Original Verbatim Exam View
   return (
-    <div className="space-y-6" dir="ltr">
+    <div className="space-y-6" dir="ltr" onClick={() => setOpenDropdownGap(null)}>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left 7 Columns: Full Verbatim Cloze Text + Verbatim Raw Options/WordBox */}
         <div className="lg:col-span-7 space-y-5">
@@ -267,14 +411,36 @@ export const SprachView: React.FC<SprachViewProps> = ({
                 </span>
                 <h3 className="text-lg md:text-xl font-black text-white">{topic.title}</h3>
               </div>
-              <span className="px-3 py-1 rounded-lg bg-indigo-950 text-indigo-300 font-mono font-bold text-xs border border-indigo-500/30">
-                10 × 1.5P = 15P
-              </span>
+              <div className="flex items-center gap-2">
+                <AudioListenButton text={topic.text} label="استمع للرسالة" />
+                <span className="px-3 py-1 rounded-lg bg-indigo-950 text-indigo-300 font-mono font-bold text-xs border border-indigo-500/30">
+                  10 × 1.5P = 15P
+                </span>
+              </div>
+            </div>
+
+            <div className="mb-3 bg-indigo-950/40 border border-indigo-500/30 rounded-xl px-3 py-2 text-xs font-bold text-indigo-200" dir="rtl">
+              🎯 نصيحة: اضغط مباشرة على أي فراغ <span className="font-mono text-amber-300" dir="ltr">[ {startNum}: (?) ▾ ]</span> وسط الجملة لاختيار الكلمة الألمانية وقراءة الجملة كاملة، أو اضغط على أي كلمة لترجمتها!
             </div>
 
             <div className={`${fontSizeClass} text-slate-100 leading-relaxed whitespace-pre-line font-sans`}>
               {renderedVerbatimTextWithGaps}
             </div>
+
+            {showTranslation && (
+              <div
+                dir="rtl"
+                className="mt-4 bg-cyan-950/45 border border-cyan-500/40 rounded-xl p-3.5 text-xs md:text-sm font-bold text-cyan-200 space-y-1"
+              >
+                <div className="flex items-center gap-1.5 text-cyan-300 font-black">
+                  <Languages className="w-4 h-4" />
+                  <span>الترجمة والمعنى العام للنص ({topic.title}):</span>
+                </div>
+                <p className="leading-relaxed">
+                  {translateGermanTextToArabic(topic.text, undefined, topic.title)}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Verbatim OptionsRaw / WordBoxRaw Box (100% Untouched Verbatim Text) */}
@@ -302,10 +468,12 @@ export const SprachView: React.FC<SprachViewProps> = ({
                   return (
                     <div
                       key={letter}
-                      className={`p-2 rounded-xl border text-xs font-mono flex items-center justify-between gap-1 ${
+                      onClick={() => onWordClick(word, topic.text)}
+                      title="اضغط لترجمة هذه الأداة/الكلمة"
+                      className={`p-2 rounded-xl border text-xs font-mono flex items-center justify-between gap-1 cursor-pointer transition-colors ${
                         usedByGap
                           ? 'bg-emerald-950/70 border-emerald-500/50 text-emerald-200'
-                          : 'bg-slate-950 border-slate-800 text-slate-200'
+                          : 'bg-slate-950 border-slate-800 text-slate-200 hover:border-amber-400/50'
                       }`}
                     >
                       <div>
@@ -331,15 +499,15 @@ export const SprachView: React.FC<SprachViewProps> = ({
           </div>
         </div>
 
-        {/* Right 5 Columns: Interactive Gap Selectors (21..30 or 31..40) */}
+        {/* Right 5 Columns: Interactive Gap Selectors (21..30 or 31..40) + Smart B2 Grammar Explainer */}
         <div className="lg:col-span-5 space-y-3">
           <div className="bg-slate-900/95 border border-indigo-500/30 rounded-2xl p-4 flex items-center justify-between" dir="rtl">
             <div>
               <h4 className="text-sm font-black text-white">
-                🎯 الإجابة التفاعلية على الفراغات ({startNum}–{startNum + 9})
+                🎯 الإجابة التفاعلية + شرح قواعد B2 ({startNum}–{startNum + 9})
               </h4>
               <p className="text-xs text-slate-400">
-                اختار الجواب لكل فراغ أو فعل &quot;وضع الحفظ&quot; لإظهار جميع الحلول بالكلمات!
+                كل فراغ مرفق بشرح القاعدة النحوية بالدارجة (حروف الجر، الروابط، Konjunktiv II، ضمائر الوصل)!
               </p>
             </div>
           </div>
@@ -349,6 +517,30 @@ export const SprachView: React.FC<SprachViewProps> = ({
             const selectedLetter = memorizeMode ? correctLetter : userAnswers[gapNum] || '';
             const isCorrect = selectedLetter === correctLetter;
             const correctWord = getWordForLetter(gapNum, correctLetter);
+            const grammarExp = explainSprachGapGrammar(
+              gapNum,
+              correctLetter,
+              correctWord,
+              gapContexts[gapNum] || '',
+              mode
+            );
+
+            const handleOpenGapTutor = () => {
+              onAskAi({
+                moduleType: mode,
+                moduleTitle: topic.title,
+                itemLabel: `Lücke ${gapNum}`,
+                questionNum: gapNum,
+                textDe: gapContexts[gapNum] || topic.text,
+                correctLetter,
+                correctTextDe: `${correctLetter}: ${correctWord}`,
+                tKey: correctWord,
+                hKey: grammarExp.ruleCategoryAr,
+                arSummary: grammarExp.explanationDarija,
+                baseAnswer: topic.ansBase[idx],
+                mod1Answer: topic.ansMod1?.[idx],
+              });
+            };
 
             return (
               <div
@@ -375,15 +567,26 @@ export const SprachView: React.FC<SprachViewProps> = ({
                     )}
                   </div>
 
-                  {isChecked && selectedLetter && (
-                    <span className="text-xs font-mono font-bold flex items-center gap-1">
-                      {isCorrect ? (
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                      ) : (
-                        <XCircle className="w-4 h-4 text-rose-400" />
-                      )}
-                    </span>
-                  )}
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={handleOpenGapTutor}
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-violet-600/80 hover:bg-violet-500 text-white text-[11px] font-bold cursor-pointer"
+                    >
+                      <Bot className="w-3 h-3 text-amber-300" />
+                      <span>Ask AI</span>
+                    </button>
+
+                    {isChecked && selectedLetter && (
+                      <span className="text-xs font-mono font-bold flex items-center gap-1">
+                        {isCorrect ? (
+                          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                        ) : (
+                          <XCircle className="w-4 h-4 text-rose-400" />
+                        )}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {mode === 'sb1' ? (
@@ -457,13 +660,24 @@ export const SprachView: React.FC<SprachViewProps> = ({
                   </div>
                 )}
 
-                {showUnderSummary && (
-                  <div className="mt-2 pt-2 border-t border-slate-800/80 text-[11px] text-slate-300 font-mono flex items-center justify-between">
-                    <span className="truncate">{gapContexts[gapNum]}</span>
-                    <span className="shrink-0 ml-2 text-emerald-400 font-bold flex items-center gap-1">
-                      <Sparkles className="w-3 h-3" />
-                      {correctLetter} ({correctWord})
-                    </span>
+                {/* Smart B2 Grammar Explainer Under Each Blank */}
+                {(showUnderSummary || memorizeMode || isChecked) && (
+                  <div
+                    dir="rtl"
+                    className="mt-2.5 pt-2.5 border-t border-slate-800/80 space-y-1"
+                  >
+                    <div className="flex items-center justify-between text-[11px] font-black text-amber-300">
+                      <span className="flex items-center gap-1">
+                        <Sparkles className="w-3 h-3 text-yellow-300" />
+                        <span>{grammarExp.ruleCategoryAr}</span>
+                      </span>
+                      <span dir="ltr" className="text-emerald-400 font-mono">
+                        [{gapNum}] {correctLetter}: {correctWord}
+                      </span>
+                    </div>
+                    <p className="text-xs font-bold text-slate-200 leading-relaxed">
+                      {grammarExp.explanationDarija}
+                    </p>
                   </div>
                 )}
               </div>

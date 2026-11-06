@@ -1,14 +1,16 @@
 import React, { useMemo, useState } from 'react';
-import { ExamVariant, SubViewMode, Teil3Topic } from '../data/verbatimTypes';
+import { AskAiContextItem, ExamVariant, SubViewMode, Teil3Topic } from '../data/verbatimTypes';
 import {
   buildTeil3SpeedDrill,
   extractGermanKeywords,
   getTeil3AnswerKey,
   getTeil3SituationHelper,
 } from '../utils/examEngine';
+import { translateGermanTextToArabic } from '../utils/b2StudyEngine';
 import { HighlightedText } from './HighlightedText';
 import { SpeedDrillView } from './SpeedDrillView';
-import { ArrowUpRight, CheckCircle2, KeyRound, Sparkles, XCircle } from 'lucide-react';
+import { AudioListenButton } from './AudioListenButton';
+import { ArrowUpRight, Bot, CheckCircle2, KeyRound, Languages, Sparkles } from 'lucide-react';
 
 interface Teil3ViewProps {
   topic: Teil3Topic;
@@ -19,12 +21,15 @@ interface Teil3ViewProps {
   highlightMotCle: boolean;
   memorizeMode: boolean;
   showUnderSummary: boolean;
+  showTranslation: boolean;
   shuffleMode: boolean;
   isChecked: boolean;
   fontScale: number;
   streak: number;
   onIncrementStreak: () => void;
   onResetStreak: () => void;
+  onWordClick: (word: string, contextText: string) => void;
+  onAskAi: (ctx: AskAiContextItem) => void;
 }
 
 const AD_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
@@ -38,12 +43,15 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
   highlightMotCle,
   memorizeMode,
   showUnderSummary,
+  showTranslation,
   shuffleMode,
   isChecked,
   fontScale,
   streak,
   onIncrementStreak,
   onResetStreak,
+  onWordClick,
+  onAskAi,
 }) => {
   const [flashedAd, setFlashedAd] = useState<string | null>(null);
 
@@ -146,7 +154,12 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
                     </span>
                   </div>
                   <p dir="ltr" className="text-sm font-bold text-white mb-2 leading-snug">
-                    <HighlightedText text={sit.text} keywords={kw} highlightEnabled={true} />
+                    <HighlightedText
+                      text={sit.text}
+                      keywords={kw}
+                      highlightEnabled={true}
+                      onWordClick={onWordClick}
+                    />
                   </p>
                   <p className="text-xs text-amber-200/90 font-semibold border-t border-indigo-500/20 pt-1.5">
                     {helper.arHint}
@@ -193,7 +206,12 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
                     </span>
                   </div>
                   <p className="text-xs md:text-sm font-semibold text-slate-100 whitespace-pre-line line-clamp-4">
-                    <HighlightedText text={helper.adText} keywords={kw} highlightEnabled={true} />
+                    <HighlightedText
+                      text={helper.adText}
+                      keywords={kw}
+                      highlightEnabled={true}
+                      onWordClick={onWordClick}
+                    />
                   </p>
                 </div>
               </div>
@@ -228,6 +246,24 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
           const helper = helpers[idx];
           const sitKeywords = extractGermanKeywords([helper.sKey, helper.adKey]);
 
+          const handleOpenTutor = () => {
+            onAskAi({
+              moduleType: 'teil3',
+              moduleTitle: `${topic.title} (${topic.arTitle})`,
+              itemLabel: `Situation ${sit.num}`,
+              questionNum: sit.num,
+              textDe: sit.text,
+              correctLetter,
+              correctTextDe: helper.adText,
+              tKey: helper.sKey,
+              hKey: helper.adKey,
+              arSummary: helper.arHint,
+              baseAnswer: topic.ansBase[idx],
+              mod1Answer: topic.ansMod1?.[idx],
+              mod2Answer: topic.ansMod2?.[idx],
+            });
+          };
+
           return (
             <div
               key={sit.num}
@@ -239,8 +275,8 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
                   : 'border-slate-700/80'
               }`}
             >
-              <div className="flex items-start justify-between gap-3 mb-3">
-                <div className="flex items-start gap-2.5">
+              <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
+                <div className="flex items-start gap-2.5 flex-1">
                   <span className="px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-mono font-black text-xs shrink-0">
                     {sit.num}
                   </span>
@@ -249,28 +285,52 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
                       text={sit.text}
                       keywords={sitKeywords}
                       highlightEnabled={highlightMotCle}
+                      onWordClick={onWordClick}
                     />
                   </p>
                 </div>
 
-                {(memorizeMode || isChecked || selectedLetter) && (
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <AudioListenButton text={sit.text} compact />
                   <button
                     type="button"
-                    onClick={() => scrollToAd(memorizeMode || isChecked ? correctLetter : selectedLetter)}
-                    className={`shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-lg font-mono font-black text-xs cursor-pointer ${
-                      (memorizeMode || isChecked ? correctLetter : selectedLetter) === 'X'
-                        ? 'bg-rose-500 text-white'
-                        : 'bg-emerald-500 text-slate-950 hover:bg-emerald-400'
-                    }`}
-                    title="اضغط للانتقال إلى الإعلان المطابق"
+                    onClick={handleOpenTutor}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-[11px] font-extrabold border border-indigo-400/40 cursor-pointer"
                   >
-                    <span>{memorizeMode || isChecked ? correctLetter : selectedLetter}</span>
-                    {(memorizeMode || isChecked ? correctLetter : selectedLetter) !== 'X' && (
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    )}
+                    <Bot className="w-3.5 h-3.5 text-amber-300" />
+                    <span dir="rtl">Ask AI</span>
                   </button>
-                )}
+                  {(memorizeMode || isChecked || selectedLetter) && (
+                    <button
+                      type="button"
+                      onClick={() => scrollToAd(memorizeMode || isChecked ? correctLetter : selectedLetter)}
+                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg font-mono font-black text-xs cursor-pointer ${
+                        (memorizeMode || isChecked ? correctLetter : selectedLetter) === 'X'
+                          ? 'bg-rose-500 text-white'
+                          : 'bg-emerald-500 text-slate-950 hover:bg-emerald-400'
+                      }`}
+                      title="اضغط للانتقال إلى الإعلان المطابق"
+                    >
+                      <span>{memorizeMode || isChecked ? correctLetter : selectedLetter}</span>
+                      {(memorizeMode || isChecked ? correctLetter : selectedLetter) !== 'X' && (
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      )}
+                    </button>
+                  )}
+                </div>
               </div>
+
+              {showTranslation && (
+                <div
+                  dir="rtl"
+                  className="mb-3 bg-cyan-950/45 border border-cyan-500/40 rounded-xl p-2.5 text-xs font-bold text-cyan-200 flex items-center gap-1.5"
+                >
+                  <Languages className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                  <span>
+                    {translateGermanTextToArabic(sit.text, helper.arHint, `الوضعية ${sit.num}`)}
+                  </span>
+                </div>
+              )}
 
               {/* A-L Buttons + Dedicated Red X Button */}
               <div className="flex flex-wrap items-center gap-1 pt-2 border-t border-slate-800/80">
@@ -366,7 +426,7 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
           <div>
             <h3 className="text-base font-black text-white">Info-Texte / Anzeigen (A–L)</h3>
             <p className="text-xs text-slate-400" dir="rtl">
-              النصوص الـ 12 الأصلية حرف بحرف بدون اختصار — الإعلانات المستعملة كيتكتب قدامها رقم الوضعية!
+              النصوص الـ 12 الأصلية حرف بحرف بدون اختصار — اضغط على أي كلمة لترجمتها فوراً!
             </p>
           </div>
           <span className="px-3 py-1 rounded-lg bg-emerald-950 text-emerald-300 font-mono font-bold text-xs border border-emerald-500/30">
@@ -403,6 +463,7 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
                     {letter}
                   </span>
                   <span className="text-xs font-mono font-bold text-slate-400">Anzeige {letter}</span>
+                  <AudioListenButton text={adText} compact />
                 </div>
 
                 {matchedSits.length > 0 && (
@@ -425,8 +486,21 @@ export const Teil3View: React.FC<Teil3ViewProps> = ({
                   text={adText}
                   keywords={allAdKeywords}
                   highlightEnabled={highlightMotCle}
+                  onWordClick={onWordClick}
                 />
               </div>
+
+              {showTranslation && (
+                <div
+                  dir="rtl"
+                  className="mt-3 bg-cyan-950/45 border border-cyan-500/40 rounded-xl p-2.5 text-xs font-bold text-cyan-200 flex items-center gap-1.5"
+                >
+                  <Languages className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                  <span>
+                    {translateGermanTextToArabic(adText, undefined, `الإعلان ${letter}`)}
+                  </span>
+                </div>
+              )}
             </div>
           );
         })}

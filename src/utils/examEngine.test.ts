@@ -118,13 +118,14 @@ describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & Engine Tests', ()
     assert.ok(segments.some((s) => s.highlighted), 'At least one Mot-Clé segment should be highlighted');
   });
 
-  it('parses all 35 SB1 optionsRaw and 36 SB2 wordBoxRaw cleanly', () => {
+  it('parses all 35 SB1 optionsRaw/parsedOptions and 36 SB2 wordBoxRaw/parsedWordBox cleanly', () => {
     for (const s1 of VERBATIM_DB.sb1) {
-      const parsed = parseSb1Options(s1.optionsRaw, s1.ansBase);
+      const parsed = parseSb1Options(s1.optionsRaw, s1.ansBase, s1.parsedOptions);
       assert.ok(parsed[21] && parsed[30], `SB1 ${s1.id} should parse gaps 21..30`);
+      assert.ok(parsed[21].A.length > 0 && parsed[21].B.length > 0 && parsed[21].C.length > 0);
     }
     for (const s2 of VERBATIM_DB.sb2) {
-      const parsed = parseSb2WordBox(s2.wordBoxRaw);
+      const parsed = parseSb2WordBox(s2.wordBoxRaw, s2.parsedWordBox);
       assert.equal(Object.keys(parsed).length, 15, `SB2 ${s2.id} should parse all 15 words A..O`);
     }
   });
@@ -137,6 +138,7 @@ describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & Engine Tests', ()
 
     const t2Drills = buildTeil2SpeedDrill(VERBATIM_DB.teil2[0], 'base');
     assert.equal(t2Drills.length, 5);
+    assert.ok(t2Drills[0].promptDe.length > 0, 'Teil 2 drill promptDe should be populated from stem/q');
 
     const t3Drills = buildTeil3SpeedDrill(VERBATIM_DB.teil3[0], 'base');
     assert.equal(t3Drills.length, 10);
@@ -146,4 +148,44 @@ describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & Engine Tests', ()
     const inselnHits = searchRadarModules('EBICJ');
     assert.ok(inselnHits.length >= 1);
   });
+
+  it('provides instant German-Arabic dictionary lookup, B2 grammar explainer, and Local AI Tutor responses', async () => {
+    const {
+      lookupGermanWord,
+      explainSprachGapGrammar,
+      generateLocalAiTutorResponse,
+      translateGermanTextToArabic,
+    } = await import('./b2StudyEngine');
+
+    const wordObwohl = lookupGermanWord('Obwohl,');
+    assert.equal(wordObwohl.cleanWord, 'Obwohl');
+    assert.ok(wordObwohl.meaningAr.includes('بالرغم'));
+
+    const grammarExp = explainSprachGapGrammar(22, 'B', 'weil', 'Ich komme heute nicht, ___22___ ich krank bin.', 'sb1');
+    assert.equal(grammarExp.gapNum, 22);
+    assert.ok(grammarExp.explanationDarija.includes('weil'));
+
+    const translation = translateGermanTextToArabic('Die Wissenschaftler haben kaum Zeit für eine neue Studie.');
+    assert.ok(translation.length > 10);
+    assert.ok(translation.includes('نفي'));
+
+    const tutorRes = generateLocalAiTutorResponse(
+      {
+        moduleType: 'teil1',
+        moduleTitle: 'Inseln',
+        itemLabel: 'Text 1',
+        questionNum: 1,
+        textDe: VERBATIM_DB.teil1[0].texts['1'],
+        correctLetter: 'E',
+        correctTextDe: VERBATIM_DB.teil1[0].headings['E'],
+        tKey: 'Tourismus',
+        hKey: 'Urlaub',
+        baseAnswer: 'E',
+        mod1Answer: 'H',
+      },
+      'mod_and_negation'
+    );
+    assert.ok(tutorRes.sections.length >= 2);
+  });
 });
+

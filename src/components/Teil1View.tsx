@@ -1,13 +1,15 @@
 import React, { useMemo } from 'react';
-import { ExamVariant, SubViewMode, Teil1Topic } from '../data/verbatimTypes';
+import { AskAiContextItem, ExamVariant, SubViewMode, Teil1Topic } from '../data/verbatimTypes';
 import {
   buildTeil1SpeedDrill,
   extractGermanKeywords,
   getTeil1AnswerKey,
 } from '../utils/examEngine';
+import { translateGermanTextToArabic } from '../utils/b2StudyEngine';
 import { HighlightedText } from './HighlightedText';
 import { SpeedDrillView } from './SpeedDrillView';
-import { ArrowLeft, CheckCircle2, KeyRound, Sparkles, XCircle } from 'lucide-react';
+import { AudioListenButton } from './AudioListenButton';
+import { ArrowLeft, Bot, CheckCircle2, KeyRound, Languages, Sparkles, XCircle } from 'lucide-react';
 
 interface Teil1ViewProps {
   topic: Teil1Topic;
@@ -18,12 +20,15 @@ interface Teil1ViewProps {
   highlightMotCle: boolean;
   memorizeMode: boolean;
   showUnderSummary: boolean;
+  showTranslation: boolean;
   shuffleMode: boolean;
   isChecked: boolean;
   fontScale: number;
   streak: number;
   onIncrementStreak: () => void;
   onResetStreak: () => void;
+  onWordClick: (word: string, contextText: string) => void;
+  onAskAi: (ctx: AskAiContextItem) => void;
 }
 
 const HEADING_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
@@ -37,12 +42,15 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
   highlightMotCle,
   memorizeMode,
   showUnderSummary,
+  showTranslation,
   shuffleMode,
   isChecked,
   fontScale,
   streak,
   onIncrementStreak,
   onResetStreak,
+  onWordClick,
+  onAskAi,
 }) => {
   const activeKey = useMemo(() => getTeil1AnswerKey(topic, variant), [topic, variant]);
 
@@ -174,7 +182,12 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
                     </span>
                   </div>
                   <p className="text-sm md:text-base font-bold text-white leading-snug">
-                    <HighlightedText text={headingDe} keywords={hKeywords} highlightEnabled={true} />
+                    <HighlightedText
+                      text={headingDe}
+                      keywords={hKeywords}
+                      highlightEnabled={true}
+                      onWordClick={onWordClick}
+                    />
                   </p>
                 </div>
               </div>
@@ -196,7 +209,7 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
               <span>📋 العناوين العشرة الأصلية حرف بحرف (Überschriften A–J)</span>
             </h3>
             <p className="text-xs text-slate-400">
-              العناوين المستعملة كيتشطب عليها أوتوماتيكياً وتكتب قدامها رقم النص، والموكلي يتلون بالأصفر!
+              اضغط على أي كلمة ألمانية لترجمتها فوراً وسماع نطقها — العناوين المستعملة كيتكتب قدامها رقم النص!
             </p>
           </div>
           <span dir="ltr" className="text-xs font-mono font-bold text-indigo-300 bg-indigo-950/70 px-3 py-1 rounded-lg border border-indigo-500/30">
@@ -210,11 +223,14 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
             const assignedTextNum = usedByUserMap[letter];
             const isCorrectAssignment =
               assignedTextNum !== undefined && activeKey[assignedTextNum - 1] === letter;
+            const matchedTextIndex = activeKey.findIndex((k) => k === letter);
+            const matchedTrig =
+              matchedTextIndex >= 0 ? topic.codatTriggers?.[String(matchedTextIndex + 1)] : undefined;
 
             return (
               <div
                 key={letter}
-                className={`flex items-start justify-between gap-3 p-3 rounded-xl border transition-all ${
+                className={`flex flex-col justify-between gap-2 p-3 rounded-xl border transition-all ${
                   assignedTextNum !== undefined
                     ? memorizeMode || (isChecked && isCorrectAssignment)
                       ? 'bg-emerald-950/60 border-emerald-500/60 text-emerald-100'
@@ -224,35 +240,58 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
                     : 'bg-slate-950/80 border-slate-800 text-slate-100'
                 }`}
               >
-                <div className="flex items-start gap-2.5">
-                  <span
-                    className={`w-7 h-7 shrink-0 rounded-lg font-mono font-black text-sm flex items-center justify-center ${
-                      assignedTextNum !== undefined
-                        ? 'bg-emerald-500 text-slate-950'
-                        : 'bg-slate-800 text-indigo-300 border border-slate-700'
-                    }`}
-                  >
-                    {letter}
-                  </span>
-                  <span
-                    className={`${fontSizeClass} font-semibold leading-snug ${
-                      assignedTextNum !== undefined && !memorizeMode && !highlightMotCle
-                        ? 'line-through decoration-emerald-400/70 opacity-85'
-                        : ''
-                    }`}
-                  >
-                    <HighlightedText
-                      text={headingText}
-                      keywords={allHeadingKeywords}
-                      highlightEnabled={highlightMotCle}
-                    />
-                  </span>
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-2.5">
+                    <span
+                      className={`w-7 h-7 shrink-0 rounded-lg font-mono font-black text-sm flex items-center justify-center ${
+                        assignedTextNum !== undefined
+                          ? 'bg-emerald-500 text-slate-950'
+                          : 'bg-slate-800 text-indigo-300 border border-slate-700'
+                      }`}
+                    >
+                      {letter}
+                    </span>
+                    <span
+                      className={`${fontSizeClass} font-semibold leading-snug ${
+                        assignedTextNum !== undefined && !memorizeMode && !highlightMotCle
+                          ? 'line-through decoration-emerald-400/70 opacity-85'
+                          : ''
+                      }`}
+                    >
+                      <HighlightedText
+                        text={headingText}
+                        keywords={allHeadingKeywords}
+                        highlightEnabled={highlightMotCle}
+                        onWordClick={onWordClick}
+                      />
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <AudioListenButton text={headingText} compact />
+                    {assignedTextNum !== undefined && (
+                      <span className="px-2.5 py-1 rounded-lg bg-emerald-500 text-slate-950 font-mono font-black text-xs shadow-xs">
+                        Text {assignedTextNum}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                {assignedTextNum !== undefined && (
-                  <span className="shrink-0 px-2.5 py-1 rounded-lg bg-emerald-500 text-slate-950 font-mono font-black text-xs shadow-xs">
-                    Text {assignedTextNum}
-                  </span>
+                {/* Inline Arabic Translation under Heading when showTranslation is enabled */}
+                {showTranslation && (
+                  <div
+                    dir="rtl"
+                    className="text-xs font-bold text-cyan-300 bg-cyan-950/40 border border-cyan-500/30 rounded-lg px-2.5 py-1.5 flex items-center gap-1.5"
+                  >
+                    <Languages className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                    <span>
+                      {translateGermanTextToArabic(
+                        headingText,
+                        matchedTrig ? `يطابق النص ${matchedTextIndex + 1}: ${matchedTrig.ar}` : undefined,
+                        `العنوان ${letter}`
+                      )}
+                    </span>
+                  </div>
                 )}
               </div>
             );
@@ -270,6 +309,29 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
           const trig = topic.codatTriggers?.[String(num)];
           const textKeywords = extractGermanKeywords([trig?.tKey || '', trig?.hKey || '']);
 
+          const handleOpenTutor = () => {
+            const distractors = HEADING_LETTERS.filter((l) => l !== correctLetter).map((l) => ({
+              letter: l,
+              text: topic.headings[l] || '',
+            }));
+            onAskAi({
+              moduleType: 'teil1',
+              moduleTitle: `${topic.sahlaTitle} (${topic.arTitle})`,
+              itemLabel: `Text ${num}`,
+              questionNum: num,
+              textDe: verbatimParagraph,
+              correctLetter,
+              correctTextDe: topic.headings[correctLetter] || '',
+              tKey: trig?.tKey,
+              hKey: trig?.hKey,
+              arSummary: trig?.ar,
+              distractors,
+              baseAnswer: topic.ansBase[num - 1],
+              mod1Answer: topic.ansMod1?.[num - 1],
+              mod2Answer: topic.ansMod2?.[num - 1],
+            });
+          };
+
           return (
             <div
               key={num}
@@ -281,12 +343,24 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
                   : 'border-slate-700/80'
               }`}
             >
-              {/* Paragraph Header + Quick-Select A-J Buttons */}
+              {/* Paragraph Header + Audio + Ask AI + Quick-Select A-J Buttons */}
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-800">
-                <div className="flex items-center gap-2.5">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white font-mono font-black text-sm shadow-sm">
                     Text {num}
                   </span>
+
+                  <AudioListenButton text={verbatimParagraph} label="استمع للنص" />
+
+                  <button
+                    type="button"
+                    onClick={handleOpenTutor}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-xs font-extrabold shadow-md shadow-indigo-500/20 border border-indigo-400/40 cursor-pointer"
+                  >
+                    <Bot className="w-3.5 h-3.5 text-amber-300" />
+                    <span>🤖 Ask AI — اشرح لي بالتفصيل</span>
+                  </button>
+
                   {selectedLetter && (
                     <span
                       dir="ltr"
@@ -354,12 +428,13 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
                       text={topic.headings[memorizeMode || isChecked ? correctLetter : selectedLetter] || ''}
                       keywords={textKeywords}
                       highlightEnabled={highlightMotCle}
+                      onWordClick={onWordClick}
                     />
                   </div>
                 </div>
               )}
 
-              {/* Verbatim German Paragraph */}
+              {/* Verbatim German Paragraph (Clickable Words) */}
               <div
                 dir="ltr"
                 className={`${fontSizeClass} text-slate-100 leading-relaxed whitespace-pre-line font-sans bg-slate-950/70 p-4 rounded-xl border border-slate-800/80`}
@@ -368,8 +443,25 @@ export const Teil1View: React.FC<Teil1ViewProps> = ({
                   text={verbatimParagraph}
                   keywords={textKeywords}
                   highlightEnabled={highlightMotCle}
+                  onWordClick={onWordClick}
                 />
               </div>
+
+              {/* Inline Arabic Translation under Paragraph when showTranslation is enabled */}
+              {showTranslation && (
+                <div
+                  dir="rtl"
+                  className="mt-3 bg-cyan-950/45 border border-cyan-500/40 rounded-xl p-3.5 text-xs md:text-sm font-bold text-cyan-200 space-y-1"
+                >
+                  <div className="flex items-center gap-1.5 text-cyan-300 font-black">
+                    <Languages className="w-4 h-4" />
+                    <span>الترجمة العربية الفورية (Text {num}):</span>
+                  </div>
+                  <p className="leading-relaxed">
+                    {translateGermanTextToArabic(verbatimParagraph, trig?.ar, `النص ${num}`)}
+                  </p>
+                </div>
+              )}
 
               {/* Under-Text Darija Summary + Golden Mot-Clé Match Card */}
               {(showUnderSummary || memorizeMode || isChecked) && trig && (

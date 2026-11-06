@@ -10213,7 +10213,59 @@
         "B",
         "A",
         "A"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "an",
+          "B": "von",
+          "C": "zu"
+        },
+        "24": {
+          "A": "bieten",
+          "B": "fordern",
+          "C": "nehmen"
+        },
+        "27": {
+          "A": "die Ansicht",
+          "B": "der Besuch",
+          "C": "das Betrachten"
+        },
+        "30": {
+          "A": "haben",
+          "B": "hatten",
+          "C": "hätten"
+        },
+        "22": {
+          "A": "ankommenden",
+          "B": "gekommenen",
+          "C": "kommenden"
+        },
+        "25": {
+          "A": "sodass",
+          "B": "weil",
+          "C": "wenn"
+        },
+        "28": {
+          "A": "hat geplant",
+          "B": "ist geplant",
+          "C": "wird geplant haben"
+        },
+        "23": {
+          "A": "aus",
+          "B": "mit",
+          "C": "nach"
+        },
+        "26": {
+          "A": "Gemeinsam mit",
+          "B": "Verbunden von",
+          "C": "Zusammen neben"
+        },
+        "29": {
+          "A": "besprochen",
+          "B": "gesprochen",
+          "C": "versprochen"
+        }
+      }
     },
     {
       "id": "maria_timur",
@@ -10231,7 +10283,59 @@
         "C",
         "C",
         "A"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "seien",
+          "B": "sind",
+          "C": "waren"
+        },
+        "24": {
+          "A": "je...desto",
+          "B": "sowohl...als auch",
+          "C": "weder...noch"
+        },
+        "27": {
+          "A": "als",
+          "B": "für",
+          "C": "wie"
+        },
+        "30": {
+          "A": "hätten",
+          "B": "könnten",
+          "C": "sollten"
+        },
+        "22": {
+          "A": "Da",
+          "B": "Das",
+          "C": "Dass"
+        },
+        "25": {
+          "A": "Verwandte",
+          "B": "Verwandten",
+          "C": "Verwandter"
+        },
+        "28": {
+          "A": "dass",
+          "B": "falls",
+          "C": "ob"
+        },
+        "23": {
+          "A": "an",
+          "B": "auf",
+          "C": "für"
+        },
+        "26": {
+          "A": "unsere",
+          "B": "unseren",
+          "C": "unserer"
+        },
+        "29": {
+          "A": "bereiten",
+          "B": "machen",
+          "C": "tun"
+        }
+      }
     },
     {
       "id": "autorinnen",
@@ -10249,7 +10353,59 @@
         "C",
         "B",
         "C"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "Wie",
+          "B": "Was",
+          "C": "Wann"
+        },
+        "24": {
+          "A": "zu",
+          "B": "ein",
+          "C": "ab"
+        },
+        "27": {
+          "A": "deswegn",
+          "B": "darum",
+          "C": "dafür"
+        },
+        "30": {
+          "A": "sowie",
+          "B": "als ob",
+          "C": "als"
+        },
+        "22": {
+          "A": "vorliegen",
+          "B": "unterliegen",
+          "C": "liegen lassen"
+        },
+        "25": {
+          "A": "mit",
+          "B": "für",
+          "C": "bei"
+        },
+        "28": {
+          "A": "besprechen",
+          "B": "aussprechen",
+          "C": "ansprechen"
+        },
+        "23": {
+          "A": "von",
+          "B": "ohne",
+          "C": "im"
+        },
+        "26": {
+          "A": "unerschütterlich",
+          "B": "stark",
+          "C": "fest"
+        },
+        "29": {
+          "A": "ob",
+          "B": "dass",
+          "C": "damit"
+        }
+      }
     },
     {
       "id": "ferdinand1",
@@ -10267,7 +10423,59 @@
         "C",
         "B",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "damit",
+          "B": "für",
+          "C": "um"
+        },
+        "24": {
+          "A": "bestimmt",
+          "B": "unbedingt",
+          "C": "völlig"
+        },
+        "27": {
+          "A": "jetzigen",
+          "B": "kommenden",
+          "C": "letzten"
+        },
+        "30": {
+          "A": "einen",
+          "B": "einfach",
+          "C": "einzig"
+        },
+        "22": {
+          "A": "wann",
+          "B": "wie",
+          "C": "wo"
+        },
+        "25": {
+          "A": "dich",
+          "B": "mich",
+          "C": "sich"
+        },
+        "28": {
+          "A": "danach",
+          "B": "darüber",
+          "C": "dazu"
+        },
+        "23": {
+          "A": "damit",
+          "B": "denn",
+          "C": "doch"
+        },
+        "26": {
+          "A": "als",
+          "B": "da",
+          "C": "wenn"
+        },
+        "29": {
+          "A": "als",
+          "B": "sondern",
+          "C": "oder"
+        }
+      }
     },
     {
       "id": "ferdinand2",
@@ -10285,7 +10493,59 @@
         "C",
         "C",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "anstatt",
+          "B": "ohne",
+          "C": "um"
+        },
+        "24": {
+          "A": "bestimmt",
+          "B": "unbedingt",
+          "C": "völlig"
+        },
+        "27": {
+          "A": "baldigen",
+          "B": "kommenden",
+          "C": "vergangenen"
+        },
+        "30": {
+          "A": "für",
+          "B": "einfach",
+          "C": "einzig"
+        },
+        "22": {
+          "A": "dass",
+          "B": "ob",
+          "C": "während"
+        },
+        "25": {
+          "A": "dich",
+          "B": "mich",
+          "C": "sich"
+        },
+        "28": {
+          "A": "danach",
+          "B": "darüber",
+          "C": "dazu"
+        },
+        "23": {
+          "A": "aber",
+          "B": "denn",
+          "C": "und"
+        },
+        "26": {
+          "A": "als",
+          "B": "wenn",
+          "C": "wie"
+        },
+        "29": {
+          "A": "aber",
+          "B": "oder",
+          "C": "sondern"
+        }
+      }
     },
     {
       "id": "thomas",
@@ -10303,7 +10563,59 @@
         "A",
         "B",
         "C"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "obwohl",
+          "B": "trotzdem",
+          "C": "während"
+        },
+        "24": {
+          "A": "dafür",
+          "B": "damit",
+          "C": "davon"
+        },
+        "27": {
+          "A": "aussuchen",
+          "B": "ausgesucht",
+          "C": "auszusuchen"
+        },
+        "30": {
+          "A": "dass",
+          "B": "ob",
+          "C": "wie"
+        },
+        "22": {
+          "A": "hat",
+          "B": "hatte",
+          "C": "hätte"
+        },
+        "25": {
+          "A": "Einerseits...andererseits",
+          "B": "Weder...noch",
+          "C": "Zwar...aber"
+        },
+        "28": {
+          "A": "grundlegende",
+          "B": "grundlegenden",
+          "C": "grundlegender"
+        },
+        "23": {
+          "A": "konnte",
+          "B": "sollte",
+          "C": "wollte"
+        },
+        "26": {
+          "A": "dabei",
+          "B": "davon",
+          "C": "dazu"
+        },
+        "29": {
+          "A": "am",
+          "B": "im",
+          "C": "zum"
+        }
+      }
     },
     {
       "id": "judith",
@@ -10321,7 +10633,59 @@
         "A",
         "A",
         "C"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "Zuversichtlich",
+          "B": "Möglichst",
+          "C": "Hoffentlich"
+        },
+        "24": {
+          "A": "damit",
+          "B": "dafür",
+          "C": "dadurch"
+        },
+        "27": {
+          "A": "vor Kurzem",
+          "B": "kürzlich",
+          "C": "kurz"
+        },
+        "30": {
+          "A": "passenden",
+          "B": "bequemen",
+          "C": "angenehmen"
+        },
+        "22": {
+          "A": "vermutlich",
+          "B": "nämlich",
+          "C": "bestimmt"
+        },
+        "25": {
+          "A": "Wenn",
+          "B": "Wann",
+          "C": "Als"
+        },
+        "28": {
+          "A": "weshalb",
+          "B": "insofern",
+          "C": "deshalb"
+        },
+        "23": {
+          "A": "schon",
+          "B": "fast",
+          "C": "beinahe"
+        },
+        "26": {
+          "A": "zueinander",
+          "B": "voneinander",
+          "C": "miteinander"
+        },
+        "29": {
+          "A": "vollkommen",
+          "B": "sämtlich",
+          "C": "erschöpfend"
+        }
+      }
     },
     {
       "id": "corinna",
@@ -10339,7 +10703,59 @@
         "A",
         "C",
         "C"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "dass",
+          "B": "ob",
+          "C": "weil"
+        },
+        "24": {
+          "A": "außerdem",
+          "B": "insbesondere",
+          "C": "jedoch"
+        },
+        "27": {
+          "A": "gering",
+          "B": "knapp",
+          "C": "wenig"
+        },
+        "30": {
+          "A": "kürzlich",
+          "B": "üblich",
+          "C": "möglich"
+        },
+        "22": {
+          "A": "bedienen",
+          "B": "beeilen",
+          "C": "beschäftigen"
+        },
+        "25": {
+          "A": "übermächtig",
+          "B": "übermäßig",
+          "C": "überwiegend"
+        },
+        "28": {
+          "A": "kommt",
+          "B": "läuft",
+          "C": "steht"
+        },
+        "23": {
+          "A": "bloß",
+          "B": "doch",
+          "C": "nur"
+        },
+        "26": {
+          "A": "darf",
+          "B": "muss",
+          "C": "soll"
+        },
+        "29": {
+          "A": "brauchst",
+          "B": "hast",
+          "C": "lässt"
+        }
+      }
     },
     {
       "id": "karin",
@@ -10357,7 +10773,59 @@
         "B",
         "B",
         "C"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "das",
+          "B": "was",
+          "C": "welches"
+        },
+        "24": {
+          "A": "abnehmen",
+          "B": "annehmen",
+          "C": "nehmen"
+        },
+        "27": {
+          "A": "wenn",
+          "B": "auch wenn",
+          "C": "wenn auch"
+        },
+        "30": {
+          "A": "müssen",
+          "B": "sollen",
+          "C": "wollen"
+        },
+        "22": {
+          "A": "denn",
+          "B": "doch",
+          "C": "mal"
+        },
+        "25": {
+          "A": "für",
+          "B": "über",
+          "C": "um"
+        },
+        "28": {
+          "A": "an",
+          "B": "für",
+          "C": "über"
+        },
+        "23": {
+          "A": "dazu",
+          "B": "noch",
+          "C": "sogar"
+        },
+        "26": {
+          "A": "bevor",
+          "B": "bis",
+          "C": "sobald"
+        },
+        "29": {
+          "A": "demnächst",
+          "B": "neulich",
+          "C": "noch nicht"
+        }
+      }
     },
     {
       "id": "leon",
@@ -10375,7 +10843,59 @@
         "C",
         "B",
         "A"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "ab",
+          "B": "aus",
+          "C": "von"
+        },
+        "24": {
+          "A": "ist",
+          "B": "wird",
+          "C": "würde"
+        },
+        "27": {
+          "A": "aber",
+          "B": "denn",
+          "C": "sondern"
+        },
+        "30": {
+          "A": "auf",
+          "B": "für",
+          "C": "über"
+        },
+        "22": {
+          "A": "wann",
+          "B": "was",
+          "C": "wie"
+        },
+        "25": {
+          "A": "bin",
+          "B": "war",
+          "C": "wäre"
+        },
+        "28": {
+          "A": "Beide",
+          "B": "Beiden",
+          "C": "Beides"
+        },
+        "23": {
+          "A": "da",
+          "B": "indem",
+          "C": "obwohl"
+        },
+        "26": {
+          "A": "konnte",
+          "B": "musste",
+          "C": "sollte"
+        },
+        "29": {
+          "A": "erst",
+          "B": "noch",
+          "C": "schon"
+        }
+      }
     },
     {
       "id": "geissler",
@@ -10393,7 +10913,59 @@
         "A",
         "C",
         "C"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "wegen",
+          "B": "von",
+          "C": "auf"
+        },
+        "24": {
+          "A": "unterrichten",
+          "B": "machen",
+          "C": "lernen"
+        },
+        "27": {
+          "A": "falls",
+          "B": "dass",
+          "C": "dafür"
+        },
+        "30": {
+          "A": "weniger",
+          "B": "viel",
+          "C": "mehr"
+        },
+        "22": {
+          "A": "zu",
+          "B": "aus",
+          "C": "ab"
+        },
+        "25": {
+          "A": "über",
+          "B": "für",
+          "C": "an"
+        },
+        "28": {
+          "A": "schon",
+          "B": "noch",
+          "C": "bevor"
+        },
+        "23": {
+          "A": "kaum",
+          "B": "fast",
+          "C": "ein bisschen"
+        },
+        "26": {
+          "A": "irgendwo",
+          "B": "irgendjemandem",
+          "C": "irgendetwas"
+        },
+        "29": {
+          "A": "zu",
+          "B": "für",
+          "C": "vor"
+        }
+      }
     },
     {
       "id": "dobromil",
@@ -10411,7 +10983,59 @@
         "B",
         "A",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "allergrößte",
+          "C": "allergrößten",
+          "B": "Option B"
+        },
+        "24": {
+          "A": "können",
+          "C": "zu können",
+          "B": "Option B"
+        },
+        "27": {
+          "A": "entdeckte",
+          "C": "merkte B auf Ihre Anzeige",
+          "B": "Option B"
+        },
+        "30": {
+          "A": "auf Ihre Anzeige",
+          "B": "Option B",
+          "C": "Option C"
+        },
+        "22": {
+          "A": "an dem",
+          "B": "auf dem",
+          "C": "Option C"
+        },
+        "25": {
+          "A": "an",
+          "B": "bei",
+          "C": "Option C"
+        },
+        "28": {
+          "A": "das",
+          "B": "was C um auf Ihre",
+          "C": "Option C"
+        },
+        "23": {
+          "A": "Ihrem",
+          "B": "Ihren",
+          "C": "Ihres"
+        },
+        "26": {
+          "A": "ein Jahr lang",
+          "B": "durch ein Jahr",
+          "C": "seit einem Jahr"
+        },
+        "29": {
+          "A": "sowohl ... als auch",
+          "B": "teils ... teils",
+          "C": "weder ... noch"
+        }
+      }
     },
     {
       "id": "moosberger",
@@ -10429,7 +11053,59 @@
         "C",
         "A",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "allergrößte",
+          "C": "allergrößten",
+          "B": "Option B"
+        },
+        "24": {
+          "A": "können",
+          "C": "zu können",
+          "B": "Option B"
+        },
+        "27": {
+          "A": "entdeckte",
+          "C": "merkte B auf Ihre Anzeige",
+          "B": "Option B"
+        },
+        "30": {
+          "A": "auf Ihre Anzeige",
+          "B": "Option B",
+          "C": "Option C"
+        },
+        "22": {
+          "A": "an",
+          "B": "auf",
+          "C": "Option C"
+        },
+        "25": {
+          "A": "begann",
+          "B": "beging",
+          "C": "Option C"
+        },
+        "28": {
+          "A": "Dabei",
+          "B": "Inzwischen C um auf Ihre",
+          "C": "Option C"
+        },
+        "23": {
+          "A": "als",
+          "B": "so",
+          "C": "wie"
+        },
+        "26": {
+          "A": "durch ein Jahr",
+          "B": "ein Jahr lang",
+          "C": "seit einem Jahr"
+        },
+        "29": {
+          "A": "sowohl ... als auch",
+          "B": "teils ... teils",
+          "C": "weder ... noch"
+        }
+      }
     },
     {
       "id": "david1",
@@ -10447,7 +11123,59 @@
         "A",
         "A",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "ganz",
+          "B": "noch",
+          "C": "zwar"
+        },
+        "24": {
+          "A": "konnten",
+          "B": "sollten",
+          "C": "wollten"
+        },
+        "27": {
+          "A": "neulich",
+          "B": "seitdem",
+          "C": "vormals"
+        },
+        "30": {
+          "A": "fast",
+          "B": "kaum",
+          "C": "wohl"
+        },
+        "22": {
+          "A": "jedoch",
+          "B": "obwohl",
+          "C": "trotzdem"
+        },
+        "25": {
+          "A": "ankommen wirst",
+          "B": "anzukommen wirst",
+          "C": "wirst ankommen"
+        },
+        "28": {
+          "A": "auffrischen",
+          "B": "aufholen",
+          "C": "aufsparen"
+        },
+        "23": {
+          "A": "anschauen",
+          "B": "überschauen",
+          "C": "vorschauen"
+        },
+        "26": {
+          "A": "falls",
+          "B": "für den Fall",
+          "C": "im Fall"
+        },
+        "29": {
+          "A": "als",
+          "B": "wann",
+          "C": "wo"
+        }
+      }
     },
     {
       "id": "david2",
@@ -10465,7 +11193,59 @@
         "A",
         "A",
         "C"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "ganz",
+          "B": "noch",
+          "C": "zwar"
+        },
+        "24": {
+          "A": "konnten",
+          "B": "sollten",
+          "C": "wollten"
+        },
+        "27": {
+          "A": "neulich",
+          "B": "seitdem",
+          "C": "vormals"
+        },
+        "30": {
+          "A": "geh",
+          "B": "komm",
+          "C": "lass"
+        },
+        "22": {
+          "A": "jedoch",
+          "B": "obwohl",
+          "C": "trotzdem"
+        },
+        "25": {
+          "A": "ankommen wirst",
+          "B": "anzukommen wirst",
+          "C": "wirst ankommen"
+        },
+        "28": {
+          "A": "auffrischen",
+          "B": "aufholen",
+          "C": "aufsparen"
+        },
+        "23": {
+          "A": "anschauen",
+          "B": "überschauen",
+          "C": "vorschauen"
+        },
+        "26": {
+          "A": "falls",
+          "B": "für den Fall",
+          "C": "im Fall"
+        },
+        "29": {
+          "A": "als",
+          "B": "wann",
+          "C": "wo"
+        }
+      }
     },
     {
       "id": "lara",
@@ -10483,7 +11263,59 @@
         "B",
         "B",
         "A"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "dein",
+          "B": "deine",
+          "C": "deinen"
+        },
+        "24": {
+          "A": "Für",
+          "B": "Vor",
+          "C": "Zu"
+        },
+        "27": {
+          "A": "Damit",
+          "B": "Darauf",
+          "C": "Darüber"
+        },
+        "30": {
+          "A": "können",
+          "B": "könnten",
+          "C": "konnten"
+        },
+        "22": {
+          "A": "denn",
+          "B": "obwohl",
+          "C": "weil"
+        },
+        "25": {
+          "A": "neu",
+          "B": "neuen",
+          "C": "neuer"
+        },
+        "28": {
+          "A": "ist",
+          "B": "wäre",
+          "C": "würde"
+        },
+        "23": {
+          "A": "noch",
+          "B": "schon",
+          "C": "weiterhin"
+        },
+        "26": {
+          "A": "bloß",
+          "B": "ja",
+          "C": "mal"
+        },
+        "29": {
+          "A": "aufgrund",
+          "B": "trotz",
+          "C": "wegen"
+        }
+      }
     },
     {
       "id": "lina_florian",
@@ -10501,7 +11333,59 @@
         "A",
         "B",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "dürft",
+          "B": "könnt",
+          "C": "sollt"
+        },
+        "24": {
+          "A": "einige",
+          "B": "einigen",
+          "C": "einiges"
+        },
+        "27": {
+          "A": "wann",
+          "B": "wie",
+          "C": "wo"
+        },
+        "30": {
+          "A": "man",
+          "B": "sich",
+          "C": "Sie"
+        },
+        "22": {
+          "A": "an",
+          "B": "für",
+          "C": "in"
+        },
+        "25": {
+          "A": "dem",
+          "B": "den",
+          "C": "der"
+        },
+        "28": {
+          "A": "dabei",
+          "B": "daneben",
+          "C": "darin"
+        },
+        "23": {
+          "A": "bei",
+          "B": "unter",
+          "C": "zu"
+        },
+        "26": {
+          "A": "ist",
+          "B": "sind",
+          "C": "waren"
+        },
+        "29": {
+          "A": "dies",
+          "B": "diesem",
+          "C": "dieses"
+        }
+      }
     },
     {
       "id": "julian",
@@ -10519,7 +11403,59 @@
         "B",
         "C",
         "C"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "hast",
+          "B": "bist",
+          "C": "konntest"
+        },
+        "24": {
+          "A": "langen",
+          "B": "vielen",
+          "C": "unzähligen"
+        },
+        "27": {
+          "A": "falls",
+          "B": "wenn",
+          "C": "ob"
+        },
+        "30": {
+          "A": "dank",
+          "B": "deshalb",
+          "C": "weil"
+        },
+        "22": {
+          "A": "würde",
+          "B": "wäre",
+          "C": "wurde"
+        },
+        "25": {
+          "A": "gefallen",
+          "B": "gefiel",
+          "C": "hat gefallen"
+        },
+        "28": {
+          "A": "danach",
+          "B": "dann",
+          "C": "denn"
+        },
+        "23": {
+          "A": "für",
+          "B": "in",
+          "C": "zu"
+        },
+        "26": {
+          "A": "weil",
+          "B": "denn",
+          "C": "wegen"
+        },
+        "29": {
+          "A": "ausgeräumt",
+          "B": "ausgeräumten",
+          "C": "ausgeräumter"
+        }
+      }
     },
     {
       "id": "szabo1",
@@ -10537,7 +11473,59 @@
         "A",
         "B",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "an",
+          "B": "bei",
+          "C": "in"
+        },
+        "24": {
+          "A": "angeschlossen",
+          "B": "anschließen",
+          "C": "anschließen an"
+        },
+        "27": {
+          "A": "ein",
+          "B": "einem",
+          "C": "einer"
+        },
+        "30": {
+          "A": "Bei",
+          "B": "Für",
+          "C": "Zu"
+        },
+        "22": {
+          "A": "in Betrag",
+          "B": "in Höhe",
+          "C": "in Summe"
+        },
+        "25": {
+          "A": "anlässlich",
+          "B": "bezüglich",
+          "C": "mittels"
+        },
+        "28": {
+          "A": "Sobald",
+          "B": "Sofort",
+          "C": "So oft"
+        },
+        "23": {
+          "A": "Für",
+          "B": "Zu",
+          "C": "Zwecks"
+        },
+        "26": {
+          "A": "als",
+          "B": "wenn",
+          "C": "wie"
+        },
+        "29": {
+          "A": "dafür",
+          "B": "damit",
+          "C": "dazu"
+        }
+      }
     },
     {
       "id": "szabo2",
@@ -10555,7 +11543,59 @@
         "A",
         "B",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "Anbei",
+          "B": "Dabei",
+          "C": "Vorbei"
+        },
+        "24": {
+          "A": "durchführen",
+          "B": "stattfinden",
+          "C": "veranstalten"
+        },
+        "27": {
+          "A": "ein",
+          "B": "einem",
+          "C": "einer"
+        },
+        "30": {
+          "A": "Bei",
+          "B": "Für",
+          "C": "Zu"
+        },
+        "22": {
+          "A": "in Betrag",
+          "B": "in Höhe",
+          "C": "in Summe"
+        },
+        "25": {
+          "A": "anlässlich",
+          "B": "bezüglich",
+          "C": "mittels"
+        },
+        "28": {
+          "A": "Sobald",
+          "B": "Sofort",
+          "C": "So oft"
+        },
+        "23": {
+          "A": "Für",
+          "B": "Zur",
+          "C": "Zwecks"
+        },
+        "26": {
+          "A": "möglich",
+          "B": "möglicherweise",
+          "C": "möglichst"
+        },
+        "29": {
+          "A": "dafür",
+          "B": "damit",
+          "C": "dazu"
+        }
+      }
     },
     {
       "id": "agnieszka",
@@ -10573,7 +11613,59 @@
         "B",
         "C",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "her",
+          "B": "hin",
+          "C": "vorbei"
+        },
+        "24": {
+          "A": "nicht nur...sondern auch",
+          "B": "teils...teils",
+          "C": "zwar...aber"
+        },
+        "27": {
+          "A": "darüber",
+          "B": "davon",
+          "C": "dazu"
+        },
+        "30": {
+          "A": "weshalb",
+          "B": "wie",
+          "C": "wo"
+        },
+        "22": {
+          "A": "erkrankt",
+          "B": "gekränkt",
+          "C": "kränklich"
+        },
+        "25": {
+          "A": "werde",
+          "B": "wollte",
+          "C": "würde"
+        },
+        "28": {
+          "A": "dich",
+          "B": "dir",
+          "C": "sich"
+        },
+        "23": {
+          "A": "als",
+          "B": "da",
+          "C": "wenn"
+        },
+        "26": {
+          "A": "Dafür",
+          "B": "Danach",
+          "C": "Darauf"
+        },
+        "29": {
+          "A": "beschäftigen lassen",
+          "B": "beschäftigt zu sein",
+          "C": "zu beschäftigen"
+        }
+      }
     },
     {
       "id": "goronsksa",
@@ -10591,7 +11683,59 @@
         "A",
         "B",
         "A"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "dabei",
+          "C": "davon",
+          "B": "Option B"
+        },
+        "24": {
+          "A": "Jeder Mittwoch",
+          "C": "Zum Mittwoch",
+          "B": "Option B"
+        },
+        "27": {
+          "A": "obwohl",
+          "C": "wobei B müssen eine",
+          "B": "Option B"
+        },
+        "30": {
+          "A": "eine Diät",
+          "B": "Option B",
+          "C": "Option C"
+        },
+        "22": {
+          "A": "denen",
+          "B": "die",
+          "C": "Option C"
+        },
+        "25": {
+          "A": "jedem Kurs",
+          "B": "jeden Kurs",
+          "C": "Option C"
+        },
+        "28": {
+          "A": "Ihnen",
+          "B": "Sie C müssen halten",
+          "C": "Option C"
+        },
+        "23": {
+          "A": "an",
+          "B": "durch",
+          "C": "in"
+        },
+        "26": {
+          "A": "der",
+          "B": "deren",
+          "C": "dessen"
+        },
+        "29": {
+          "A": "hat",
+          "B": "ist",
+          "C": "wird"
+        }
+      }
     },
     {
       "id": "andrea1",
@@ -10609,7 +11753,59 @@
         "B",
         "C",
         "C"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "erst",
+          "B": "gleich",
+          "C": "zuerst"
+        },
+        "24": {
+          "A": "aber",
+          "B": "denn",
+          "C": "oder"
+        },
+        "27": {
+          "A": "anwerben",
+          "B": "bewerben",
+          "C": "umwerben"
+        },
+        "30": {
+          "A": "ausgemacht",
+          "B": "beschlossen",
+          "C": "entschieden"
+        },
+        "22": {
+          "A": "am besten",
+          "B": "bestenfalls",
+          "C": "bestens"
+        },
+        "25": {
+          "A": "besondere",
+          "B": "geringe",
+          "C": "gute"
+        },
+        "28": {
+          "A": "Bedauerlich",
+          "B": "Leider",
+          "C": "Schade"
+        },
+        "23": {
+          "A": "bei",
+          "B": "mit",
+          "C": "zu"
+        },
+        "26": {
+          "A": "künftige",
+          "B": "nächste",
+          "C": "weitere"
+        },
+        "29": {
+          "A": "deshalb",
+          "B": "trotzdem",
+          "C": "übrigens"
+        }
+      }
     },
     {
       "id": "andrea2",
@@ -10627,7 +11823,59 @@
         "C",
         "C",
         "C"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "erst",
+          "B": "gleich",
+          "C": "zuerst"
+        },
+        "24": {
+          "A": "fast",
+          "B": "ungefähr",
+          "C": "ziemlich"
+        },
+        "27": {
+          "A": "anwerben",
+          "B": "bewerben",
+          "C": "umwerben"
+        },
+        "30": {
+          "A": "ausgemacht",
+          "B": "beschlossen",
+          "C": "entschieden"
+        },
+        "22": {
+          "A": "am besten",
+          "B": "bestenfalls",
+          "C": "bestens"
+        },
+        "25": {
+          "A": "besondere",
+          "B": "geringe",
+          "C": "gute"
+        },
+        "28": {
+          "A": "außerdem",
+          "B": "damals",
+          "C": "sonst"
+        },
+        "23": {
+          "A": "bei",
+          "B": "mit",
+          "C": "zu"
+        },
+        "26": {
+          "A": "künftige",
+          "B": "nächste",
+          "C": "weitere"
+        },
+        "29": {
+          "A": "deshalb",
+          "B": "trotzdem",
+          "C": "übrigens"
+        }
+      }
     },
     {
       "id": "wenzel",
@@ -10645,7 +11893,59 @@
         "B",
         "A",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "auf",
+          "B": "für",
+          "C": "wegen"
+        },
+        "24": {
+          "A": "vorbereitende",
+          "B": "vorbereitend",
+          "C": "vorbereiteten"
+        },
+        "27": {
+          "A": "auf",
+          "B": "hinter",
+          "C": "neben"
+        },
+        "30": {
+          "A": "erhältlich",
+          "B": "erreichbar",
+          "C": "wirksam"
+        },
+        "22": {
+          "A": "jeden",
+          "B": "jedoch",
+          "C": "jeweils"
+        },
+        "25": {
+          "A": "am meisten",
+          "B": "meisten",
+          "C": "meistens"
+        },
+        "28": {
+          "A": "der",
+          "B": "deren",
+          "C": "dessen"
+        },
+        "23": {
+          "A": "gedacht",
+          "B": "geeignet",
+          "C": "gewidmet"
+        },
+        "26": {
+          "A": "entlang",
+          "B": "gegenüber",
+          "C": "während"
+        },
+        "29": {
+          "A": "sofern",
+          "B": "sogar",
+          "C": "sogleich"
+        }
+      }
     },
     {
       "id": "maria",
@@ -10663,7 +11963,59 @@
         "A",
         "C",
         "A"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "momentan",
+          "B": "noch",
+          "C": "weiterhin"
+        },
+        "24": {
+          "A": "haben",
+          "B": "hatten",
+          "C": "hätten"
+        },
+        "27": {
+          "A": "absolut",
+          "B": "ganz",
+          "C": "vollkommen"
+        },
+        "30": {
+          "A": "inzwischen",
+          "B": "während",
+          "C": "zwischen"
+        },
+        "22": {
+          "A": "deswegen",
+          "B": "wegen",
+          "C": "weil"
+        },
+        "25": {
+          "A": "als",
+          "B": "für",
+          "C": "zur"
+        },
+        "28": {
+          "A": "obwohl",
+          "B": "trotzdem",
+          "C": "ungeachtet"
+        },
+        "23": {
+          "A": "abgesehen",
+          "B": "außer",
+          "C": "bis"
+        },
+        "26": {
+          "A": "auf",
+          "B": "in",
+          "C": "zu"
+        },
+        "29": {
+          "A": "durften",
+          "B": "konnten",
+          "C": "sollten"
+        }
+      }
     },
     {
       "id": "vanessa",
@@ -10681,7 +12033,59 @@
         "B",
         "C",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "an den",
+          "B": "auf dem",
+          "C": "über den"
+        },
+        "24": {
+          "A": "Wann",
+          "B": "Was",
+          "C": "Wie"
+        },
+        "27": {
+          "A": "durchfallen",
+          "B": "umfallen",
+          "C": "wegfallen"
+        },
+        "30": {
+          "A": "dabei",
+          "B": "damit",
+          "C": "davon"
+        },
+        "22": {
+          "A": "nichts mehr",
+          "B": "noch nicht",
+          "C": "keines"
+        },
+        "25": {
+          "A": "der",
+          "B": "die",
+          "C": "von"
+        },
+        "28": {
+          "A": "dich",
+          "B": "dir",
+          "C": "mal"
+        },
+        "23": {
+          "A": "doch",
+          "B": "eben",
+          "C": "überhaupt"
+        },
+        "26": {
+          "A": "gelaufen",
+          "B": "getan",
+          "C": "geworden"
+        },
+        "29": {
+          "A": "alle",
+          "B": "ganze",
+          "C": "jede"
+        }
+      }
     },
     {
       "id": "igor",
@@ -10699,7 +12103,59 @@
         "B",
         "B",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "mit",
+          "B": "über",
+          "C": "wegen"
+        },
+        "24": {
+          "A": "da",
+          "B": "darum",
+          "C": "deshalb"
+        },
+        "27": {
+          "A": "als",
+          "B": "dass",
+          "C": "wenn"
+        },
+        "30": {
+          "A": "bestenfalls",
+          "B": "jedenfalls",
+          "C": "keinesfalls"
+        },
+        "22": {
+          "A": "außerdem",
+          "B": "sonst",
+          "C": "weiterhin"
+        },
+        "25": {
+          "A": "dadurch",
+          "B": "damit",
+          "C": "davon"
+        },
+        "28": {
+          "A": "euch",
+          "B": "sich",
+          "C": "uns"
+        },
+        "23": {
+          "A": "fahren",
+          "B": "kommen",
+          "C": "nehmen"
+        },
+        "26": {
+          "A": "besprochen",
+          "B": "gesprochen",
+          "C": "versprochen"
+        },
+        "29": {
+          "A": "das",
+          "B": "der",
+          "C": "die"
+        }
+      }
     },
     {
       "id": "ida",
@@ -10717,7 +12173,59 @@
         "A",
         "A",
         "A"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "an",
+          "B": "auf",
+          "C": "wegen"
+        },
+        "24": {
+          "A": "ausgepackt habe",
+          "B": "ausgepackt hatte",
+          "C": "auspackte"
+        },
+        "27": {
+          "A": "als",
+          "B": "denn",
+          "C": "wenn"
+        },
+        "30": {
+          "A": "eigentlich",
+          "B": "hoffentlich",
+          "C": "sicherlich"
+        },
+        "22": {
+          "A": "habe",
+          "B": "hätte",
+          "C": "würde"
+        },
+        "25": {
+          "A": "daran",
+          "B": "darauf",
+          "C": "darin"
+        },
+        "28": {
+          "A": "obwohl",
+          "B": "trotzdem",
+          "C": "während"
+        },
+        "23": {
+          "A": "dich",
+          "B": "uns",
+          "C": "mich"
+        },
+        "26": {
+          "A": "einander",
+          "B": "gegeneinander",
+          "C": "miteinander"
+        },
+        "29": {
+          "A": "bei",
+          "B": "mit",
+          "C": "zu"
+        }
+      }
     },
     {
       "id": "justus",
@@ -10735,7 +12243,59 @@
         "C",
         "B",
         "C"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "an",
+          "B": "für",
+          "C": "über"
+        },
+        "24": {
+          "A": "allerdings",
+          "B": "außerdem",
+          "C": "schließlich"
+        },
+        "27": {
+          "A": "gesagt",
+          "B": "sagend",
+          "C": "zu sagen"
+        },
+        "30": {
+          "A": "ist",
+          "B": "war",
+          "C": "wäre"
+        },
+        "22": {
+          "A": "daher",
+          "B": "gar",
+          "C": "sicher"
+        },
+        "25": {
+          "A": "---",
+          "B": "abgerückt",
+          "C": "entfernt"
+        },
+        "28": {
+          "A": "kommende",
+          "B": "kommendem",
+          "C": "kommenden"
+        },
+        "23": {
+          "A": "besonders",
+          "B": "einfach",
+          "C": "kaum"
+        },
+        "26": {
+          "A": "wechseln",
+          "B": "verwechseln",
+          "C": "wechselten"
+        },
+        "29": {
+          "A": "als",
+          "B": "je",
+          "C": "weil"
+        }
+      }
     },
     {
       "id": "paola",
@@ -10753,7 +12313,59 @@
         "C",
         "A",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "ihr",
+          "B": "Sie",
+          "C": "sie"
+        },
+        "24": {
+          "A": "auf",
+          "B": "im",
+          "C": "in"
+        },
+        "27": {
+          "A": "verstellen",
+          "B": "vorstellen",
+          "C": "zustellen"
+        },
+        "30": {
+          "A": "hätte",
+          "B": "sei",
+          "C": "wäre"
+        },
+        "22": {
+          "A": "deshalb",
+          "B": "obwohl",
+          "C": "trotzdem"
+        },
+        "25": {
+          "A": "seit",
+          "B": "vom",
+          "C": "zum"
+        },
+        "28": {
+          "A": "dafür",
+          "B": "damit",
+          "C": "davon"
+        },
+        "23": {
+          "A": "bis",
+          "B": "dann",
+          "C": "wann"
+        },
+        "26": {
+          "A": "ob",
+          "B": "obwohl",
+          "C": "ohnehin"
+        },
+        "29": {
+          "A": "als",
+          "B": "wie",
+          "C": "zu"
+        }
+      }
     },
     {
       "id": "meike",
@@ -10771,7 +12383,59 @@
         "B",
         "B",
         "A"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "neue",
+          "B": "neuen",
+          "C": "neuer"
+        },
+        "24": {
+          "A": "es",
+          "B": "mich",
+          "C": "mir"
+        },
+        "27": {
+          "A": "als",
+          "B": "nach",
+          "C": "wie"
+        },
+        "30": {
+          "A": "denen",
+          "B": "der",
+          "C": "die"
+        },
+        "22": {
+          "A": "Seit",
+          "B": "Sobald",
+          "C": "Solange"
+        },
+        "25": {
+          "A": "Damit",
+          "B": "Obwohl",
+          "C": "Wenn"
+        },
+        "28": {
+          "A": "nahmen",
+          "B": "nehmen",
+          "C": "nimmt"
+        },
+        "23": {
+          "A": "daran",
+          "B": "darauf",
+          "C": "darüber"
+        },
+        "26": {
+          "A": "dürfte",
+          "B": "könnte",
+          "C": "müsste"
+        },
+        "29": {
+          "A": "mein",
+          "B": "mich",
+          "C": "mir"
+        }
+      }
     },
     {
       "id": "hi_jens",
@@ -10789,7 +12453,59 @@
         "B",
         "C",
         "A"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "Option A",
+          "B": "lassen",
+          "C": "Option C"
+        },
+        "22": {
+          "A": "Option A",
+          "B": "weil",
+          "C": "Option C"
+        },
+        "23": {
+          "A": "Option A",
+          "B": "Option B",
+          "C": "erfahren"
+        },
+        "24": {
+          "A": "immer",
+          "B": "Option B",
+          "C": "Option C"
+        },
+        "25": {
+          "A": "Option A",
+          "B": "Option B",
+          "C": "dazu"
+        },
+        "26": {
+          "A": "Option A",
+          "B": "zu überzeugen",
+          "C": "Option C"
+        },
+        "27": {
+          "A": "mich",
+          "B": "Option B",
+          "C": "Option C"
+        },
+        "28": {
+          "A": "Option A",
+          "B": "doch",
+          "C": "Option C"
+        },
+        "29": {
+          "A": "Option A",
+          "B": "Option B",
+          "C": "bevor"
+        },
+        "30": {
+          "A": "auf",
+          "B": "Option B",
+          "C": "Option C"
+        }
+      }
     },
     {
       "id": "jutta_clara",
@@ -10807,7 +12523,59 @@
         "A",
         "A",
         "B"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "erst",
+          "B": "Option B",
+          "C": "Option C"
+        },
+        "22": {
+          "A": "Option A",
+          "B": "auf",
+          "C": "Option C"
+        },
+        "23": {
+          "A": "Option A",
+          "B": "Option B",
+          "C": "damit"
+        },
+        "24": {
+          "A": "obwohl",
+          "B": "Option B",
+          "C": "Option C"
+        },
+        "25": {
+          "A": "Option A",
+          "B": "um",
+          "C": "Option C"
+        },
+        "26": {
+          "A": "Option A",
+          "B": "Option B",
+          "C": "denen"
+        },
+        "27": {
+          "A": "Option A",
+          "B": "kommenden",
+          "C": "Option C"
+        },
+        "28": {
+          "A": "kannst",
+          "B": "Option B",
+          "C": "Option C"
+        },
+        "29": {
+          "A": "bis",
+          "B": "Option B",
+          "C": "Option C"
+        },
+        "30": {
+          "A": "Option A",
+          "B": "ob",
+          "C": "Option C"
+        }
+      }
     },
     {
       "id": "frau_melchior_jakob",
@@ -10825,7 +12593,59 @@
         "A",
         "C",
         "A"
-      ]
+      ],
+      "parsedOptions": {
+        "21": {
+          "A": "Option A",
+          "B": "für",
+          "C": "Option C"
+        },
+        "22": {
+          "A": "hiermit",
+          "B": "Option B",
+          "C": "Option C"
+        },
+        "23": {
+          "A": "Option A",
+          "B": "Option B",
+          "C": "möchte"
+        },
+        "24": {
+          "A": "Option A",
+          "B": "ob",
+          "C": "Option C"
+        },
+        "25": {
+          "A": "Dadurch",
+          "B": "Option B",
+          "C": "Option C"
+        },
+        "26": {
+          "A": "Option A",
+          "B": "Option B",
+          "C": "sowie"
+        },
+        "27": {
+          "A": "Option A",
+          "B": "im",
+          "C": "Option C"
+        },
+        "28": {
+          "A": "mich",
+          "B": "Option B",
+          "C": "Option C"
+        },
+        "29": {
+          "A": "Option A",
+          "B": "Option B",
+          "C": "äußerst"
+        },
+        "30": {
+          "A": "siehe",
+          "B": "Option B",
+          "C": "Option C"
+        }
+      }
     }
   ],
   "sb2": [
@@ -10845,7 +12665,24 @@
         "F",
         "A",
         "N"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "AUF",
+        "F": "DASS",
+        "K": "MIT",
+        "B": "BEI",
+        "G": "DAVON",
+        "L": "OBWOHL",
+        "C": "DABEI",
+        "H": "DENNOCH",
+        "M": "SONDERN",
+        "D": "DAFÜR",
+        "I": "DOCH",
+        "N": "VON",
+        "E": "DAS",
+        "J": "JEDOCH",
+        "O": "WEIL"
+      }
     },
     {
       "id": "handschrift",
@@ -10863,7 +12700,24 @@
         "C",
         "G",
         "F"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "DAMIT",
+        "F": "GEHT",
+        "K": "SUCHEN",
+        "B": "DAS",
+        "G": "GESTALTEN",
+        "L": "TUN",
+        "C": "DASS",
+        "H": "IMMER",
+        "M": "VON",
+        "D": "FIGUREN",
+        "I": "NIE",
+        "N": "WEIL",
+        "E": "FÜR",
+        "J": "SPIELERISCHE",
+        "O": "WURDE"
+      }
     },
     {
       "id": "teamarbeit",
@@ -10881,7 +12735,24 @@
         "G",
         "J",
         "B"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ZU",
+        "F": "MUSSTEN",
+        "K": "FÖRDERTE",
+        "B": "WIE",
+        "G": "LIEFERT",
+        "L": "ERBRINGEN",
+        "C": "SEI",
+        "H": "KONNTEN",
+        "M": "DAZU",
+        "D": "NUR",
+        "I": "HABEN",
+        "N": "DAVON",
+        "E": "NACHWEISEN",
+        "J": "GEBEN",
+        "O": "BEKANNTLICH"
+      }
     },
     {
       "id": "fahrrad1",
@@ -10899,7 +12770,24 @@
         "L",
         "E",
         "F"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "AN",
+        "F": "DENN",
+        "K": "MÜSSEN",
+        "B": "AUF",
+        "G": "DÜRFEN",
+        "L": "SOLLEN",
+        "C": "BEINAHE",
+        "H": "FAST",
+        "M": "STATT",
+        "D": "DAFÜR",
+        "I": "INNERHALB",
+        "N": "VOR",
+        "E": "DANN",
+        "J": "KAUM",
+        "O": "VORBEI"
+      }
     },
     {
       "id": "fahrrad2",
@@ -10917,7 +12805,24 @@
         "L",
         "E",
         "F"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "AN",
+        "F": "DENN",
+        "K": "MÜSSEN",
+        "B": "AUF",
+        "G": "DÜRFEN",
+        "L": "SOLLEN",
+        "C": "BEINAHE",
+        "H": "FAST",
+        "M": "STATT",
+        "D": "DAFÜR",
+        "I": "INNERHALB",
+        "N": "VOR",
+        "E": "DANN",
+        "J": "KAUM",
+        "O": "ZUMEIST"
+      }
     },
     {
       "id": "schulweg",
@@ -10935,7 +12840,24 @@
         "G",
         "N",
         "H"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "BEMÜHEN",
+        "F": "KONZENTRIEREN",
+        "K": "SCHON",
+        "B": "FÜR",
+        "G": "KRITISCHE",
+        "L": "SELBST",
+        "C": "DESHALB",
+        "H": "LÖSUNGEN",
+        "M": "STATT",
+        "D": "DOCH",
+        "I": "NICHT",
+        "N": "SELBSTBEWUSST",
+        "E": "HILFREICH",
+        "J": "PROBLEME",
+        "O": "VERHALTEN"
+      }
     },
     {
       "id": "haustiere",
@@ -10953,7 +12875,24 @@
         "D",
         "N",
         "I"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ZWAR",
+        "F": "VERGANGENEN",
+        "K": "FRÜHEREN",
+        "B": "WURDEN",
+        "G": "UM",
+        "L": "DURCH",
+        "C": "WIE",
+        "H": "GERINGERES",
+        "M": "DIESELBE",
+        "D": "WENIGER",
+        "I": "GEGENTEIL",
+        "N": "DEUTLICH",
+        "E": "WAREN",
+        "J": "GEGENSATZ",
+        "O": "ALS"
+      }
     },
     {
       "id": "theater",
@@ -10971,7 +12910,24 @@
         "F",
         "D",
         "M"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "AB",
+        "F": "DARUM",
+        "K": "SONDERN",
+        "B": "ABER",
+        "G": "DAZU",
+        "L": "TROTZ",
+        "C": "AM",
+        "H": "ES",
+        "M": "UM",
+        "D": "AUF",
+        "I": "OHNE",
+        "N": "VOR",
+        "E": "DA",
+        "J": "SEIT",
+        "O": "WEGEN"
+      }
     },
     {
       "id": "braunbaeren",
@@ -10989,7 +12945,24 @@
         "F",
         "J",
         "G"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "WÄHREND",
+        "F": "NOCH",
+        "K": "DENN",
+        "B": "VORKOMMEN",
+        "G": "NACHKOMMEN",
+        "L": "DASS",
+        "C": "UM",
+        "H": "KAM",
+        "M": "DAFÜR",
+        "D": "SOWIE",
+        "I": "GING",
+        "N": "DADURCH",
+        "E": "SODASS",
+        "J": "EINGRIFFE",
+        "O": "BEGRIFFE"
+      }
     },
     {
       "id": "schwarzarbeit",
@@ -11007,7 +12980,24 @@
         "L",
         "D",
         "K"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ALLES",
+        "F": "DAGEGEN",
+        "K": "MEISTENS",
+        "B": "ANSTATT",
+        "G": "DAVON",
+        "L": "SOLCHE",
+        "C": "AUSGEHEN",
+        "H": "GEGEN",
+        "M": "UM",
+        "D": "BEKOMMEN",
+        "I": "HÖCHSTENS",
+        "N": "WILL",
+        "E": "BILDEN",
+        "J": "JEDE",
+        "O": "WÜNSCHT"
+      }
     },
     {
       "id": "kuehltruhe",
@@ -11025,7 +13015,24 @@
         "E",
         "O",
         "N"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ANHAND",
+        "F": "FAST",
+        "K": "SOWIE",
+        "B": "ANSTRENGEND",
+        "G": "FOLGLICH",
+        "L": "VON",
+        "C": "AUF",
+        "H": "IN",
+        "M": "WEGEN",
+        "D": "AUS",
+        "I": "KAUM",
+        "N": "WOHL",
+        "E": "EHER",
+        "J": "LANGWEILIG",
+        "O": "ZU"
+      }
     },
     {
       "id": "jugend_diskutiert",
@@ -11043,7 +13050,24 @@
         "M",
         "L",
         "N"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ALS",
+        "F": "DIE",
+        "K": "WARUM",
+        "B": "AN",
+        "G": "NACHDEM",
+        "L": "WAS",
+        "C": "AUSSERDEM",
+        "H": "OBWOHL",
+        "M": "WEIL",
+        "D": "BEI",
+        "I": "SEIT",
+        "N": "WER",
+        "E": "DARUNTER",
+        "J": "VOR",
+        "O": "WIE"
+      }
     },
     {
       "id": "online_sprachkurse",
@@ -11061,7 +13085,24 @@
         "L",
         "N",
         "I"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ABER",
+        "F": "MIT",
+        "K": "SOGAR",
+        "B": "ANSTATT",
+        "G": "MÜSSTE",
+        "L": "SOLLTE",
+        "C": "BESONDERS",
+        "H": "OHNE",
+        "M": "SONDERN",
+        "D": "FÜR",
+        "I": "SCHON",
+        "N": "UM",
+        "E": "KAUM",
+        "J": "SO",
+        "O": "VON"
+      }
     },
     {
       "id": "bodyscanning1",
@@ -11079,7 +13120,24 @@
         "L",
         "H",
         "G"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ANS",
+        "F": "DAS",
+        "K": "NUR",
+        "B": "ALS",
+        "G": "DASS",
+        "L": "SOLLEN",
+        "C": "DA",
+        "H": "DÜRFEN",
+        "M": "SONDERN",
+        "D": "DARÜBER",
+        "I": "INS",
+        "N": "SOWIE",
+        "E": "DARUM",
+        "J": "MÜSSEN",
+        "O": "WEDER"
+      }
     },
     {
       "id": "bodyscanning2",
@@ -11097,7 +13155,24 @@
         "L",
         "F",
         "G"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ALS",
+        "F": "DASS",
+        "K": "NUR",
+        "B": "DA",
+        "G": "GLEICH",
+        "L": "SOLLEN",
+        "C": "DARÜBER",
+        "H": "HABE",
+        "M": "SONDERN",
+        "D": "DARUM",
+        "I": "INS",
+        "N": "SOWIE",
+        "E": "DAS",
+        "J": "KAM",
+        "O": "WEDER"
+      }
     },
     {
       "id": "kluegste_freund1",
@@ -11115,7 +13190,24 @@
         "G",
         "E",
         "J"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "AB",
+        "F": "DARÜBER",
+        "K": "ÜBER",
+        "B": "ABER",
+        "G": "DAVON",
+        "L": "UM",
+        "C": "AN",
+        "H": "SEI",
+        "M": "WAR",
+        "D": "AUF",
+        "I": "SEIEN",
+        "N": "WURDEN",
+        "E": "DARAUF",
+        "J": "SONDERN",
+        "O": "ZWAR"
+      }
     },
     {
       "id": "kluegste_freund2",
@@ -11133,7 +13225,24 @@
         "G",
         "E",
         "J"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "AB",
+        "F": "DARÜBER",
+        "K": "ÜBER",
+        "B": "ABER",
+        "G": "DAVON",
+        "L": "UM",
+        "C": "AN",
+        "H": "SEI",
+        "M": "WAR",
+        "D": "AUF",
+        "I": "SEIEN",
+        "N": "WURDEN",
+        "E": "DARAUF",
+        "J": "SONDERN",
+        "O": "ZWAR"
+      }
     },
     {
       "id": "manipulierte_bilder",
@@ -11151,7 +13260,24 @@
         "L",
         "M",
         "J"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ABER",
+        "F": "KORREKT",
+        "K": "STELLT",
+        "B": "ABGRENZEN",
+        "G": "MEISTEN",
+        "L": "UNLOGISCHE",
+        "C": "ALS",
+        "H": "RECHT",
+        "M": "UNTERSCHEIDEN",
+        "D": "DIESEN",
+        "I": "REISEND",
+        "N": "VERSCHIEDEN",
+        "E": "FLUT",
+        "J": "SOMIT",
+        "O": "ZWAR"
+      }
     },
     {
       "id": "bio",
@@ -11169,7 +13295,24 @@
         "M",
         "O",
         "E"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "AN",
+        "F": "ENTHALTEN",
+        "K": "SOGAR",
+        "B": "AUF",
+        "G": "ENTLASTET",
+        "L": "SONDERN",
+        "C": "AUS",
+        "H": "FÜR",
+        "M": "VERWENDET",
+        "D": "AUSSERDEM",
+        "I": "HINTER",
+        "N": "WENN",
+        "E": "DASS",
+        "J": "OB",
+        "O": "WIRKLICH"
+      }
     },
     {
       "id": "restaurant1",
@@ -11187,7 +13330,24 @@
         "L",
         "I",
         "N"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ALS",
+        "F": "FERTIG",
+        "K": "MIT",
+        "B": "BEHÄLT",
+        "G": "GEHÖREN",
+        "L": "TAKT",
+        "C": "BEREIT",
+        "H": "JEDER",
+        "M": "TIPP",
+        "D": "BLEIBT",
+        "I": "KLAR",
+        "N": "WAS",
+        "E": "DAGEGEN",
+        "J": "MANCHER",
+        "O": "WINK"
+      }
     },
     {
       "id": "restaurant2",
@@ -11205,7 +13365,24 @@
         "L",
         "I",
         "N"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ALS",
+        "F": "FERTIG",
+        "K": "MIT",
+        "B": "BEHÄLT",
+        "G": "GEHÖREN",
+        "L": "TAKTGEFÜHL",
+        "C": "BEREIT",
+        "H": "JEDER",
+        "M": "TIPP",
+        "D": "BLEIBT",
+        "I": "KLAR",
+        "N": "WAS",
+        "E": "DAGEGEN",
+        "J": "MANCHEM",
+        "O": "WINK"
+      }
     },
     {
       "id": "ausbildung_30",
@@ -11223,7 +13400,24 @@
         "M",
         "K",
         "J"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "AUSWAHL",
+        "F": "DURFTEN",
+        "K": "TROTZDEM",
+        "B": "CHANCE",
+        "G": "KÖNNTEN",
+        "L": "ÜBERNEHMEN",
+        "C": "DA",
+        "H": "MÖCHTE",
+        "M": "VERFÜGUNG",
+        "D": "DAGEGEN",
+        "I": "SOLLTE",
+        "N": "WARUM",
+        "E": "DENN",
+        "J": "SONDERN",
+        "O": "ZIEHEN"
+      }
     },
     {
       "id": "hund_intelligent",
@@ -11241,7 +13435,24 @@
         "G",
         "E",
         "I"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "AN",
+        "F": "DEM",
+        "K": "SO DASS",
+        "B": "AUS",
+        "G": "DENEN",
+        "L": "ÜBRIGENS",
+        "C": "DARAUF",
+        "H": "JETZT",
+        "M": "WAS",
+        "D": "DAS",
+        "I": "KEINE",
+        "N": "WELCHE",
+        "E": "DASS",
+        "J": "NICHT NUR",
+        "O": "ZU"
+      }
     },
     {
       "id": "skipiste",
@@ -11259,7 +13470,24 @@
         "G",
         "C",
         "N"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ZWAR",
+        "F": "RECHNEN",
+        "K": "EINORDNEN",
+        "B": "VOR",
+        "G": "RAND",
+        "L": "DARF",
+        "C": "STELLE",
+        "H": "KANN",
+        "M": "ANPASSEN",
+        "D": "SOLLTE",
+        "I": "GÜLTIG",
+        "N": "ANGEBEN",
+        "E": "SO",
+        "J": "GELTEN",
+        "O": "ALLERDINGS"
+      }
     },
     {
       "id": "lernen_jugend",
@@ -11277,7 +13505,24 @@
         "J",
         "D",
         "F"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ALLEIN",
+        "F": "DURCH",
+        "K": "MÖCHTEN",
+        "B": "AN",
+        "G": "DÜRFTEN",
+        "L": "REGE",
+        "C": "AUF",
+        "H": "EINZIGE",
+        "M": "STATTDESSEN",
+        "D": "AUFGRUND",
+        "I": "KNAPP",
+        "N": "WÄHREND",
+        "E": "DARAUF",
+        "J": "KURZ",
+        "O": "WEGEN"
+      }
     },
     {
       "id": "mann_kocht",
@@ -11295,7 +13540,24 @@
         "G",
         "E",
         "D"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "DAFÜR",
+        "F": "DAVON",
+        "K": "IRGENDEIN",
+        "B": "DAHER",
+        "G": "DAZU",
+        "L": "WAS",
+        "C": "DAMIT",
+        "H": "DENN",
+        "M": "WEITER",
+        "D": "DARAN",
+        "I": "FÜR",
+        "N": "ZU",
+        "E": "DASS",
+        "J": "GEGEN",
+        "O": "ZWISCHEN"
+      }
     },
     {
       "id": "kaffee_kuchen",
@@ -11313,7 +13575,24 @@
         "B",
         "A",
         "F"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "AUS",
+        "F": "IMMER",
+        "K": "SICHER",
+        "B": "BIS",
+        "G": "KONNTEN",
+        "L": "SONDERN",
+        "C": "DAMALS",
+        "H": "MEHR",
+        "M": "VON",
+        "D": "DESTO",
+        "I": "MUSSTEN",
+        "N": "WIE",
+        "E": "GENAU",
+        "J": "OB",
+        "O": "ZU"
+      }
     },
     {
       "id": "hoeflichkeit",
@@ -11331,7 +13610,24 @@
         "N",
         "C",
         "K"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "FEIN",
+        "F": "MITEINANDER",
+        "K": "SICH",
+        "B": "GUT",
+        "G": "MÖGEN",
+        "L": "SINNLOS",
+        "C": "LASSEN",
+        "H": "NACH",
+        "M": "STIMMEN",
+        "D": "MAN",
+        "I": "NACHEINANDER",
+        "N": "STÖREN",
+        "E": "MEINEN",
+        "J": "NEHMEN",
+        "O": "VERGEBLICH"
+      }
     },
     {
       "id": "tv_bilder",
@@ -11349,7 +13645,24 @@
         "G",
         "M",
         "B"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "AUS",
+        "F": "MACHTEN",
+        "K": "VON",
+        "B": "DANN",
+        "G": "MIT",
+        "L": "VOR",
+        "C": "DURCH",
+        "H": "SO",
+        "M": "WAS",
+        "D": "JENE",
+        "I": "UNTERSCHIEDEN",
+        "N": "WELCHE",
+        "E": "LIESSEN",
+        "J": "VERÄNDERTEN",
+        "O": "WIE"
+      }
     },
     {
       "id": "staedte_infarkt",
@@ -11367,7 +13680,24 @@
         "M",
         "F",
         "I"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "DASS",
+        "F": "GRABEN",
+        "K": "REIBEN",
+        "B": "DAVON",
+        "G": "HIERMIT",
+        "L": "SO",
+        "C": "DAZU",
+        "H": "KLAUEN",
+        "M": "UM",
+        "D": "DENN",
+        "I": "KOSTEN",
+        "N": "WENN",
+        "E": "FAHREN",
+        "J": "OFT",
+        "O": "WER"
+      }
     },
     {
       "id": "garten_stadt",
@@ -11385,7 +13715,24 @@
         "G",
         "H",
         "I"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "SETZEN",
+        "F": "EINFACH",
+        "K": "KLEIN",
+        "B": "GEZÜCHTET",
+        "G": "MITTLERWEILE",
+        "L": "KEIN",
+        "C": "VORTEILE",
+        "H": "SOLCHE",
+        "M": "HÖHER",
+        "D": "VOR",
+        "I": "DADURCH",
+        "N": "ERZOGEN",
+        "E": "ES",
+        "J": "VON",
+        "O": "BEZÜCHTET"
+      }
     },
     {
       "id": "obst_gemuese",
@@ -11403,7 +13750,24 @@
         "G",
         "N",
         "A"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ABGESCHLOSSEN",
+        "F": "DOCH",
+        "K": "MUSS",
+        "B": "ALS",
+        "G": "ERWERBEN",
+        "L": "NÄMLICH",
+        "C": "ANKOMMT",
+        "H": "GENAU",
+        "M": "REGIERT",
+        "D": "BEWERBEN",
+        "I": "KEINESFALLS",
+        "N": "SONDERN",
+        "E": "DARF",
+        "J": "LEITET",
+        "O": "VERSCHLOSSEN"
+      }
     },
     {
       "id": "fische_schlauer",
@@ -11421,7 +13785,24 @@
         "K",
         "A",
         "O"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ALS",
+        "F": "DEUTLICH",
+        "K": "FÜR",
+        "B": "BEOBACHTUNG",
+        "G": "DOCH",
+        "L": "GENAU",
+        "C": "BETRACHTUNG",
+        "H": "ENTWARFEN",
+        "M": "NOCH",
+        "D": "DENN",
+        "I": "ENTWICKELTEN",
+        "N": "ÜBRIGENS",
+        "E": "DER",
+        "J": "FÄHIG",
+        "O": "WER"
+      }
     },
     {
       "id": "katze_namen",
@@ -11439,7 +13820,24 @@
         "J",
         "B",
         "C"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ANGABEN",
+        "F": "DEUTLICH",
+        "K": "SONDERN",
+        "B": "BEKANNT",
+        "G": "LAGE",
+        "L": "UNKLAR",
+        "C": "BLOß",
+        "H": "MEHR",
+        "M": "VERHALTEN",
+        "D": "DEN",
+        "I": "NUR",
+        "N": "WEITER",
+        "E": "DENEN",
+        "J": "SOFERN",
+        "O": "ZUNÄCHST"
+      }
     },
     {
       "id": "teleshopping",
@@ -11457,7 +13855,24 @@
         "K",
         "N",
         "D"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "ALLERDINGS",
+        "B": "BEI",
+        "C": "DAMIT",
+        "D": "DARÜBER",
+        "E": "DENN",
+        "F": "DOCH",
+        "G": "HÄUFIG",
+        "H": "INNERHALB",
+        "I": "JEDOCH",
+        "J": "MEIST",
+        "K": "OBWOHL",
+        "L": "SEIT",
+        "M": "SONDERN",
+        "N": "TROTZDEM",
+        "O": "WÄHREND"
+      }
     },
     {
       "id": "rueckkehr_nachtzug_joggen",
@@ -11475,7 +13890,24 @@
         "N",
         "E",
         "A"
-      ]
+      ],
+      "parsedWordBox": {
+        "A": "AUF",
+        "B": "BESONDERS",
+        "C": "DABEI",
+        "D": "DESHALB",
+        "E": "IM",
+        "F": "INZWISCHEN",
+        "G": "JEDOCH",
+        "H": "OBWOHL",
+        "I": "MIT",
+        "J": "AUFGRUND",
+        "K": "SONDERN",
+        "L": "SOWIE",
+        "M": "WÄHREND",
+        "N": "WESHALB",
+        "O": "ZUDEM"
+      }
     }
   ]
 }

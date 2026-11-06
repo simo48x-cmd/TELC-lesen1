@@ -48,7 +48,8 @@ export interface Teil2QuestionTrigger {
 
 export interface Teil2Question {
   num: number;
-  q: string;
+  q?: string;
+  stem?: string;
   options: Record<string, string>;
   correctBase: string;
   correctMod?: string;
@@ -93,6 +94,7 @@ export interface Sb1Topic {
   title: string;
   text: string;
   optionsRaw: string;
+  parsedOptions?: Record<string, Record<'A' | 'B' | 'C', string>>;
   ansBase: string[];
   ansMod1?: string[];
 }
@@ -102,8 +104,48 @@ export interface Sb2Topic {
   title: string;
   text: string;
   wordBoxRaw: string;
+  parsedWordBox?: Record<string, string>;
   ansBase: string[];
   ansMod1?: string[];
+}
+
+export interface SavedWordItem {
+  word: string;
+  cleanWord: string;
+  meaningAr: string;
+  category: string;
+  grammarTipAr: string;
+  contextSentence?: string;
+  addedAt: number;
+}
+
+export interface MistakeItem {
+  id: string;
+  moduleType: 'teil1' | 'teil2' | 'teil3' | 'sb1' | 'sb2';
+  moduleId: string;
+  moduleTitle: string;
+  questionNum: number;
+  userAnswer: string;
+  correctAnswer: string;
+  explanationAr: string;
+  timestamp: number;
+}
+
+export interface AskAiContextItem {
+  moduleType: 'teil1' | 'teil2' | 'teil3' | 'sb1' | 'sb2';
+  moduleTitle: string;
+  itemLabel: string;
+  questionNum: number;
+  textDe: string;
+  correctLetter: string;
+  correctTextDe: string;
+  tKey?: string;
+  hKey?: string;
+  arSummary?: string;
+  distractors?: { letter: string; text: string }[];
+  baseAnswer?: string;
+  mod1Answer?: string;
+  mod2Answer?: string;
 }
 
 export interface VerbatimDatabase {
@@ -116,3 +158,4 @@ export interface VerbatimDatabase {
 }
 
 export const VERBATIM_DB: VerbatimDatabase = rawDb as unknown as VerbatimDatabase;
+

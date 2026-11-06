@@ -88,13 +88,22 @@ export function formatCodeCompact(ans?: string[], prefixStart?: number): string 
 }
 
 /**
- * Parses SB1 `optionsRaw` into per-gap (21..30) A/B/C option labels while keeping
+ * Parses SB1 `optionsRaw` and `parsedOptions` into per-gap (21..30) A/B/C option labels while keeping
  * full compatibility with both 3-row table format and pipe-separated format.
  */
-export function parseSb1Options(raw: string, ansBase?: string[]): Record<number, Record<'A' | 'B' | 'C', string>> {
+export function parseSb1Options(
+  raw: string,
+  ansBase?: string[],
+  parsedOptions?: Record<string, Record<'A' | 'B' | 'C', string>>
+): Record<number, Record<'A' | 'B' | 'C', string>> {
   const map: Record<number, Record<'A' | 'B' | 'C', string>> = {};
   for (let i = 21; i <= 30; i++) {
-    map[i] = { A: 'A', B: 'B', C: 'C' };
+    const fromJson = parsedOptions?.[String(i)];
+    map[i] = {
+      A: fromJson?.A || 'A',
+      B: fromJson?.B || 'B',
+      C: fromJson?.C || 'C',
+    };
   }
   if (!raw) return map;
 
@@ -107,11 +116,15 @@ export function parseSb1Options(raw: string, ansBase?: string[]): Record<number,
         const num = parseInt(m[1], 10);
         const letter = m[2] as 'A' | 'B' | 'C';
         const word = m[3].trim();
-        map[num] = {
-          A: letter === 'A' ? word : '—',
-          B: letter === 'B' ? word : '—',
-          C: letter === 'C' ? word : '—',
-        };
+        if (!parsedOptions?.[String(num)]) {
+          map[num] = {
+            A: letter === 'A' ? word : 'Option A',
+            B: letter === 'B' ? word : 'Option B',
+            C: letter === 'C' ? word : 'Option C',
+          };
+        } else {
+          map[num][letter] = word;
+        }
       }
     }
     return map;
@@ -131,8 +144,9 @@ export function parseSb1Options(raw: string, ansBase?: string[]): Record<number,
         const start = (numMatches[idx].index ?? 0) + numMatches[idx][0].length;
         const end = idx + 1 < numMatches.length ? (numMatches[idx + 1].index ?? line.length) : line.length;
         const num = activeNums[idx];
-        if (map[num]) {
-          map[num].A = line.slice(start, end).trim();
+        const val = line.slice(start, end).trim();
+        if (map[num] && val) {
+          map[num].A = val;
         }
       }
     } else if (activeNums.length > 0 && /^[BC]\s+/.test(line)) {
@@ -165,10 +179,14 @@ export function parseSb1Options(raw: string, ansBase?: string[]): Record<number,
 }
 
 /**
- * Parses SB2 `wordBoxRaw` into a map of A..O -> German word/phrase.
+ * Parses SB2 `wordBoxRaw` and `parsedWordBox` into a map of A..O -> German word/phrase.
  */
-export function parseSb2WordBox(raw: string): Record<string, string> {
-  const result: Record<string, string> = {};
+export function parseSb2WordBox(
+  raw: string,
+  parsedWordBox?: Record<string, string>
+): Record<string, string> {
+  const result: Record<string, string> = { ...(parsedWordBox || {}) };
+  if (Object.keys(result).length >= 12) return result;
   if (!raw) return result;
 
   if (raw.includes('|')) {
@@ -189,6 +207,7 @@ export function parseSb2WordBox(raw: string): Record<string, string> {
   }
   return result;
 }
+
 
 const GERMAN_STOPWORDS = new Set([
   'der',
@@ -568,7 +587,7 @@ export function buildTeil2SpeedDrill(topic: Teil2Topic, variant: ExamVariant): S
     return {
       id: `${topic.id}-t2-${q.num}`,
       label: `Frage ${q.num}`,
-      promptDe: q.q,
+      promptDe: q.stem || q.q || '',
       hintAr: q.trigger?.ar || `السؤال ${q.num} من موضوع ${topic.arTitle || topic.title}`,
       motCleDe: q.trigger?.key || '',
       correctText,

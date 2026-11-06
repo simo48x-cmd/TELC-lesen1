@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import { ExamVariant, SubViewMode } from '../data/verbatimTypes';
-import { Check, Copy, Eye, Flame, Highlighter, Lightbulb, RotateCcw, Shuffle, Sparkles } from 'lucide-react';
+import {
+  Check,
+  Copy,
+  Eye,
+  Flame,
+  Highlighter,
+  Languages,
+  Lightbulb,
+  RotateCcw,
+  Shuffle,
+  Sparkles,
+} from 'lucide-react';
 
 interface SahlaToolbarProps {
   variant: ExamVariant;
@@ -17,6 +28,8 @@ interface SahlaToolbarProps {
   onToggleMemorizeMode: () => void;
   showUnderSummary: boolean;
   onToggleShowUnderSummary: () => void;
+  showTranslation: boolean;
+  onToggleShowTranslation: () => void;
   shuffleMode: boolean;
   onToggleShuffleMode: () => void;
   isChecked: boolean;
@@ -44,6 +57,8 @@ export const SahlaToolbar: React.FC<SahlaToolbarProps> = ({
   onToggleMemorizeMode,
   showUnderSummary,
   onToggleShowUnderSummary,
+  showTranslation,
+  onToggleShowTranslation,
   shuffleMode,
   onToggleShuffleMode,
   isChecked,
@@ -210,6 +225,19 @@ export const SahlaToolbar: React.FC<SahlaToolbarProps> = ({
             >
               <Lightbulb className="w-3.5 h-3.5" />
               <span>💡 شرح وفهم تحت كل نص</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={onToggleShowTranslation}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold border transition-all cursor-pointer ${
+                showTranslation
+                  ? 'bg-cyan-400 text-slate-950 border-cyan-300 shadow-md shadow-cyan-400/20'
+                  : 'bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-700'
+              }`}
+            >
+              <Languages className="w-3.5 h-3.5" />
+              <span>文A ترجمة فورية + قاموس النقر</span>
             </button>
 
             <button

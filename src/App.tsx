@@ -1,8 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
+  AskAiContextItem,
   ExamVariant,
   MainTabId,
+  MistakeItem,
   PruefungPackage,
+  SavedWordItem,
   SubViewMode,
   VERBATIM_DB,
 } from './data/verbatimTypes';
@@ -15,22 +18,34 @@ import {
   getTeil3AnswerKey,
   RadarRow,
 } from './utils/examEngine';
+import {
+  DEFAULT_SAVED_WORDS,
+  lookupGermanWord,
+  WordLookupResult,
+} from './utils/b2StudyEngine';
 import { SahlaToolbar } from './components/SahlaToolbar';
 import { Teil1View } from './components/Teil1View';
 import { Teil2View } from './components/Teil2View';
 import { Teil3View } from './components/Teil3View';
 import { SprachView } from './components/SprachView';
 import { ExamRadarTab } from './components/ExamRadarTab';
+import { WordDictionaryPopover } from './components/WordDictionaryPopover';
+import { AskAiTutorModal } from './components/AskAiTutorModal';
+import { AntwortbogenDrawer } from './components/AntwortbogenDrawer';
+import { SavedWordsMistakesDrawer } from './components/SavedWordsMistakesDrawer';
 import {
   ArrowRight,
   Award,
+  BookMarked,
   BookOpen,
   CheckCircle2,
+  ClipboardList,
   Clock,
   FileText,
   Flame,
   Layers,
   LockOpen,
+  Moon,
   Pause,
   Play,
   Puzzle,
@@ -39,7 +54,6 @@ import {
   Search,
   Sparkles,
   Sun,
-  Moon,
 } from 'lucide-react';
 
 type PruefungStepIndex = 0 | 1 | 2 | 3 | 4;
@@ -69,10 +83,17 @@ export function App() {
   const [highlightMotCle, setHighlightMotCle] = useState<boolean>(true);
   const [memorizeMode, setMemorizeMode] = useState<boolean>(false);
   const [showUnderSummary, setShowUnderSummary] = useState<boolean>(true);
+  const [showTranslation, setShowTranslation] = useState<boolean>(false);
   const [shuffleMode, setShuffleMode] = useState<boolean>(false);
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [fontScale, setFontScale] = useState<number>(0);
   const [lightTheme, setLightTheme] = useState<boolean>(false);
+
+  // Interactive Modals & Drawers State (Features 2, 3, 5, 6)
+  const [activeWordLookup, setActiveWordLookup] = useState<WordLookupResult | null>(null);
+  const [activeAskAiContext, setActiveAskAiContext] = useState<AskAiContextItem | null>(null);
+  const [isAntwortbogenOpen, setIsAntwortbogenOpen] = useState<boolean>(false);
+  const [isSavedDrawerOpen, setIsSavedDrawerOpen] = useState<boolean>(false);
 
   // User Answers for current exam session
   const [t1Answers, setT1Answers] = useState<Record<number, string>>({});
@@ -81,7 +102,7 @@ export function App() {
   const [sb1Answers, setSb1Answers] = useState<Record<number, string>>({});
   const [sb2Answers, setSb2Answers] = useState<Record<number, string>>({});
 
-  // Persistent Completed Modules & Streak in localStorage
+  // Persistent Completed Modules, Streak, Saved Words & Mistake Bank in localStorage
   const [completedIds, setCompletedIds] = useState<Record<string, boolean>>(() => {
     try {
       const raw = localStorage.getItem('sahla_verbatim_completed_2026');
@@ -100,6 +121,28 @@ export function App() {
     }
   });
 
+  const [savedWords, setSavedWords] = useState<SavedWordItem[]>(() => {
+    try {
+      const raw = localStorage.getItem('sahla_verbatim_saved_words_2026');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+      return DEFAULT_SAVED_WORDS;
+    } catch {
+      return DEFAULT_SAVED_WORDS;
+    }
+  });
+
+  const [mistakes, setMistakes] = useState<MistakeItem[]>(() => {
+    try {
+      const raw = localStorage.getItem('sahla_verbatim_mistakes_2026');
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
+  });
+
   useEffect(() => {
     try {
       localStorage.setItem('sahla_verbatim_completed_2026', JSON.stringify(completedIds));
@@ -115,6 +158,22 @@ export function App() {
       // ignore storage errors
     }
   }, [streakCount]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('sahla_verbatim_saved_words_2026', JSON.stringify(savedWords));
+    } catch {
+      // ignore storage errors
+    }
+  }, [savedWords]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('sahla_verbatim_mistakes_2026', JSON.stringify(mistakes));
+    } catch {
+      // ignore storage errors
+    }
+  }, [mistakes]);
 
   // 90-Minute Exam Countdown Timer (5400 seconds)
   const [secondsLeft, setSecondsLeft] = useState<number>(90 * 60);
@@ -137,6 +196,70 @@ export function App() {
   const toggleCompleted = (key: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     setCompletedIds((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const handleWordClick = (word: string, contextText: string) => {
+    const result = lookupGermanWord(word, contextText);
+    setActiveWordLookup(result);
+  };
+
+  const handleSaveWord = (lookup: WordLookupResult) => {
+    setSavedWords((prev) => {
+      if (prev.some((w) => w.cleanWord.toLowerCase() === lookup.cleanWord.toLowerCase())) {
+        return prev;
+      }
+      return [
+        {
+          word: lookup.word,
+          cleanWord: lookup.cleanWord,
+          meaningAr: lookup.meaningAr,
+          category: lookup.category,
+          grammarTipAr: lookup.grammarTipAr,
+          contextSentence: lookup.contextSentence,
+          addedAt: Date.now(),
+        },
+        ...prev,
+      ];
+    });
+  };
+
+  const handleRemoveWord = (cleanWord: string) => {
+    setSavedWords((prev) => prev.filter((w) => w.cleanWord !== cleanWord));
+  };
+
+  const recordMistakesForModule = (
+    moduleType: 'teil1' | 'teil2' | 'teil3' | 'sb1' | 'sb2',
+    moduleId: string,
+    moduleTitle: string,
+    startQ: number,
+    userMap: Record<number, string>,
+    correctArr: string[]
+  ) => {
+    const newMistakes: MistakeItem[] = [];
+    correctArr.forEach((rightAns, idx) => {
+      const qNum = startQ + idx;
+      const uAns = userMap[qNum];
+      if (uAns && uAns !== rightAns) {
+        newMistakes.push({
+          id: `${moduleType}-${moduleId}-${qNum}`,
+          moduleType,
+          moduleId,
+          moduleTitle,
+          questionNum: qNum,
+          userAnswer: uAns,
+          correctAnswer: rightAns,
+          explanationAr: `في السؤال رقم ${qNum} من (${moduleTitle})، اخترت (${uAns}) بينما الجواب الصحيح هو (${rightAns}).`,
+          timestamp: Date.now(),
+        });
+      }
+    });
+
+    if (newMistakes.length > 0) {
+      setMistakes((prev) => {
+        const filtered = prev.filter((m) => !newMistakes.some((nm) => nm.id === m.id));
+        return [...newMistakes, ...filtered].slice(0, 60);
+      });
+    }
   };
 
   const resetCurrentSessionAnswers = () => {
@@ -258,6 +381,7 @@ export function App() {
   ) => {
     if (moduleType === 'teil1') {
       const topic = VERBATIM_DB.teil1.find((x) => x.id === moduleId) || VERBATIM_DB.teil1[0];
+      const activeKey = getTeil1AnswerKey(topic, variant);
       return (
         <>
           <SahlaToolbar
@@ -275,10 +399,15 @@ export function App() {
             onToggleMemorizeMode={() => setMemorizeMode((v) => !v)}
             showUnderSummary={showUnderSummary}
             onToggleShowUnderSummary={() => setShowUnderSummary((v) => !v)}
+            showTranslation={showTranslation}
+            onToggleShowTranslation={() => setShowTranslation((v) => !v)}
             shuffleMode={shuffleMode}
             onToggleShuffleMode={() => setShuffleMode((v) => !v)}
             isChecked={isChecked}
-            onCheckAnswers={() => setIsChecked(true)}
+            onCheckAnswers={() => {
+              setIsChecked(true);
+              recordMistakesForModule('teil1', topic.id, topic.sahlaTitle, 1, t1Answers, activeKey);
+            }}
             onResetAnswers={resetCurrentSessionAnswers}
             fontScale={fontScale}
             onChangeFontScale={(d) => setFontScale((s) => Math.max(-1, Math.min(2, s + d)))}
@@ -295,12 +424,15 @@ export function App() {
             highlightMotCle={highlightMotCle}
             memorizeMode={memorizeMode}
             showUnderSummary={showUnderSummary}
+            showTranslation={showTranslation}
             shuffleMode={shuffleMode}
             isChecked={isChecked}
             fontScale={fontScale}
             streak={streakCount}
             onIncrementStreak={() => setStreakCount((s) => s + 1)}
             onResetStreak={() => setStreakCount(0)}
+            onWordClick={handleWordClick}
+            onAskAi={setActiveAskAiContext}
           />
         </>
       );
@@ -308,6 +440,7 @@ export function App() {
 
     if (moduleType === 'teil2') {
       const topic = VERBATIM_DB.teil2.find((x) => x.id === moduleId) || VERBATIM_DB.teil2[0];
+      const activeKey = getTeil2AnswerKey(topic, variant);
       return (
         <>
           <SahlaToolbar
@@ -324,10 +457,15 @@ export function App() {
             onToggleMemorizeMode={() => setMemorizeMode((v) => !v)}
             showUnderSummary={showUnderSummary}
             onToggleShowUnderSummary={() => setShowUnderSummary((v) => !v)}
+            showTranslation={showTranslation}
+            onToggleShowTranslation={() => setShowTranslation((v) => !v)}
             shuffleMode={shuffleMode}
             onToggleShuffleMode={() => setShuffleMode((v) => !v)}
             isChecked={isChecked}
-            onCheckAnswers={() => setIsChecked(true)}
+            onCheckAnswers={() => {
+              setIsChecked(true);
+              recordMistakesForModule('teil2', topic.id, topic.title, 6, t2Answers, activeKey);
+            }}
             onResetAnswers={resetCurrentSessionAnswers}
             fontScale={fontScale}
             onChangeFontScale={(d) => setFontScale((s) => Math.max(-1, Math.min(2, s + d)))}
@@ -344,12 +482,15 @@ export function App() {
             highlightMotCle={highlightMotCle}
             memorizeMode={memorizeMode}
             showUnderSummary={showUnderSummary}
+            showTranslation={showTranslation}
             shuffleMode={shuffleMode}
             isChecked={isChecked}
             fontScale={fontScale}
             streak={streakCount}
             onIncrementStreak={() => setStreakCount((s) => s + 1)}
             onResetStreak={() => setStreakCount(0)}
+            onWordClick={handleWordClick}
+            onAskAi={setActiveAskAiContext}
           />
         </>
       );
@@ -357,6 +498,7 @@ export function App() {
 
     if (moduleType === 'teil3') {
       const topic = VERBATIM_DB.teil3.find((x) => x.id === moduleId) || VERBATIM_DB.teil3[0];
+      const activeKey = getTeil3AnswerKey(topic, variant);
       return (
         <>
           <SahlaToolbar
@@ -374,10 +516,15 @@ export function App() {
             onToggleMemorizeMode={() => setMemorizeMode((v) => !v)}
             showUnderSummary={showUnderSummary}
             onToggleShowUnderSummary={() => setShowUnderSummary((v) => !v)}
+            showTranslation={showTranslation}
+            onToggleShowTranslation={() => setShowTranslation((v) => !v)}
             shuffleMode={shuffleMode}
             onToggleShuffleMode={() => setShuffleMode((v) => !v)}
             isChecked={isChecked}
-            onCheckAnswers={() => setIsChecked(true)}
+            onCheckAnswers={() => {
+              setIsChecked(true);
+              recordMistakesForModule('teil3', topic.id, topic.title, 11, t3Answers, activeKey);
+            }}
             onResetAnswers={resetCurrentSessionAnswers}
             fontScale={fontScale}
             onChangeFontScale={(d) => setFontScale((s) => Math.max(-1, Math.min(2, s + d)))}
@@ -394,12 +541,15 @@ export function App() {
             highlightMotCle={highlightMotCle}
             memorizeMode={memorizeMode}
             showUnderSummary={showUnderSummary}
+            showTranslation={showTranslation}
             shuffleMode={shuffleMode}
             isChecked={isChecked}
             fontScale={fontScale}
             streak={streakCount}
             onIncrementStreak={() => setStreakCount((s) => s + 1)}
             onResetStreak={() => setStreakCount(0)}
+            onWordClick={handleWordClick}
+            onAskAi={setActiveAskAiContext}
           />
         </>
       );
@@ -407,6 +557,7 @@ export function App() {
 
     if (moduleType === 'sb1') {
       const topic = VERBATIM_DB.sb1.find((x) => x.id === moduleId) || VERBATIM_DB.sb1[0];
+      const activeKey = getSb1AnswerKey(topic, variant);
       return (
         <>
           <SahlaToolbar
@@ -423,10 +574,15 @@ export function App() {
             onToggleMemorizeMode={() => setMemorizeMode((v) => !v)}
             showUnderSummary={showUnderSummary}
             onToggleShowUnderSummary={() => setShowUnderSummary((v) => !v)}
+            showTranslation={showTranslation}
+            onToggleShowTranslation={() => setShowTranslation((v) => !v)}
             shuffleMode={shuffleMode}
             onToggleShuffleMode={() => setShuffleMode((v) => !v)}
             isChecked={isChecked}
-            onCheckAnswers={() => setIsChecked(true)}
+            onCheckAnswers={() => {
+              setIsChecked(true);
+              recordMistakesForModule('sb1', topic.id, topic.title, 21, sb1Answers, activeKey);
+            }}
             onResetAnswers={resetCurrentSessionAnswers}
             fontScale={fontScale}
             onChangeFontScale={(d) => setFontScale((s) => Math.max(-1, Math.min(2, s + d)))}
@@ -444,17 +600,21 @@ export function App() {
             highlightMotCle={highlightMotCle}
             memorizeMode={memorizeMode}
             showUnderSummary={showUnderSummary}
+            showTranslation={showTranslation}
             isChecked={isChecked}
             fontScale={fontScale}
             streak={streakCount}
             onIncrementStreak={() => setStreakCount((s) => s + 1)}
             onResetStreak={() => setStreakCount(0)}
+            onWordClick={handleWordClick}
+            onAskAi={setActiveAskAiContext}
           />
         </>
       );
     }
 
     const topic = VERBATIM_DB.sb2.find((x) => x.id === moduleId) || VERBATIM_DB.sb2[0];
+    const activeKey = getSb2AnswerKey(topic, variant);
     return (
       <>
         <SahlaToolbar
@@ -471,10 +631,15 @@ export function App() {
           onToggleMemorizeMode={() => setMemorizeMode((v) => !v)}
           showUnderSummary={showUnderSummary}
           onToggleShowUnderSummary={() => setShowUnderSummary((v) => !v)}
+          showTranslation={showTranslation}
+          onToggleShowTranslation={() => setShowTranslation((v) => !v)}
           shuffleMode={shuffleMode}
           onToggleShuffleMode={() => setShuffleMode((v) => !v)}
           isChecked={isChecked}
-          onCheckAnswers={() => setIsChecked(true)}
+          onCheckAnswers={() => {
+            setIsChecked(true);
+            recordMistakesForModule('sb2', topic.id, topic.title, 31, sb2Answers, activeKey);
+          }}
           onResetAnswers={resetCurrentSessionAnswers}
           fontScale={fontScale}
           onChangeFontScale={(d) => setFontScale((s) => Math.max(-1, Math.min(2, s + d)))}
@@ -492,11 +657,14 @@ export function App() {
           highlightMotCle={highlightMotCle}
           memorizeMode={memorizeMode}
           showUnderSummary={showUnderSummary}
+          showTranslation={showTranslation}
           isChecked={isChecked}
           fontScale={fontScale}
           streak={streakCount}
           onIncrementStreak={() => setStreakCount((s) => s + 1)}
           onResetStreak={() => setStreakCount(0)}
+          onWordClick={handleWordClick}
+          onAskAi={setActiveAskAiContext}
         />
       </>
     );
@@ -534,13 +702,26 @@ export function App() {
                   </span>
                 </div>
                 <p className="text-xs text-slate-400">
-                  النسخة الحرفية الكاملة 100% — النصوص الرسمية بدون اختصار + التعديلات + تلوين الموكلي بالصفر
+                  النسخة الحرفية الكاملة 100% — النصوص الرسمية + التعديلات + قاموس النقر الذكي + المعلم الذكي
                 </p>
               </div>
             </div>
 
             {/* Right Stats & Quick Actions */}
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              {/* Feature 6: My Saved Words & Mistake Bank Button */}
+              <button
+                type="button"
+                onClick={() => setIsSavedDrawerOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500/20 to-rose-500/20 hover:from-amber-500/30 hover:to-rose-500/30 border border-amber-400/40 text-amber-200 text-xs font-extrabold cursor-pointer shadow-xs"
+              >
+                <BookMarked className="w-4 h-4 text-amber-300" />
+                <span>📚 قاموسي وأخطائي</span>
+                <span className="px-1.5 py-0.5 rounded bg-black/40 font-mono text-[10px] text-emerald-300">
+                  {savedWords.length}★ / {mistakes.length}⚠️
+                </span>
+              </button>
+
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-extrabold">
                 <Flame className="w-4 h-4 text-amber-400 fill-amber-400" />
                 <span>سلسلة الحفاظة: {streakCount}</span>
@@ -602,7 +783,7 @@ export function App() {
         {/* CASE 1: Inside an opened 90-Minute Connected Prüfung (5-Part Stepper) */}
         {activePruefung && activePruefungModules ? (
           <div className="space-y-5">
-            {/* Top Connected Prüfung Banner + 90:00 Timer + 105-Pt Score */}
+            {/* Top Connected Prüfung Banner + 90:00 Timer + 105-Pt Score + Official Antwortbogen (1-40) Button */}
             <div className="bg-gradient-to-r from-slate-900 via-indigo-950/80 to-slate-900 border border-indigo-500/40 rounded-3xl p-4 md:p-5 shadow-2xl space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
@@ -628,8 +809,18 @@ export function App() {
                   </div>
                 </div>
 
-                {/* Live 90:00 Timer & 105-Point Score Display */}
-                <div className="flex flex-wrap items-center gap-3">
+                {/* Live 90:00 Timer & 105-Point Score Display + Official Antwortbogen Button */}
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {/* Feature 5: Official TELC B2 Antwortbogen (1-40) Drawer Trigger */}
+                  <button
+                    type="button"
+                    onClick={() => setIsAntwortbogenOpen(true)}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs shadow-md shadow-emerald-500/20 cursor-pointer"
+                  >
+                    <ClipboardList className="w-4 h-4" />
+                    <span>📋 ورقة الإجابة الرسمية (Antwortbogen 1–40)</span>
+                  </button>
+
                   {/* Timer */}
                   <div className="flex items-center gap-2 bg-slate-950 border border-slate-800 px-3.5 py-2 rounded-2xl">
                     <Clock className="w-4 h-4 text-amber-400" />
@@ -657,7 +848,8 @@ export function App() {
                   {/* 105-Point Score Box */}
                   {pruefungScore && (
                     <div
-                      className={`px-4 py-2 rounded-2xl border flex items-center gap-3 ${
+                      onClick={() => setIsAntwortbogenOpen(true)}
+                      className={`px-4 py-2 rounded-2xl border flex items-center gap-3 cursor-pointer ${
                         pruefungScore.passed
                           ? 'bg-emerald-950/70 border-emerald-500/50 text-emerald-200'
                           : 'bg-slate-950 border-indigo-500/40 text-slate-200'
@@ -821,6 +1013,33 @@ export function App() {
             {pruefungStep === 2 && renderExamWorkspace('teil3', activePruefungModules.t3.id)}
             {pruefungStep === 3 && renderExamWorkspace('sb1', activePruefungModules.sb1.id)}
             {pruefungStep === 4 && renderExamWorkspace('sb2', activePruefungModules.sb2.id)}
+
+            {/* Official TELC B2 Antwortbogen (1-40) Floating Drawer */}
+            {pruefungScore && (
+              <AntwortbogenDrawer
+                isOpen={isAntwortbogenOpen}
+                onClose={() => setIsAntwortbogenOpen(false)}
+                pruefungTitle={activePruefung.title}
+                pruefungArTitle={activePruefung.arTitle}
+                variantLabel={variant === 'base' ? 'الأساسي (Base)' : variant === 'mod1' ? 'المعدل 1 (Mod 1)' : 'المعدل 2 (Mod 2)'}
+                score={pruefungScore}
+                t1User={t1Answers}
+                t1Correct={getTeil1AnswerKey(activePruefungModules.t1, variant)}
+                t2User={t2Answers}
+                t2Correct={getTeil2AnswerKey(activePruefungModules.t2, variant)}
+                t3User={t3Answers}
+                t3Correct={getTeil3AnswerKey(activePruefungModules.t3, variant)}
+                sb1User={sb1Answers}
+                sb1Correct={getSb1AnswerKey(activePruefungModules.sb1, variant)}
+                sb2User={sb2Answers}
+                sb2Correct={getSb2AnswerKey(activePruefungModules.sb2, variant)}
+                memorizeMode={memorizeMode}
+                onJumpToStep={(step) => {
+                  setPruefungStep(step);
+                  setSubView('verbatim');
+                }}
+              />
+            )}
           </div>
         ) : openedStandaloneId && activeTab !== 'pruefungen' && activeTab !== 'radar' ? (
           /* CASE 2: Inside a standalone opened module from Tab 2..6 */
@@ -1375,6 +1594,36 @@ export function App() {
           </div>
         )}
       </main>
+
+      {/* Global Interactive Modals & Drawers */}
+      <WordDictionaryPopover
+        lookup={activeWordLookup}
+        onClose={() => setActiveWordLookup(null)}
+        onSaveWord={handleSaveWord}
+        isSaved={Boolean(
+          activeWordLookup &&
+            savedWords.some(
+              (w) => w.cleanWord.toLowerCase() === activeWordLookup.cleanWord.toLowerCase()
+            )
+        )}
+      />
+
+      <AskAiTutorModal
+        context={activeAskAiContext}
+        onClose={() => setActiveAskAiContext(null)}
+      />
+
+      <SavedWordsMistakesDrawer
+        isOpen={isSavedDrawerOpen}
+        onClose={() => setIsSavedDrawerOpen(false)}
+        savedWords={savedWords}
+        onRemoveWord={handleRemoveWord}
+        mistakes={mistakes}
+        onClearMistakes={() => setMistakes([])}
+        onOpenMistakeModule={(modType, modId) => {
+          handleOpenStandalone(modType, modId);
+        }}
+      />
     </div>
   );
 }
