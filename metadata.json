@@ -1,6 +1,6 @@
 {
-  "name": "TELC B2 Lesen & Prüfungen Master Pro 2026",
-  "description": "Interactive TELC Deutsch B2 Lesen & Sprachbausteine Exam Simulator (Sahla & Alpha Edition) featuring all 26 complete leaked Prüfungen, 42 Teil 1, 27 Teil 2, and 28 Teil 3 topics with Mot-Clé highlighting, Arabic translations, shuffle mode, and original vs. modified exam comparisons.",
+  "name": "SAHLA B2 & TELCFREE PRO 2026 — Complete Verbatim Edition",
+  "description": "منصة الامتحانات الرسمية المسربة حرفياً لامتحان TELC Deutsch B2 (210 نموذج كامل: 34 امتحان شامل، 45 Lesen Teil 1، 28 Lesen Teil 2، 32 Lesen Teil 3، 35 Sprachbausteine 1، 36 Sprachbausteine 2) مع فاصو الاختصارات وتحدي الحفاظة البرقية ورادار الكودات.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

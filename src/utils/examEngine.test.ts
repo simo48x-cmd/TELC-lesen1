@@ -1,93 +1,149 @@
-import test from 'node:test';
+import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { VERBATIM_DB } from '../data/verbatimTypes';
 import {
-  PRUEFUNGEN_PACKAGES,
-  TEIL1_TOPICS,
-  TEIL2_TOPICS,
-  TEIL3_TOPICS,
-  SPRACHBAUSTEINE_TOPICS,
-} from '../data/lesenData';
-import {
+  buildTeil1SpeedDrill,
+  buildTeil2SpeedDrill,
+  buildTeil3SpeedDrill,
   calculatePruefungScore,
-  resolveVariantAnswer,
-  searchExamRadar,
-  splitTextByKeywords,
+  extractGermanKeywords,
+  getTeil1AnswerKey,
+  getTeil2AnswerKey,
+  getTeil3AnswerKey,
+  parseSb1Options,
+  parseSb2WordBox,
+  searchRadarModules,
+  splitTextWithHighlights,
 } from './examEngine';
 
-test('Database completeness: 26 Prüfungen, 42 Teil 1, 27 Teil 2, 28 Teil 3', () => {
-  assert.equal(PRUEFUNGEN_PACKAGES.length, 26, 'Should have all 26 Prüfungen packages');
-  assert.equal(TEIL1_TOPICS.length, 42, 'Should have all 42 Lesen Teil 1 topics');
-  assert.equal(TEIL2_TOPICS.length, 27, 'Should have all 27 Lesen Teil 2 topics');
-  assert.equal(TEIL3_TOPICS.length, 28, 'Should have all 28 Lesen Teil 3 topics');
-  assert.ok(SPRACHBAUSTEINE_TOPICS.length >= 7, 'Should have linked Sprachbausteine topics');
-});
+describe('SAHLA B2 & TELCFREE PRO 2026 — Verbatim Database & Engine Tests', () => {
+  it('loads all 210 verbatim exam modules with exact counts', () => {
+    assert.equal(VERBATIM_DB.pruefungen.length, 34, 'Should have 34 Prüfungen');
+    assert.equal(VERBATIM_DB.teil1.length, 45, 'Should have 45 Lesen Teil 1 topics');
+    assert.equal(VERBATIM_DB.teil2.length, 28, 'Should have 28 Lesen Teil 2 topics');
+    assert.equal(VERBATIM_DB.teil3.length, 32, 'Should have 32 Lesen Teil 3 topics');
+    assert.equal(VERBATIM_DB.sb1.length, 35, 'Should have 35 Sprachbausteine 1 topics');
+    assert.equal(VERBATIM_DB.sb2.length, 36, 'Should have 36 Sprachbausteine 2 topics');
 
-test('All 26 Prüfungen link to valid Teil 1, Teil 2, Teil 3, SB1, and SB2 IDs', () => {
-  for (const pkg of PRUEFUNGEN_PACKAGES) {
-    const t1 = TEIL1_TOPICS.find((t) => t.id === pkg.teil1Id);
-    const t2 = TEIL2_TOPICS.find((t) => t.id === pkg.teil2Id);
-    const t3 = TEIL3_TOPICS.find((t) => t.id === pkg.teil3Id);
-    const sb1 = SPRACHBAUSTEINE_TOPICS.find((s) => s.id === pkg.sb1Id);
-    const sb2 = SPRACHBAUSTEINE_TOPICS.find((s) => s.id === pkg.sb2Id);
-
-    assert.ok(t1, `Package ${pkg.id} missing Teil 1 ID: ${pkg.teil1Id}`);
-    assert.ok(t2, `Package ${pkg.id} missing Teil 2 ID: ${pkg.teil2Id}`);
-    assert.ok(t3, `Package ${pkg.id} missing Teil 3 ID: ${pkg.teil3Id}`);
-    assert.ok(sb1, `Package ${pkg.id} missing SB1 ID: ${pkg.sb1Id}`);
-    assert.ok(sb2, `Package ${pkg.id} missing SB2 ID: ${pkg.sb2Id}`);
-  }
-});
-
-test('TELC B2 105-point scoring and 63-point (60%) pass threshold work accurately', () => {
-  const fullScore = calculatePruefungScore({
-    teil1CorrectCount: 5,
-    teil2CorrectCount: 5,
-    teil3CorrectCount: 10,
-    sb1CorrectCount: 10,
-    sb2CorrectCount: 10,
+    const total =
+      VERBATIM_DB.pruefungen.length +
+      VERBATIM_DB.teil1.length +
+      VERBATIM_DB.teil2.length +
+      VERBATIM_DB.teil3.length +
+      VERBATIM_DB.sb1.length +
+      VERBATIM_DB.sb2.length;
+    assert.equal(total, 210, 'Total modules across all categories must equal 210');
   });
-  assert.equal(fullScore.totalPoints, 105);
-  assert.equal(fullScore.percentage, 100);
-  assert.equal(fullScore.passed, true);
 
-  const exactPass = calculatePruefungScore({
-    teil1CorrectCount: 4, // 20
-    teil2CorrectCount: 4, // 20
-    teil3CorrectCount: 4, // 10
-    sb1CorrectCount: 5,   // 7.5
-    sb2CorrectCount: 4,   // 6.0 -> sum = 63.5
+  it('validates that all 34 Prüfungen link to existing Teil 1, Teil 2, Teil 3, SB1, and SB2 modules', () => {
+    const t1Ids = new Set(VERBATIM_DB.teil1.map((x) => x.id));
+    const t2Ids = new Set(VERBATIM_DB.teil2.map((x) => x.id));
+    const t3Ids = new Set(VERBATIM_DB.teil3.map((x) => x.id));
+    const sb1Ids = new Set(VERBATIM_DB.sb1.map((x) => x.id));
+    const sb2Ids = new Set(VERBATIM_DB.sb2.map((x) => x.id));
+
+    for (const p of VERBATIM_DB.pruefungen) {
+      assert.ok(t1Ids.has(p.t1), `Prüfung ${p.id} missing t1=${p.t1}`);
+      assert.ok(t2Ids.has(p.t2), `Prüfung ${p.id} missing t2=${p.t2}`);
+      if (p.t2_alt) assert.ok(t2Ids.has(p.t2_alt), `Prüfung ${p.id} missing t2_alt=${p.t2_alt}`);
+      assert.ok(t3Ids.has(p.t3), `Prüfung ${p.id} missing t3=${p.t3}`);
+      if (p.t3_alt) assert.ok(t3Ids.has(p.t3_alt), `Prüfung ${p.id} missing t3_alt=${p.t3_alt}`);
+      assert.ok(sb1Ids.has(p.sb1), `Prüfung ${p.id} missing sb1=${p.sb1}`);
+      if (p.sb1_alt) assert.ok(sb1Ids.has(p.sb1_alt), `Prüfung ${p.id} missing sb1_alt=${p.sb1_alt}`);
+      assert.ok(sb2Ids.has(p.sb2), `Prüfung ${p.id} missing sb2=${p.sb2}`);
+      if (p.sb2_alt) assert.ok(sb2Ids.has(p.sb2_alt), `Prüfung ${p.id} missing sb2_alt=${p.sb2_alt}`);
+    }
   });
-  assert.equal(exactPass.totalPoints, 63.5);
-  assert.equal(exactPass.passed, true);
 
-  const failScore = calculatePruefungScore({
-    teil1CorrectCount: 2, // 10
-    teil2CorrectCount: 2, // 10
-    teil3CorrectCount: 4, // 10
-    sb1CorrectCount: 2,   // 3
-    sb2CorrectCount: 2,   // 3 -> sum = 36
+  it('switches correctly between Base, Mod1, and Mod2 answer keys', () => {
+    const t1 = VERBATIM_DB.teil1[0];
+    assert.deepEqual(getTeil1AnswerKey(t1, 'base'), t1.ansBase);
+    if (t1.ansMod1) {
+      assert.deepEqual(getTeil1AnswerKey(t1, 'mod1'), t1.ansMod1);
+    }
+
+    const t2 = VERBATIM_DB.teil2[0];
+    assert.deepEqual(getTeil2AnswerKey(t2, 'base'), t2.ansBase);
+    if (t2.ansMod1) {
+      assert.deepEqual(getTeil2AnswerKey(t2, 'mod1'), t2.ansMod1);
+    }
+
+    const t3 = VERBATIM_DB.teil3[0];
+    assert.deepEqual(getTeil3AnswerKey(t3, 'base'), t3.ansBase);
+    if (t3.ansMod1) {
+      assert.deepEqual(getTeil3AnswerKey(t3, 'mod1'), t3.ansMod1);
+    }
   });
-  assert.equal(failScore.totalPoints, 36);
-  assert.equal(failScore.passed, false);
-});
 
-test('Exam-Day Radar finds Inseln, Krista, EBICJ, and Insekten variants accurately', () => {
-  const byCode = searchExamRadar('EBICJ');
-  assert.ok(byCode.teil1Matches.some((t) => t.id === 'inseln'));
-  assert.ok(byCode.packages.some((p) => p.id === 'P1'));
+  it('calculates the 105-point TELC B2 score and 63-point pass threshold accurately', () => {
+    const perfect = calculatePruefungScore({
+      t1User: { 1: 'E', 2: 'B', 3: 'I', 4: 'C', 5: 'J' },
+      t1Correct: ['E', 'B', 'I', 'C', 'J'],
+      t2User: { 6: 'B', 7: 'B', 8: 'A', 9: 'C', 10: 'A' },
+      t2Correct: ['B', 'B', 'A', 'C', 'A'],
+      t3User: { 11: 'A', 12: 'G', 13: 'B', 14: 'C', 15: 'H', 16: 'E', 17: 'J', 18: 'L', 19: 'X', 20: 'D' },
+      t3Correct: ['A', 'G', 'B', 'C', 'H', 'E', 'J', 'L', 'X', 'D'],
+      sb1User: { 21: 'C', 22: 'C', 23: 'C', 24: 'A', 25: 'A', 26: 'A', 27: 'B', 28: 'B', 29: 'A', 30: 'A' },
+      sb1Correct: ['C', 'C', 'C', 'A', 'A', 'A', 'B', 'B', 'A', 'A'],
+      sb2User: { 31: 'K', 32: 'B', 33: 'E', 34: 'D', 35: 'M', 36: 'L', 37: 'O', 38: 'F', 39: 'A', 40: 'N' },
+      sb2Correct: ['K', 'B', 'E', 'D', 'M', 'L', 'O', 'F', 'A', 'N'],
+    });
+    assert.equal(perfect.totalScore, 105);
+    assert.equal(perfect.passed, true);
+    assert.equal(perfect.percentage, 100);
 
-  const byKrista = searchExamRadar('Kinobetreiber');
-  assert.ok(byKrista.teil2Matches.some((t) => t.id === 'krista'));
+    const borderlineFail = calculatePruefungScore({
+      t1User: { 1: 'E', 2: 'B', 3: 'I', 4: 'C', 5: 'J' }, // 25
+      t1Correct: ['E', 'B', 'I', 'C', 'J'],
+      t2User: { 6: 'B', 7: 'B', 8: 'A', 9: 'C', 10: 'A' }, // 25
+      t2Correct: ['B', 'B', 'A', 'C', 'A'],
+      t3User: { 11: 'A', 12: 'G', 13: 'B', 14: 'C' }, // 10 -> total 60
+      t3Correct: ['A', 'G', 'B', 'C', 'H', 'E', 'J', 'L', 'X', 'D'],
+      sb1User: {},
+      sb1Correct: ['C', 'C', 'C', 'A', 'A', 'A', 'B', 'B', 'A', 'A'],
+      sb2User: {},
+      sb2Correct: ['K', 'B', 'E', 'D', 'M', 'L', 'O', 'F', 'A', 'N'],
+    });
+    assert.equal(borderlineFail.totalScore, 60);
+    assert.equal(borderlineFail.passed, false);
+  });
 
-  const byInsekten = searchExamRadar('IHBEC');
-  assert.ok(byInsekten.teil1Matches.some((t) => t.id === 'insekten'));
-});
+  it('highlights Mot-Clé trigger words without altering verbatim German text', () => {
+    const sampleText = VERBATIM_DB.teil1[0].texts['1'];
+    const trig = VERBATIM_DB.teil1[0].codatTriggers?.['1'];
+    const keywords = extractGermanKeywords([trig?.tKey || '', trig?.hKey || '']);
+    const segments = splitTextWithHighlights(sampleText, keywords);
+    const reconstructed = segments.map((s) => s.text).join('');
+    assert.equal(reconstructed, sampleText, 'Reconstructed text must be 100% identical to verbatim text');
+    assert.ok(segments.some((s) => s.highlighted), 'At least one Mot-Clé segment should be highlighted');
+  });
 
-test('Variant resolution switches between original and modified answers', () => {
-  const insekten = TEIL1_TOPICS.find((t) => t.id === 'insekten')!;
-  assert.equal(resolveVariantAnswer(insekten.items[0].correctLetterByVariant, 'original'), 'C');
-  assert.equal(resolveVariantAnswer(insekten.items[0].correctLetterByVariant, 'mod1'), 'I');
+  it('parses all 35 SB1 optionsRaw and 36 SB2 wordBoxRaw cleanly', () => {
+    for (const s1 of VERBATIM_DB.sb1) {
+      const parsed = parseSb1Options(s1.optionsRaw, s1.ansBase);
+      assert.ok(parsed[21] && parsed[30], `SB1 ${s1.id} should parse gaps 21..30`);
+    }
+    for (const s2 of VERBATIM_DB.sb2) {
+      const parsed = parseSb2WordBox(s2.wordBoxRaw);
+      assert.equal(Object.keys(parsed).length, 15, `SB2 ${s2.id} should parse all 15 words A..O`);
+    }
+  });
 
-  const segments = splitTextByKeywords('Er war früher Kinobetreiber in der Stadt.', ['Kinobetreiber']);
-  assert.ok(segments.some((s) => s.highlighted && s.text.toLowerCase() === 'kinobetreiber'));
+  it('builds letterless 4-option Speed-Drill items for Sub-View 3 and searches all 210 Radar rows', () => {
+    const t1Drills = buildTeil1SpeedDrill(VERBATIM_DB.teil1[0], 'base');
+    assert.equal(t1Drills.length, 5);
+    assert.equal(t1Drills[0].choices.length, 4);
+    assert.ok(t1Drills[0].choices.includes(t1Drills[0].correctText));
+
+    const t2Drills = buildTeil2SpeedDrill(VERBATIM_DB.teil2[0], 'base');
+    assert.equal(t2Drills.length, 5);
+
+    const t3Drills = buildTeil3SpeedDrill(VERBATIM_DB.teil3[0], 'base');
+    assert.equal(t3Drills.length, 10);
+
+    const allRadar = searchRadarModules('');
+    assert.equal(allRadar.length, 210);
+    const inselnHits = searchRadarModules('EBICJ');
+    assert.ok(inselnHits.length >= 1);
+  });
 });
